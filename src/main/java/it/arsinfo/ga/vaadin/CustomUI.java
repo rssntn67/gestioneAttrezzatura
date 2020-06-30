@@ -7,6 +7,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.MenuBar.MenuItem;
 
 @Push
 public abstract class CustomUI extends UI {
@@ -23,14 +24,46 @@ public abstract class CustomUI extends UI {
     public final static String URL_LOGIN_PROCESSING = "/login";
     public final static String URL_LOGIN_FAILURE = "/login.html?error";
     public final static String URL_LOGOUT = "/logout";
+    public final static String URL_MODELLO_ATTREZZATURA = "/modelloAttrezzatura";
+    public final static String URL_ATTREZZATURA = "/attrezzatura";
 
+
+    public static final String TITLE_HOME = "Home";
+    public final static String TITLE_MODELLO_ATTREZZATURA = "Modello Attrezzatura";
+    public final static String TITLE_ATTREZZATURA = "Attrezzatura";
 
     protected void init(VaadinRequest request, String head) {
 
         header.setValue(head);
         layout.addComponent(menu);
         layout.addComponent(header);
-        setContent(layout);        
+        setContent(layout);   
+        
+        menu.addItem(TITLE_HOME,new MenuBar.Command() {
+            private static final long serialVersionUID = 1L;
+            
+            public void menuSelected(MenuItem selectedItem) {
+                getUI().getPage().setLocation(HOME);
+            }
+        });
+
+        menu.addItem(TITLE_MODELLO_ATTREZZATURA,new MenuBar.Command() {
+            private static final long serialVersionUID = 1L;
+            
+            public void menuSelected(MenuItem selectedItem) {
+                getUI().getPage().setLocation(URL_MODELLO_ATTREZZATURA);
+            }
+        });
+        
+        menu.addItem(TITLE_ATTREZZATURA,new MenuBar.Command() {
+            private static final long serialVersionUID = 1L;
+            
+            public void menuSelected(MenuItem selectedItem) {
+                getUI().getPage().setLocation(URL_ATTREZZATURA);
+            }
+        });
+
+
     }
 
     protected void setExpandRatio(Component component, float ratio) {

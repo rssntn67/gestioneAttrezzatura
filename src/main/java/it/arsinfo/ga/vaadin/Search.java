@@ -4,9 +4,9 @@ package it.arsinfo.ga.vaadin;
 import java.util.List;
 
 import it.arsinfo.ga.dao.ServiceDao;
-import it.arsinfo.ga.entity.Entity;
+import it.arsinfo.ga.entity.EntityBase;
 
-public abstract class Search<T extends Entity>
+public abstract class Search<T extends EntityBase>
         extends UIChangeHandler {
 
     private final ServiceDao<T> dao;

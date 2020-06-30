@@ -2,9 +2,9 @@ package it.arsinfo.ga.vaadin;
 
 import com.vaadin.server.VaadinRequest;
 
-import it.arsinfo.ga.entity.Entity;
+import it.arsinfo.ga.entity.EntityBase;
 
-public abstract class EditorUI<T extends Entity> extends CustomUI {
+public abstract class EditorUI<T extends EntityBase> extends CustomUI {
 
     /**
      * 

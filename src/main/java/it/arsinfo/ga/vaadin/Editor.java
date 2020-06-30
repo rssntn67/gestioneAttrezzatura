@@ -2,9 +2,9 @@ package it.arsinfo.ga.vaadin;
 
 import com.vaadin.ui.HorizontalLayout;
 
-import it.arsinfo.ga.entity.Entity;
+import it.arsinfo.ga.entity.EntityBase;
 
-public abstract class Editor<T extends Entity>
+public abstract class Editor<T extends EntityBase>
         extends UIChangeHandler {
 
     	private HorizontalLayout actions = new HorizontalLayout();

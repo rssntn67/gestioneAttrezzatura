@@ -9,9 +9,9 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
-import it.arsinfo.ga.entity.Entity;
+import it.arsinfo.ga.entity.EntityBase;
 
-public abstract class RepositoryDaoEditor<T extends Entity>
+public abstract class RepositoryDaoEditor<T extends EntityBase>
         extends UIChangeHandler {
 
     private final JpaRepository<T, Long> repositoryDao;

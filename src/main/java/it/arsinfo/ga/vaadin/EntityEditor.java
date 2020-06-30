@@ -10,9 +10,9 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
 import it.arsinfo.ga.dao.ServiceDao;
-import it.arsinfo.ga.entity.Entity;
+import it.arsinfo.ga.entity.EntityBase;
 
-public abstract class EntityEditor<T extends Entity>
+public abstract class EntityEditor<T extends EntityBase>
         extends Editor<T> {
 
     private final ServiceDao<T> repositoryDao;

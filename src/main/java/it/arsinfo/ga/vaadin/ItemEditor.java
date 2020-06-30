@@ -2,9 +2,9 @@ package it.arsinfo.ga.vaadin;
 
 import com.vaadin.data.Binder;
 
-import it.arsinfo.ga.entity.Entity;
+import it.arsinfo.ga.entity.EntityBase;
 
-public abstract class ItemEditor<T extends Entity>
+public abstract class ItemEditor<T extends EntityBase>
         extends Editor<T> {
 
 	private T smdObj;

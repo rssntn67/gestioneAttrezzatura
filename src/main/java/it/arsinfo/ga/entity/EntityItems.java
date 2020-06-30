@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.Transient;
 
-public interface EntityItems<S extends Entity> extends Entity {
+public interface EntityItems<S extends EntityBase> extends EntityBase {
     
 	@Transient
 	boolean addItem(S item);

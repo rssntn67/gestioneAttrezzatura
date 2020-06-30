@@ -4,9 +4,9 @@ package it.arsinfo.ga.vaadin;
 import java.util.List;
 import java.util.Set;
 
-import it.arsinfo.ga.entity.Entity;
+import it.arsinfo.ga.entity.EntityBase;
 
-public abstract class CheckBoxArrayMapper<T extends Entity, K extends Entity>
+public abstract class CheckBoxArrayMapper<T extends EntityBase, K extends EntityBase>
         extends CheckBoxArray<T> {
 
 
