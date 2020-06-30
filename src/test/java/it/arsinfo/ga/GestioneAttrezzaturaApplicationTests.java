@@ -15,13 +15,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import it.arsinfo.ga.dao.repository.AttrezzaturaDao;
+import it.arsinfo.ga.dao.repository.CantiereDao;
 import it.arsinfo.ga.dao.repository.ModelloAttrezzaturaDao;
+import it.arsinfo.ga.dao.repository.OperazioneDao;
 import it.arsinfo.ga.data.Anno;
 import it.arsinfo.ga.data.MarcaModello;
 import it.arsinfo.ga.data.StatoAttrezzatura;
+import it.arsinfo.ga.data.StatoCantiere;
 import it.arsinfo.ga.data.TipoModello;
 import it.arsinfo.ga.entity.Attrezzatura;
+import it.arsinfo.ga.entity.Cantiere;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.entity.Operazione;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,6 +38,12 @@ public class GestioneAttrezzaturaApplicationTests {
 	@Autowired
 	private AttrezzaturaDao attrezzaturaDao;
 
+	@Autowired
+	private CantiereDao cantiereDao;
+	
+	@Autowired
+	private OperazioneDao operazioneDao;
+	
     private static final Logger log = LoggerFactory.getLogger(GestioneAttrezzaturaApplicationTests.class);
 
     @Before    
@@ -43,6 +54,37 @@ public class GestioneAttrezzaturaApplicationTests {
     public void clearDown() {
     }
     
+    @Test
+    public void testCantiereCRUD() throws Exception {
+
+    	assertEquals(0, cantiereDao.count());
+    	Cantiere c = new Cantiere();
+    	c.setIdentificativo("Autostrade-MI-NA-0006");
+    	
+    	cantiereDao.save(c);
+    	
+    	assertEquals(1, cantiereDao.count());
+
+    	Cantiere fromDb = cantiereDao.findByIdentificativo("Autostrade-MI-NA-0006");
+    	
+    	assertNotNull(fromDb);
+    	
+    	assertEquals(StatoCantiere.InOpera, fromDb.getStatoCantiere());
+    	
+    	fromDb.setStatoCantiere(StatoCantiere.Terminato);
+    	cantiereDao.save(fromDb);
+    	assertEquals(1, cantiereDao.count());
+    	
+    	Cantiere fromDb2 = cantiereDao.findByStatoCantiere(StatoCantiere.Terminato).iterator().next();
+    	assertNotNull(fromDb2);
+    	
+    	cantiereDao.delete(fromDb2);
+    	assertEquals(0, cantiereDao.count());
+    	
+    	
+            	
+    }
+
     @Test
     public void testModelloAttrezzaturaCRUD() throws Exception {
     	ModelloAttrezzatura mda1 = new ModelloAttrezzatura();
@@ -128,8 +170,46 @@ public class GestioneAttrezzaturaApplicationTests {
     	modelloAttrezzaturaDao.deleteAll();
     	assertEquals(0, attrezzaturaDao.count());
     	assertEquals(0, modelloAttrezzaturaDao.count());
-    	
-    	            	
+    	    	            	
     }
+    
+    @Test
+    public void testOperazioneCRUD() throws Exception {
+
+    	Cantiere c = new Cantiere();
+    	c.setIdentificativo("Autostrade-MI-NA-0006");
+    	
+    	cantiereDao.save(c);
+    	
+    	ModelloAttrezzatura mda1 = new ModelloAttrezzatura();
+    	mda1.setNome("AAA1");
+    	mda1.setAnnoProduzione(Anno.ANNOND);
+    	mda1.setDescrizione("aZz");
+    	mda1.setMarcaModello(MarcaModello.Echo);
+    	mda1.setTipoModello(TipoModello.Decespugliatori);
+    	
+    	modelloAttrezzaturaDao.save(mda1);
+    	
+    	Attrezzatura a =  new Attrezzatura();
+    	a.setIdentificativo("xp37jkf");
+    	a.setModelloAttrezzatura(mda1);
+    	attrezzaturaDao.save(a);
+    	
+    	Operazione o = new Operazione();
+    	o.setCantiere(c);
+    	o.setAttrezzatura(a);
+    	operazioneDao.save(o);
+    	
+    	log.info("{}",o);
+    	
+    	operazioneDao.deleteAll();
+    	attrezzaturaDao.deleteAll();
+    	cantiereDao.deleteAll();
+    	modelloAttrezzaturaDao.deleteAll();
+
+    	
+    	
+    }
+    
 
 }

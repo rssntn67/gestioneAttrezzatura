@@ -26,11 +26,13 @@ public abstract class CustomUI extends UI {
     public final static String URL_LOGOUT = "/logout";
     public final static String URL_MODELLO_ATTREZZATURA = "/modelloAttrezzatura";
     public final static String URL_ATTREZZATURA = "/attrezzatura";
+    public final static String URL_CANTIERE = "/cantiere";
 
 
     public static final String TITLE_HOME = "Home";
     public final static String TITLE_MODELLO_ATTREZZATURA = "Modello Attrezzatura";
     public final static String TITLE_ATTREZZATURA = "Attrezzatura";
+    public final static String TITLE_CANTIERE = "Cantiere";
 
     protected void init(VaadinRequest request, String head) {
 
@@ -62,6 +64,15 @@ public abstract class CustomUI extends UI {
                 getUI().getPage().setLocation(URL_ATTREZZATURA);
             }
         });
+        
+        menu.addItem(TITLE_CANTIERE,new MenuBar.Command() {
+            private static final long serialVersionUID = 1L;
+            
+            public void menuSelected(MenuItem selectedItem) {
+                getUI().getPage().setLocation(URL_CANTIERE);
+            }
+        });
+
 
 
     }

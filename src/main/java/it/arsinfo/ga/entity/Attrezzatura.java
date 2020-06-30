@@ -32,7 +32,7 @@ public class Attrezzatura implements EntityBase {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatoAttrezzatura statoAttrezzatura=StatoAttrezzatura.Attiva;
+    private StatoAttrezzatura statoAttrezzatura=StatoAttrezzatura.Disponibile;
     
 	@Override
 	public Long getId() {
