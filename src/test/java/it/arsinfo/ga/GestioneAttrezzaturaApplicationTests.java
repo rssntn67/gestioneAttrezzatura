@@ -26,7 +26,7 @@ import it.arsinfo.ga.data.TipoAttrezzatura;
 import it.arsinfo.ga.entity.Attrezzatura;
 import it.arsinfo.ga.entity.Cantiere;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;
-import it.arsinfo.ga.entity.Operazione;
+import it.arsinfo.ga.entity.OperazioneAttrezzatura;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -195,7 +195,7 @@ public class GestioneAttrezzaturaApplicationTests {
     	a.setModelloAttrezzatura(mda1);
     	attrezzaturaDao.save(a);
     	
-    	Operazione o = new Operazione();
+    	OperazioneAttrezzatura o = new OperazioneAttrezzatura();
     	o.setCantiere(c);
     	o.setAttrezzatura(a);
     	operazioneDao.save(o);

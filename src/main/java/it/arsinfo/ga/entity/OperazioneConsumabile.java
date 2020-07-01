@@ -15,28 +15,29 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import it.arsinfo.ga.data.TipoOperazione;
+import it.arsinfo.ga.data.TipoOperazioneConsumabile;
 
 @Entity
-public class Operazione implements EntityBase {
+public class OperazioneConsumabile implements EntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @ManyToOne(fetch=FetchType.LAZY)
-    private Attrezzatura attrezzatura;
+    private Consumabile consumabile;
 
     @ManyToOne(fetch=FetchType.LAZY)
     private Cantiere cantiere;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TipoOperazione tipoOperazione=TipoOperazione.Carico;
+    private TipoOperazioneConsumabile tipoOperazione=TipoOperazioneConsumabile.Ritira;
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataOperazione = new Date();
 
+    private Integer numero = 0;
 	@Override
 	public Long getId() {
 		return id;
@@ -45,15 +46,15 @@ public class Operazione implements EntityBase {
 	@Override
     @Transient
     public String getHeader() {
-        return String.format("%s:%s:%s",tipoOperazione, cantiere.getHeader(),attrezzatura.getHeader() );
+        return String.format("%s:%s:%s:%d",cantiere.getHeader(),consumabile.getHeader(),tipoOperazione,numero);
     }
 
-	public Attrezzatura getAttrezzatura() {
-		return attrezzatura;
+	public Consumabile getConsumabile() {
+		return consumabile;
 	}
 
-	public void setAttrezzatura(Attrezzatura attrezzatura) {
-		this.attrezzatura = attrezzatura;
+	public void setConsumabile(Consumabile attrezzatura) {
+		this.consumabile = attrezzatura;
 	}
 
 	public Cantiere getCantiere() {
@@ -64,11 +65,11 @@ public class Operazione implements EntityBase {
 		this.cantiere = cantiere;
 	}
 
-	public TipoOperazione getTipoOperazione() {
+	public TipoOperazioneConsumabile getTipoOperazione() {
 		return tipoOperazione;
 	}
 
-	public void setTipoOperazione(TipoOperazione tipoOperazione) {
+	public void setTipoOperazione(TipoOperazioneConsumabile tipoOperazione) {
 		this.tipoOperazione = tipoOperazione;
 	}
 
@@ -84,10 +85,19 @@ public class Operazione implements EntityBase {
 		this.dataOperazione = dataOperazione;
 	}
 
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
 	@Override
 	public String toString() {
-		return "Operazione [id=" + id + ", attrezzatura=" + attrezzatura + ", cantiere=" + cantiere
-				+ ", tipoOperazione=" + tipoOperazione + ", dataOperazione=" + dataOperazione + "]";
+		return "OperazioneConsumabile [id=" + id + ", consumabile=" + consumabile + ", cantiere=" + cantiere
+				+ ", tipoOperazione=" + tipoOperazione + ", dataOperazione=" + dataOperazione + ", numero=" + numero
+				+ "]";
 	}
 
 }
