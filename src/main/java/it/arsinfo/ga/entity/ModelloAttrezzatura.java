@@ -12,8 +12,8 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.MarcaModello;
-import it.arsinfo.ga.data.TipoModello;
+import it.arsinfo.ga.data.MarcaAttrezzatura;
+import it.arsinfo.ga.data.TipoAttrezzatura;
 
 @Entity
 @Table(uniqueConstraints={
@@ -30,10 +30,10 @@ public class ModelloAttrezzatura implements EntityBase {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private MarcaModello marcaModello = MarcaModello.NonDefinita;
+    private MarcaAttrezzatura marca = MarcaAttrezzatura.NonDefinita;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TipoModello tipoModello = TipoModello.NonDisponibile;    
+    private TipoAttrezzatura tipo = TipoAttrezzatura.NonDisponibile;    
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Anno annoProduzione = Anno.ANNOND;
@@ -49,20 +49,20 @@ public class ModelloAttrezzatura implements EntityBase {
         return String.format("%s:%s", nome,annoProduzione.getAnnoAsString());
     }
 	 
-	public MarcaModello getMarcaModello() {
-		return marcaModello;
+	public MarcaAttrezzatura getMarca() {
+		return marca;
 	}
 
-	public void setMarcaModello(MarcaModello marcaModello) {
-		this.marcaModello = marcaModello;
+	public void setMarcaModello(MarcaAttrezzatura marcaModello) {
+		this.marca = marcaModello;
 	}
 
-	public TipoModello getTipoModello() {
-		return tipoModello;
+	public TipoAttrezzatura getTipo() {
+		return tipo;
 	}
 
-	public void setTipoModello(TipoModello tipoModello) {
-		this.tipoModello = tipoModello;
+	public void setTipo(TipoAttrezzatura tipoModello) {
+		this.tipo = tipoModello;
 	}
 
 	public String getNome() {
@@ -95,8 +95,8 @@ public class ModelloAttrezzatura implements EntityBase {
 
 	@Override
 	public String toString() {
-		return "ModelloAttrezzatura [id=" + id + ", nome=" + nome + ", descrizione=" + descrizione + ", marcaModello="
-				+ marcaModello + ", tipoModello=" + tipoModello + ", annoProduzione=" + annoProduzione + "]";
+		return "ModelloAttrezzatura [id=" + id + ", nome=" + nome + ", descrizione=" + descrizione + ", marca="
+				+ marca + ", tipo=" + tipo + ", annoProduzione=" + annoProduzione + "]";
 	}
 
 }

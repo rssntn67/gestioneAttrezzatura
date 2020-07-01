@@ -24,9 +24,9 @@ public class ModelloAttrezzaturaUI extends EditorUI<ModelloAttrezzatura> {
 
     @Override
     protected void init(VaadinRequest request) {
-        ModelloAttrezzaturaAdd add = new ModelloAttrezzaturaAdd("Aggiungi Modello");
+        ModelloAttrezzaturaAdd add = new ModelloAttrezzaturaAdd("Aggiungi Modello Attrezzatura");
         ModelloAttrezzaturaSearch search = new ModelloAttrezzaturaSearch(serviceDao);
-        ModelloAttrezzaturaGrid grid = new ModelloAttrezzaturaGrid("Modelli");
+        ModelloAttrezzaturaGrid grid = new ModelloAttrezzaturaGrid("Modelli Attrezzatura");
         ModelloAttrezzaturaEditor editor = new ModelloAttrezzaturaEditor(serviceDao);
         super.init(request,add,search,editor,grid, "Modello Attrezzatura");        
         

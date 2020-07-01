@@ -19,10 +19,10 @@ import it.arsinfo.ga.dao.repository.CantiereDao;
 import it.arsinfo.ga.dao.repository.ModelloAttrezzaturaDao;
 import it.arsinfo.ga.dao.repository.OperazioneDao;
 import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.MarcaModello;
+import it.arsinfo.ga.data.MarcaAttrezzatura;
 import it.arsinfo.ga.data.StatoAttrezzatura;
 import it.arsinfo.ga.data.StatoCantiere;
-import it.arsinfo.ga.data.TipoModello;
+import it.arsinfo.ga.data.TipoAttrezzatura;
 import it.arsinfo.ga.entity.Attrezzatura;
 import it.arsinfo.ga.entity.Cantiere;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;
@@ -91,8 +91,8 @@ public class GestioneAttrezzaturaApplicationTests {
     	mda1.setNome("prova");
     	mda1.setAnnoProduzione(Anno.ANNOND);
     	mda1.setDescrizione("aZz");
-    	mda1.setMarcaModello(MarcaModello.Echo);
-    	mda1.setTipoModello(TipoModello.Decespugliatori);
+    	mda1.setMarcaModello(MarcaAttrezzatura.Echo);
+    	mda1.setTipo(TipoAttrezzatura.Decespugliatori);
     	
     	modelloAttrezzaturaDao.save(mda1);
     	
@@ -131,8 +131,8 @@ public class GestioneAttrezzaturaApplicationTests {
     	mda1.setNome("prova");
     	mda1.setAnnoProduzione(Anno.ANNOND);
     	mda1.setDescrizione("aZz");
-    	mda1.setMarcaModello(MarcaModello.Echo);
-    	mda1.setTipoModello(TipoModello.Decespugliatori);
+    	mda1.setMarcaModello(MarcaAttrezzatura.Echo);
+    	mda1.setTipo(TipoAttrezzatura.Decespugliatori);
     	
     	modelloAttrezzaturaDao.save(mda1);
     	
@@ -185,8 +185,8 @@ public class GestioneAttrezzaturaApplicationTests {
     	mda1.setNome("AAA1");
     	mda1.setAnnoProduzione(Anno.ANNOND);
     	mda1.setDescrizione("aZz");
-    	mda1.setMarcaModello(MarcaModello.Echo);
-    	mda1.setTipoModello(TipoModello.Decespugliatori);
+    	mda1.setMarcaModello(MarcaAttrezzatura.Echo);
+    	mda1.setTipo(TipoAttrezzatura.Decespugliatori);
     	
     	modelloAttrezzaturaDao.save(mda1);
     	

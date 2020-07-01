@@ -9,8 +9,8 @@ import org.springframework.util.StringUtils;
 import it.arsinfo.ga.dao.ModelloAttrezzaturaServiceDao;
 import it.arsinfo.ga.dao.repository.ModelloAttrezzaturaDao;
 import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.MarcaModello;
-import it.arsinfo.ga.data.TipoModello;
+import it.arsinfo.ga.data.MarcaAttrezzatura;
+import it.arsinfo.ga.data.TipoAttrezzatura;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;
 
 @Service
@@ -45,7 +45,7 @@ public class ModelloAttrezzaturaServiceDaoImpl implements ModelloAttrezzaturaSer
 
 	@Override
 	public List<ModelloAttrezzatura> searchBy(Anno searchAnnoProduzione, String searchNome,
-			TipoModello searchTipoModello, MarcaModello searchMarcaModello) {
+			TipoAttrezzatura searchTipoModello, MarcaAttrezzatura searchMarcaModello) {
 		if (searchAnnoProduzione == null && StringUtils.isEmpty(searchNome) && searchTipoModello == null && searchMarcaModello == null)
 			return repository.findAll();
 		

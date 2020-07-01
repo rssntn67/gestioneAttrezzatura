@@ -10,8 +10,8 @@ import com.vaadin.ui.TextField;
 
 import it.arsinfo.ga.dao.ModelloAttrezzaturaServiceDao;
 import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.MarcaModello;
-import it.arsinfo.ga.data.TipoModello;
+import it.arsinfo.ga.data.MarcaAttrezzatura;
+import it.arsinfo.ga.data.TipoAttrezzatura;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.vaadin.Search;
 
@@ -19,17 +19,17 @@ public class ModelloAttrezzaturaSearch extends Search<ModelloAttrezzatura> {
 
     private String searchNome;
     private Anno searchAnnoProduzione;
-    private MarcaModello searchMarcaModello;
-    private TipoModello searchTipoModello;
+    private MarcaAttrezzatura searchMarca;
+    private TipoAttrezzatura searchTipo;
 
     private final ComboBox<Anno> filterAnno = new ComboBox<Anno>("Cerca per Anno",
             EnumSet.allOf(Anno.class));
 
-    private final ComboBox<MarcaModello> filterMarca = new ComboBox<MarcaModello>("Cerca per Marca",
-            EnumSet.allOf(MarcaModello.class));
+    private final ComboBox<MarcaAttrezzatura> filterMarca = new ComboBox<MarcaAttrezzatura>("Cerca per Marca",
+            EnumSet.allOf(MarcaAttrezzatura.class));
 
-    private final ComboBox<TipoModello> filterTipo = new ComboBox<TipoModello>("Cerca per Tipo",
-            EnumSet.allOf(TipoModello.class));
+    private final ComboBox<TipoAttrezzatura> filterTipo = new ComboBox<TipoAttrezzatura>("Cerca per Tipo",
+            EnumSet.allOf(TipoAttrezzatura.class));
 
     
     private final ModelloAttrezzaturaServiceDao dao;
@@ -63,18 +63,18 @@ public class ModelloAttrezzaturaSearch extends Search<ModelloAttrezzatura> {
 
         filterTipo.addSelectionListener(e -> {
             if (e.getValue() == null) {
-            	searchTipoModello = null;
+            	searchTipo = null;
             } else {
-            	searchTipoModello = e.getSelectedItem().get();
+            	searchTipo = e.getSelectedItem().get();
             }
             onChange();
         });
 
         filterMarca.addSelectionListener(e -> {
             if (e.getValue() == null) {
-            	searchMarcaModello = null;
+            	searchMarca = null;
             } else {
-            	searchMarcaModello = e.getSelectedItem().get();
+            	searchMarca = e.getSelectedItem().get();
             }
             onChange();
         });
@@ -91,7 +91,7 @@ public class ModelloAttrezzaturaSearch extends Search<ModelloAttrezzatura> {
 
     @Override
     public List<ModelloAttrezzatura> find() {
-        return dao.searchBy(searchAnnoProduzione,searchNome,searchTipoModello,searchMarcaModello);
+        return dao.searchBy(searchAnnoProduzione,searchNome,searchTipo,searchMarca);
     }
 
 }

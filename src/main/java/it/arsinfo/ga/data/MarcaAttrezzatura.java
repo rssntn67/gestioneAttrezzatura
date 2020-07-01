@@ -1,6 +1,6 @@
 package it.arsinfo.ga.data;
 
-public enum MarcaModello {
+public enum MarcaAttrezzatura {
 	Sthil,
 	Echo,
 	NonDefinita
