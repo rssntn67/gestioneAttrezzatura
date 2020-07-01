@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui;
+package it.arsinfo.ga.ui.cantiere;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,7 +8,7 @@ import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.dao.CantiereServiceDao;
 import it.arsinfo.ga.entity.Cantiere;
-import it.arsinfo.ga.vaadin.EditorUI;
+import it.arsinfo.ga.ui.EditorUI;
 
 @SpringUI(path = EditorUI.URL_CANTIERE)
 @Title(EditorUI.TITLE_CANTIERE)

@@ -1,4 +1,4 @@
-    package it.arsinfo.ga.vaadin;
+    package it.arsinfo.ga.ui;
 
 import com.vaadin.annotations.Push;
 import com.vaadin.server.VaadinRequest;
@@ -8,6 +8,8 @@ import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.MenuBar.MenuItem;
+
+import it.arsinfo.ga.vaadin.UIChangeHandler;
 
 @Push
 public abstract class CustomUI extends UI {

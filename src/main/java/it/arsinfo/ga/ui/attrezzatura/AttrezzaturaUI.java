@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui;
+package it.arsinfo.ga.ui.attrezzatura;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,7 +8,7 @@ import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.dao.AttrezzaturaServiceDao;
 import it.arsinfo.ga.entity.Attrezzatura;
-import it.arsinfo.ga.vaadin.EditorUI;
+import it.arsinfo.ga.ui.EditorUI;
 
 @SpringUI(path = EditorUI.URL_ATTREZZATURA)
 @Title(EditorUI.TITLE_ATTREZZATURA)

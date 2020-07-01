@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui;
+package it.arsinfo.ga.ui.attrezzatura;
 
 import com.vaadin.ui.Grid;
 

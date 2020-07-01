@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui;
+package it.arsinfo.ga.ui.modello.attrezzatura;
 
 import it.arsinfo.ga.data.Anno;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;

@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui;
+package it.arsinfo.ga.ui.home;
 
 
 
@@ -8,7 +8,7 @@ import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Label;
 
-import it.arsinfo.ga.vaadin.CustomUI;
+import it.arsinfo.ga.ui.CustomUI;
 
 @SpringUI(path=CustomUI.HOME)
 @Title("Gestione Abbonamenti ADP")

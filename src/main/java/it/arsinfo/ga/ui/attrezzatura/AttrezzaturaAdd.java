@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui;
+package it.arsinfo.ga.ui.attrezzatura;
 
 import it.arsinfo.ga.entity.Attrezzatura;
 import it.arsinfo.ga.vaadin.Add;

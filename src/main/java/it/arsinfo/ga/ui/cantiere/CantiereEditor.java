@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui;
+package it.arsinfo.ga.ui.cantiere;
 
 import java.util.EnumSet;
 

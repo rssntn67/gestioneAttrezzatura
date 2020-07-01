@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui;
+package it.arsinfo.ga.ui.modello.attrezzatura;
 
 import java.util.EnumSet;
 import java.util.List;
