@@ -1,5 +1,7 @@
 package it.arsinfo.ga.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,6 +36,10 @@ public class Attrezzatura implements EntityBase {
     @Column(nullable = false)
     private StatoAttrezzatura statoAttrezzatura=StatoAttrezzatura.Disponibile;
     
+    private BigDecimal valore=BigDecimal.ZERO;
+    private BigDecimal speseManutenzione=BigDecimal.ZERO;
+    private BigDecimal speseRiparazione=BigDecimal.ZERO;
+
 	@Override
 	public Long getId() {
 		return id;
@@ -80,10 +86,41 @@ public class Attrezzatura implements EntityBase {
 		this.id = id;
 	}
 
+	public BigDecimal getValore() {
+		return valore;
+	}
+
+	public void setValore(BigDecimal valore) {
+		this.valore = valore;
+	}
+
+	public BigDecimal getSpeseManutenzione() {
+		return speseManutenzione;
+	}
+
+	public void setSpeseManutenzione(BigDecimal speseManutenzione) {
+		this.speseManutenzione = speseManutenzione;
+	}
+
+	public BigDecimal getSpeseRiparazione() {
+		return speseRiparazione;
+	}
+
+	public void setSpeseRiparazione(BigDecimal speseRiparazione) {
+		this.speseRiparazione = speseRiparazione;
+	}
+
 	@Override
 	public String toString() {
-		return "Attrezzatura [id=" + id + ", identificativo=" + identificativo + ", modelloAttrezzatura="
-				+ modelloAttrezzatura + ", statoAttrezzatura=" + statoAttrezzatura + "]";
+		return String.format(
+		"Attrezzatura [id=%d identificativo=%s, modelloAttrezzatura=%s, statoAttrezzatura=%s, valore=%.2f, speseManutenzione=%.2f, speseRiparazione=%.2f]",
+				id,
+				identificativo,
+				modelloAttrezzatura,
+				statoAttrezzatura,
+				valore,
+				speseManutenzione,
+				speseRiparazione);
 	}
 
 }
