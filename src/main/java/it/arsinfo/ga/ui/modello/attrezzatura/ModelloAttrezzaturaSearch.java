@@ -10,6 +10,7 @@ import com.vaadin.ui.TextField;
 
 import it.arsinfo.ga.dao.ModelloAttrezzaturaServiceDao;
 import it.arsinfo.ga.data.Anno;
+import it.arsinfo.ga.data.Fornitore;
 import it.arsinfo.ga.data.MarcaAttrezzatura;
 import it.arsinfo.ga.data.TipoAttrezzatura;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;
@@ -18,9 +19,13 @@ import it.arsinfo.ga.vaadin.Search;
 public class ModelloAttrezzaturaSearch extends Search<ModelloAttrezzatura> {
 
     private String searchNome;
+    private Fornitore searchFornitore;
     private Anno searchAnnoProduzione;
     private MarcaAttrezzatura searchMarca;
     private TipoAttrezzatura searchTipo;
+
+    private final ComboBox<Fornitore> filterFornitore = new ComboBox<Fornitore>("Cerca per Fornitore",
+            EnumSet.allOf(Fornitore.class));
 
     private final ComboBox<Anno> filterAnno = new ComboBox<Anno>("Cerca per Anno",
             EnumSet.allOf(Anno.class));
@@ -42,16 +47,30 @@ public class ModelloAttrezzaturaSearch extends Search<ModelloAttrezzatura> {
         setComponents(
                       new HorizontalLayout(
                                            filterNome,
-                                           filterAnno, 
+                                           filterAnno,
+                                           filterFornitore),
+                      new HorizontalLayout(
                                            filterTipo,
                                            filterMarca
                                            ));
 
 
+       filterFornitore.setEmptySelectionAllowed(true);
+       filterFornitore.setPlaceholder("Seleziona Fornitore");
+       filterFornitore.addSelectionListener(e -> {
+            if (e.getValue() == null) {
+                searchFornitore = null;
+            } else {
+                searchFornitore = e.getSelectedItem().get();
+            }
+            onChange();
+        });
+
         filterAnno.setEmptySelectionAllowed(true);
         filterAnno.setItemCaptionGenerator(Anno::getAnnoAsString);
         filterAnno.setPlaceholder("Seleziona Anno Produzione");
 
+        
         filterAnno.addSelectionListener(e -> {
             if (e.getValue() == null) {
                 searchAnnoProduzione = null;
@@ -91,7 +110,7 @@ public class ModelloAttrezzaturaSearch extends Search<ModelloAttrezzatura> {
 
     @Override
     public List<ModelloAttrezzatura> find() {
-        return dao.searchBy(searchAnnoProduzione,searchNome,searchTipo,searchMarca);
+        return dao.searchBy(searchFornitore,searchAnnoProduzione,searchNome,searchTipo,searchMarca);
     }
 
 }

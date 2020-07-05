@@ -9,6 +9,7 @@ import com.vaadin.ui.TextField;
 
 import it.arsinfo.ga.dao.ModelloAttrezzaturaServiceDao;
 import it.arsinfo.ga.data.Anno;
+import it.arsinfo.ga.data.Fornitore;
 import it.arsinfo.ga.data.MarcaAttrezzatura;
 import it.arsinfo.ga.data.TipoAttrezzatura;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;
@@ -16,6 +17,8 @@ import it.arsinfo.ga.vaadin.EntityEditor;
 
 public class ModelloAttrezzaturaEditor extends EntityEditor<ModelloAttrezzatura> {
 
+    private final ComboBox<Fornitore> fornitore = new ComboBox<Fornitore>("Fornitore",
+            EnumSet.allOf(Fornitore.class));
     private final ComboBox<Anno> annoProduzione = new ComboBox<Anno>("Anno Produzione",
             EnumSet.allOf(Anno.class));
     private final ComboBox<TipoAttrezzatura> tipo = new ComboBox<TipoAttrezzatura>("Tipo Attrezzatura",
@@ -28,7 +31,7 @@ public class ModelloAttrezzaturaEditor extends EntityEditor<ModelloAttrezzatura>
     public ModelloAttrezzaturaEditor(ModelloAttrezzaturaServiceDao dao) {
         super(dao, new Binder<>(ModelloAttrezzatura.class));
 
-        HorizontalLayout intestazioni = new HorizontalLayout(nome,annoProduzione);
+        HorizontalLayout intestazioni = new HorizontalLayout(nome,fornitore,annoProduzione);
 
         HorizontalLayout residenza = new HorizontalLayout(tipo,marca);
         residenza.addComponentsAndExpand(descrizione);
@@ -37,6 +40,7 @@ public class ModelloAttrezzaturaEditor extends EntityEditor<ModelloAttrezzatura>
 
 
         getBinder().forField(nome).asRequired();
+        getBinder().forField(fornitore).asRequired();
         getBinder().forField(annoProduzione).asRequired();
         getBinder().bindInstanceFields(this);
 

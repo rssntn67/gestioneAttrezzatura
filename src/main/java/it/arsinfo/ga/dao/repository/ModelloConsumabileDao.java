@@ -16,7 +16,7 @@ public interface ModelloConsumabileDao extends JpaRepository<ModelloConsumabile,
 
 	List<ModelloConsumabile> findByNomeContainingIgnoreCase(String nome);
     List<ModelloConsumabile> findByAnnoProduzione(Anno anno);
-    List<ModelloConsumabile> findByFornitore(Anno anno);
+    List<ModelloConsumabile> findByFornitore(Fornitore fornitore);
     List<ModelloConsumabile> findByMarca(MarcaConsumabile marca);
     List<ModelloConsumabile> findByTipo(TipoConsumabile tipo);
     
@@ -37,8 +37,8 @@ public interface ModelloConsumabileDao extends JpaRepository<ModelloConsumabile,
     List<ModelloConsumabile> findByNomeContainingIgnoreCaseAndAnnoProduzioneAndTipo(String nome, Anno anno, TipoConsumabile tipo);
     List<ModelloConsumabile> findByNomeContainingIgnoreCaseAndAnnoProduzioneAndMarca(String nome, Anno anno, MarcaConsumabile marca);
     List<ModelloConsumabile> findByNomeContainingIgnoreCaseAndTipoAndMarca(String nome, TipoConsumabile tipo, MarcaConsumabile marca);
-    List<ModelloConsumabile> findByFornitoreAndAnnoProduzioneAndTipo(Anno anno, Fornitore fornitore,TipoConsumabile tipo);
-    List<ModelloConsumabile> findByFornitoreAndAnnoProduzioneAndMarca(Anno anno, Fornitore fornitore,MarcaConsumabile marca);
+    List<ModelloConsumabile> findByFornitoreAndAnnoProduzioneAndTipo(Fornitore fornitore,Anno anno, TipoConsumabile tipo);
+    List<ModelloConsumabile> findByFornitoreAndAnnoProduzioneAndMarca(Fornitore fornitore,Anno anno, MarcaConsumabile marca);
     List<ModelloConsumabile> findByFornitoreAndTipoAndMarca(Fornitore fornitore, TipoConsumabile tipo, MarcaConsumabile marca);
     List<ModelloConsumabile> findByAnnoProduzioneAndTipoAndMarca(Anno anno, TipoConsumabile tipo, MarcaConsumabile marca);
 

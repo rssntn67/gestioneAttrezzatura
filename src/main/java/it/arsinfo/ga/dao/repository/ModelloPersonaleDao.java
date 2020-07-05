@@ -15,7 +15,7 @@ public interface ModelloPersonaleDao extends JpaRepository<ModelloPersonale, Lon
 
 	List<ModelloPersonale> findByNomeContainingIgnoreCase(String nome);
     List<ModelloPersonale> findByAnnoProduzione(Anno anno);
-    List<ModelloPersonale> findByFornitore(Anno anno);
+    List<ModelloPersonale> findByFornitore(Fornitore fornitore);
     List<ModelloPersonale> findByTipo(TipoPersonale tipo);
     
     List<ModelloPersonale> findByNomeContainingIgnoreCaseAndAnnoProduzione(String nome, Anno anno);

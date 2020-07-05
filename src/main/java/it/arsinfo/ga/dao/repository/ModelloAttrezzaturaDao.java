@@ -16,7 +16,7 @@ public interface ModelloAttrezzaturaDao extends JpaRepository<ModelloAttrezzatur
 
 	List<ModelloAttrezzatura> findByNomeContainingIgnoreCase(String nome);
     List<ModelloAttrezzatura> findByAnnoProduzione(Anno anno);
-    List<ModelloAttrezzatura> findByFornitore(Anno anno);
+    List<ModelloAttrezzatura> findByFornitore(Fornitore fornitore);
     List<ModelloAttrezzatura> findByMarca(MarcaAttrezzatura marca);
     List<ModelloAttrezzatura> findByTipo(TipoAttrezzatura tipo);
     
@@ -37,8 +37,8 @@ public interface ModelloAttrezzaturaDao extends JpaRepository<ModelloAttrezzatur
     List<ModelloAttrezzatura> findByNomeContainingIgnoreCaseAndAnnoProduzioneAndTipo(String nome, Anno anno, TipoAttrezzatura tipo);
     List<ModelloAttrezzatura> findByNomeContainingIgnoreCaseAndAnnoProduzioneAndMarca(String nome, Anno anno, MarcaAttrezzatura marca);
     List<ModelloAttrezzatura> findByNomeContainingIgnoreCaseAndTipoAndMarca(String nome, TipoAttrezzatura tipo, MarcaAttrezzatura marca);
-    List<ModelloAttrezzatura> findByFornitoreAndAnnoProduzioneAndTipo(Anno anno, Fornitore fornitore,TipoAttrezzatura tipo);
-    List<ModelloAttrezzatura> findByFornitoreAndAnnoProduzioneAndMarca(Anno anno, Fornitore fornitore,MarcaAttrezzatura marca);
+    List<ModelloAttrezzatura> findByFornitoreAndAnnoProduzioneAndTipo(Fornitore fornitore,Anno anno, TipoAttrezzatura tipo);
+    List<ModelloAttrezzatura> findByFornitoreAndAnnoProduzioneAndMarca(Fornitore fornitore,Anno anno, MarcaAttrezzatura marca);
     List<ModelloAttrezzatura> findByFornitoreAndTipoAndMarca(Fornitore fornitore, TipoAttrezzatura tipo, MarcaAttrezzatura marca);
     List<ModelloAttrezzatura> findByAnnoProduzioneAndTipoAndMarca(Anno anno, TipoAttrezzatura tipo, MarcaAttrezzatura marca);
 
