@@ -12,7 +12,7 @@ public class AttrezzaturaAdd extends Add<Attrezzatura> {
     @Override
     public Attrezzatura generate() {
     	Attrezzatura attrezzatura = new Attrezzatura();
-    	attrezzatura.setIdentificativo("InserisciIdentificativoUnico");
+    	attrezzatura.setIdentificativo("");
         return attrezzatura;
     }
 

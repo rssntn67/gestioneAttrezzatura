@@ -16,8 +16,8 @@ import it.arsinfo.ga.vaadin.EntityEditor;
 
 public class AttrezzaturaEditor extends EntityEditor<Attrezzatura> {
 
-    private final ComboBox<ModelloAttrezzatura> modelloAttrezzatura = new ComboBox<ModelloAttrezzatura>("Modello");
-    private final ComboBox<StatoOperabile> statoAttrezzatura = new ComboBox<StatoOperabile>("Stato",
+    private final ComboBox<ModelloAttrezzatura> modello = new ComboBox<ModelloAttrezzatura>("Modello");
+    private final ComboBox<StatoOperabile> stato = new ComboBox<StatoOperabile>("Stato",
                                                                            EnumSet.allOf(StatoOperabile.class));
     private final TextField identificativo = new TextField("Identificativo");
     private final TextField speseManutenzione = new TextField("Spese Manutenzione");
@@ -26,15 +26,15 @@ public class AttrezzaturaEditor extends EntityEditor<Attrezzatura> {
     public AttrezzaturaEditor(AttrezzaturaServiceDao dao) {
         super(dao, new Binder<>(Attrezzatura.class));
 
-        HorizontalLayout intestazioni = new HorizontalLayout(identificativo,statoAttrezzatura);
-        intestazioni.addComponentsAndExpand(modelloAttrezzatura);
+        HorizontalLayout intestazioni = new HorizontalLayout(identificativo,stato);
+        intestazioni.addComponentsAndExpand(modello);
         
         HorizontalLayout importi = new HorizontalLayout(speseManutenzione,speseRiparazione);
         setComponents(getActions(), intestazioni,importi);
 
 
         getBinder().forField(identificativo).asRequired();
-        getBinder().forField(statoAttrezzatura).asRequired();
+        getBinder().forField(stato).asRequired();
         getBinder()
         .forField(speseManutenzione)
         .withConverter(new StringToBigDecimalConverter("Conversione in Eur")).bind("speseManutenzione");
@@ -45,26 +45,26 @@ public class AttrezzaturaEditor extends EntityEditor<Attrezzatura> {
         getBinder().bindInstanceFields(this);
 
         // Configure and style components
-        modelloAttrezzatura.setItemCaptionGenerator(ModelloAttrezzatura::getHeader);
-        modelloAttrezzatura.setEmptySelectionAllowed(false);
-        modelloAttrezzatura.setItems(dao.getModelli());
-        statoAttrezzatura.setEmptySelectionAllowed(false);
-        statoAttrezzatura.setVisible(false);
+        modello.setItemCaptionGenerator(ModelloAttrezzatura::getHeader);
+        modello.setEmptySelectionAllowed(false);
+        modello.setItems(dao.getModelli());
+        stato.setEmptySelectionAllowed(false);
+        stato.setVisible(false);
         
     }
 
     @Override
     public void focus(boolean persisted, Attrezzatura c) {
         if (persisted) {
-        	statoAttrezzatura.setVisible(true);
+        	stato.setVisible(true);
         	identificativo.setReadOnly(true);
-        	statoAttrezzatura.focus();
-        	modelloAttrezzatura.setReadOnly(true);
+        	stato.focus();
+        	modello.setReadOnly(true);
         } else {
-        	statoAttrezzatura.setVisible(false);        	
+        	stato.setVisible(false);        	
         	identificativo.setReadOnly(false);
         	identificativo.focus();
-        	modelloAttrezzatura.setReadOnly(false);
+        	modello.setReadOnly(false);
         }
     }
 }

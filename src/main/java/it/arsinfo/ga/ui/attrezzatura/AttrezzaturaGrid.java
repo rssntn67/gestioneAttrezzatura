@@ -9,8 +9,8 @@ public class AttrezzaturaGrid extends CustomGrid<Attrezzatura> {
 
     public AttrezzaturaGrid(String gridName) {
         super(new Grid<>(Attrezzatura.class),gridName);
-        setColumns("identificativo","statoAttrezzatura","modello");
-        setColumnCaption("statoAttrezzatura","Stato");
+        setColumns("identificativo","stato","modello.header");
+        setColumnCaption("modello.header","Modello");
     }
 
 }

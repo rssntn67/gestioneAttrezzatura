@@ -12,7 +12,7 @@ public class ModelloAttrezzaturaAdd extends Add<ModelloAttrezzatura> {
     @Override
     public ModelloAttrezzatura generate() {
     	ModelloAttrezzatura modelloAttrezzatura = new ModelloAttrezzatura();
-    	modelloAttrezzatura.setNome("InserisciNome");
+    	modelloAttrezzatura.setNome("");
         return modelloAttrezzatura;
     }
 

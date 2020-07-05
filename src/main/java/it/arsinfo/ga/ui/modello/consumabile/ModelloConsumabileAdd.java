@@ -12,7 +12,7 @@ public class ModelloConsumabileAdd extends Add<ModelloConsumabile> {
     @Override
     public ModelloConsumabile generate() {
     	ModelloConsumabile modelloConsumabile = new ModelloConsumabile();
-    	modelloConsumabile.setNome("InserisciNome");
+    	modelloConsumabile.setNome("");
         return modelloConsumabile;
     }
 
