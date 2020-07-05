@@ -3,6 +3,7 @@ package it.arsinfo.ga.ui.modello.consumabile;
 import java.util.EnumSet;
 
 import com.vaadin.data.Binder;
+import com.vaadin.data.converter.StringToBigDecimalConverter;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
@@ -27,13 +28,14 @@ public class ModelloConsumabileEditor extends EntityEditor<ModelloConsumabile> {
                                                                                             EnumSet.allOf(MarcaConsumabile.class));
     private final TextField nome = new TextField("Nome");
     private final TextField descrizione = new TextField("Descrizione");
+    private final TextField costo = new TextField("costo");
 
     public ModelloConsumabileEditor(ModelloConsumabileServiceDao dao) {
         super(dao, new Binder<>(ModelloConsumabile.class));
 
         HorizontalLayout intestazioni = new HorizontalLayout(nome,fornitore,annoProduzione);
 
-        HorizontalLayout residenza = new HorizontalLayout(tipo,marca);
+        HorizontalLayout residenza = new HorizontalLayout(costo,tipo,marca);
         residenza.addComponentsAndExpand(descrizione);
         
         setComponents(getActions(), intestazioni,residenza);
@@ -42,6 +44,10 @@ public class ModelloConsumabileEditor extends EntityEditor<ModelloConsumabile> {
         getBinder().forField(nome).asRequired();
         getBinder().forField(fornitore).asRequired();
         getBinder().forField(annoProduzione).asRequired();
+        getBinder()
+        .forField(costo)
+        .withConverter(new StringToBigDecimalConverter("Conversione in Eur")).bind("costo");
+
         getBinder().bindInstanceFields(this);
 
         // Configure and style components
@@ -56,6 +62,11 @@ public class ModelloConsumabileEditor extends EntityEditor<ModelloConsumabile> {
 
     @Override
     public void focus(boolean persisted, ModelloConsumabile c) {
+    	if (persisted) {
+    		costo.setReadOnly(true);
+    	} else {
+    		costo.setReadOnly(false);
+    	}
         nome.focus();
     }
 }

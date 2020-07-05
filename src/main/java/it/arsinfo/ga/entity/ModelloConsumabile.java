@@ -31,7 +31,7 @@ public class ModelloConsumabile extends Modello {
     @Column(nullable = false)
     private TipoConsumabile tipo = TipoConsumabile.NonDisponibile;    
 
-    private BigDecimal importo=BigDecimal.ZERO;
+    private BigDecimal costo=BigDecimal.ZERO;
 	 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -105,12 +105,12 @@ public class ModelloConsumabile extends Modello {
 	}
 
 
-	public BigDecimal getImporto() {
-		return importo;
+	public BigDecimal getCosto() {
+		return costo;
 	}
 
-	public void setImporto(BigDecimal importo) {
-		this.importo = importo;
+	public void setCosto(BigDecimal importo) {
+		this.costo = importo;
 	}
 
 	public void setMarca(MarcaConsumabile marca) {
@@ -119,7 +119,7 @@ public class ModelloConsumabile extends Modello {
 
 	@Override
 	public String toString() {
-		return "ModelloConsumabile [marca=" + marca + ", tipo=" + tipo + ", importo=" + importo + ", id=" + id
+		return "ModelloConsumabile [marca=" + marca + ", tipo=" + tipo + ", importo=" + costo + ", id=" + id
 				+ ", nome=" + nome + ", descrizione=" + descrizione + ", fornitore=" + fornitore + ", annoProduzione="
 				+ annoProduzione + "]";
 	}

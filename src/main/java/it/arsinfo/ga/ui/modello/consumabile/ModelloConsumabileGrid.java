@@ -9,6 +9,7 @@ public class ModelloConsumabileGrid extends CustomGrid<ModelloConsumabile> {
 
     public ModelloConsumabileGrid(String gridName) {
         super(new Grid<>(ModelloConsumabile.class),gridName);
+        setColumns("nome","marca","tipo","fornitore","annoProduzione","costo");
     }
 
 }
