@@ -92,7 +92,7 @@ public class GestioneAttrezzaturaApplicationTests {
     	mda1.setNome("prova");
     	mda1.setAnnoProduzione(Anno.ANNOND);
     	mda1.setDescrizione("aZz");
-    	mda1.setMarcaModello(MarcaAttrezzatura.Echo);
+    	mda1.setMarca(MarcaAttrezzatura.Echo);
     	mda1.setTipo(TipoAttrezzatura.Decespugliatori);
     	
     	modelloAttrezzaturaDao.save(mda1);
@@ -132,7 +132,7 @@ public class GestioneAttrezzaturaApplicationTests {
     	mda1.setNome("prova");
     	mda1.setAnnoProduzione(Anno.ANNOND);
     	mda1.setDescrizione("aZz");
-    	mda1.setMarcaModello(MarcaAttrezzatura.Echo);
+    	mda1.setMarca(MarcaAttrezzatura.Echo);
     	mda1.setTipo(TipoAttrezzatura.Decespugliatori);
     	
     	modelloAttrezzaturaDao.save(mda1);
@@ -186,7 +186,7 @@ public class GestioneAttrezzaturaApplicationTests {
     	mda1.setNome("AAA1");
     	mda1.setAnnoProduzione(Anno.ANNOND);
     	mda1.setDescrizione("aZz");
-    	mda1.setMarcaModello(MarcaAttrezzatura.Echo);
+    	mda1.setMarca(MarcaAttrezzatura.Echo);
     	mda1.setTipo(TipoAttrezzatura.Decespugliatori);
     	
     	modelloAttrezzaturaDao.save(mda1);

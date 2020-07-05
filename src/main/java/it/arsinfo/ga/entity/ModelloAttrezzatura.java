@@ -1,5 +1,7 @@
 package it.arsinfo.ga.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -44,6 +46,7 @@ public class ModelloAttrezzatura extends Modello {
     @Column(nullable = false)
     private Anno annoProduzione = Anno.ANNOND;
 
+    private BigDecimal costo=BigDecimal.ZERO;
 
 	@Override
 	public Long getId() {
@@ -92,10 +95,6 @@ public class ModelloAttrezzatura extends Modello {
 		return marca;
 	}
 
-	public void setMarcaModello(MarcaAttrezzatura marcaModello) {
-		this.marca = marcaModello;
-	}
-
 	public TipoAttrezzatura getTipo() {
 		return tipo;
 	}
@@ -104,11 +103,23 @@ public class ModelloAttrezzatura extends Modello {
 		this.tipo = tipoModello;
 	}
 
+	public BigDecimal getCosto() {
+		return costo;
+	}
+
+	public void setCosto(BigDecimal costo) {
+		this.costo = costo;
+	}
+
+	public void setMarca(MarcaAttrezzatura marca) {
+		this.marca = marca;
+	}
+
 	@Override
 	public String toString() {
 		return "ModelloAttrezzatura [marca=" + marca + ", tipo=" + tipo + ", id=" + id + ", nome=" + nome
 				+ ", descrizione=" + descrizione + ", fornitore=" + fornitore + ", annoProduzione=" + annoProduzione
-				+ "]";
+				+ ", costo=" + costo + "]";
 	}
 
 }

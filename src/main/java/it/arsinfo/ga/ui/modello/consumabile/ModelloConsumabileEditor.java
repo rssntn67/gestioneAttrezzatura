@@ -1,41 +1,39 @@
-package it.arsinfo.ga.ui.modello.attrezzatura;
+package it.arsinfo.ga.ui.modello.consumabile;
 
 import java.util.EnumSet;
 
 import com.vaadin.data.Binder;
-import com.vaadin.data.converter.StringToBigDecimalConverter;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.ModelloAttrezzaturaServiceDao;
+import it.arsinfo.ga.dao.ModelloConsumabileServiceDao;
 import it.arsinfo.ga.data.Anno;
 import it.arsinfo.ga.data.Fornitore;
-import it.arsinfo.ga.data.MarcaAttrezzatura;
-import it.arsinfo.ga.data.TipoAttrezzatura;
-import it.arsinfo.ga.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.data.MarcaConsumabile;
+import it.arsinfo.ga.data.TipoConsumabile;
+import it.arsinfo.ga.entity.ModelloConsumabile;
 import it.arsinfo.ga.vaadin.EntityEditor;
 
-public class ModelloAttrezzaturaEditor extends EntityEditor<ModelloAttrezzatura> {
+public class ModelloConsumabileEditor extends EntityEditor<ModelloConsumabile> {
 
     private final ComboBox<Fornitore> fornitore = new ComboBox<Fornitore>("Fornitore",
             EnumSet.allOf(Fornitore.class));
     private final ComboBox<Anno> annoProduzione = new ComboBox<Anno>("Anno Produzione",
             EnumSet.allOf(Anno.class));
-    private final ComboBox<TipoAttrezzatura> tipo = new ComboBox<TipoAttrezzatura>("Tipo Attrezzatura",
-                                                                           EnumSet.allOf(TipoAttrezzatura.class));
-    private final ComboBox<MarcaAttrezzatura> marca = new ComboBox<MarcaAttrezzatura>("Marca Attrezzatura",
-                                                                                            EnumSet.allOf(MarcaAttrezzatura.class));
+    private final ComboBox<TipoConsumabile> tipo = new ComboBox<TipoConsumabile>("Tipo Consumabile",
+                                                                           EnumSet.allOf(TipoConsumabile.class));
+    private final ComboBox<MarcaConsumabile> marca = new ComboBox<MarcaConsumabile>("Marca Consumabile",
+                                                                                            EnumSet.allOf(MarcaConsumabile.class));
     private final TextField nome = new TextField("Nome");
     private final TextField descrizione = new TextField("Descrizione");
-    private final TextField costo = new TextField("costo");
 
-    public ModelloAttrezzaturaEditor(ModelloAttrezzaturaServiceDao dao) {
-        super(dao, new Binder<>(ModelloAttrezzatura.class));
+    public ModelloConsumabileEditor(ModelloConsumabileServiceDao dao) {
+        super(dao, new Binder<>(ModelloConsumabile.class));
 
         HorizontalLayout intestazioni = new HorizontalLayout(nome,fornitore,annoProduzione);
 
-        HorizontalLayout residenza = new HorizontalLayout(costo,tipo,marca);
+        HorizontalLayout residenza = new HorizontalLayout(tipo,marca);
         residenza.addComponentsAndExpand(descrizione);
         
         setComponents(getActions(), intestazioni,residenza);
@@ -44,10 +42,6 @@ public class ModelloAttrezzaturaEditor extends EntityEditor<ModelloAttrezzatura>
         getBinder().forField(nome).asRequired();
         getBinder().forField(fornitore).asRequired();
         getBinder().forField(annoProduzione).asRequired();
-        getBinder()
-        .forField(costo)
-        .withConverter(new StringToBigDecimalConverter("Conversione in Eur")).bind("costo");
-
         getBinder().bindInstanceFields(this);
 
         // Configure and style components
@@ -61,12 +55,7 @@ public class ModelloAttrezzaturaEditor extends EntityEditor<ModelloAttrezzatura>
     }
 
     @Override
-    public void focus(boolean persisted, ModelloAttrezzatura c) {
-    	if (persisted) {
-    		costo.setReadOnly(true);
-    	} else {
-    		costo.setReadOnly(false);
-    	}
+    public void focus(boolean persisted, ModelloConsumabile c) {
         nome.focus();
     }
 }

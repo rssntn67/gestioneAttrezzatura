@@ -20,7 +20,6 @@ public class AttrezzaturaEditor extends EntityEditor<Attrezzatura> {
     private final ComboBox<StatoOperabile> statoAttrezzatura = new ComboBox<StatoOperabile>("Stato",
                                                                            EnumSet.allOf(StatoOperabile.class));
     private final TextField identificativo = new TextField("Identificativo");
-    private final TextField valore = new TextField("Valore");
     private final TextField speseManutenzione = new TextField("Spese Manutenzione");
     private final TextField speseRiparazione = new TextField("Spese Riparazione");
 
@@ -30,15 +29,12 @@ public class AttrezzaturaEditor extends EntityEditor<Attrezzatura> {
         HorizontalLayout intestazioni = new HorizontalLayout(identificativo,statoAttrezzatura);
         intestazioni.addComponentsAndExpand(modelloAttrezzatura);
         
-        HorizontalLayout importi = new HorizontalLayout(valore,speseManutenzione,speseRiparazione);
+        HorizontalLayout importi = new HorizontalLayout(speseManutenzione,speseRiparazione);
         setComponents(getActions(), intestazioni,importi);
 
 
         getBinder().forField(identificativo).asRequired();
         getBinder().forField(statoAttrezzatura).asRequired();
-        getBinder()
-        .forField(valore)
-        .withConverter(new StringToBigDecimalConverter("Conversione in Eur")).bind("valore");
         getBinder()
         .forField(speseManutenzione)
         .withConverter(new StringToBigDecimalConverter("Conversione in Eur")).bind("speseManutenzione");

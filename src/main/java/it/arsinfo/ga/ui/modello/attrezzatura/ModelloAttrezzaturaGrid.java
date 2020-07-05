@@ -9,6 +9,7 @@ public class ModelloAttrezzaturaGrid extends CustomGrid<ModelloAttrezzatura> {
 
     public ModelloAttrezzaturaGrid(String gridName) {
         super(new Grid<>(ModelloAttrezzatura.class),gridName);
+        setColumns("nome","marca","tipo","fornitore","annoProduzione","costo");
     }
 
 }

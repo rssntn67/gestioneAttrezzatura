@@ -27,7 +27,6 @@ public class Attrezzatura extends Operabile<ModelloAttrezzatura> {
     private ModelloAttrezzatura modello;
     
     
-    private BigDecimal valore=BigDecimal.ZERO;
     private BigDecimal speseManutenzione=BigDecimal.ZERO;
     private BigDecimal speseRiparazione=BigDecimal.ZERO;
 
@@ -81,14 +80,6 @@ public class Attrezzatura extends Operabile<ModelloAttrezzatura> {
 		this.modello = modelloAttrezzatura;
 	}
 
-	public BigDecimal getValore() {
-		return valore;
-	}
-
-	public void setValore(BigDecimal valore) {
-		this.valore = valore;
-	}
-
 	public BigDecimal getSpeseManutenzione() {
 		return speseManutenzione;
 	}
@@ -107,7 +98,7 @@ public class Attrezzatura extends Operabile<ModelloAttrezzatura> {
 
 	@Override
 	public String toString() {
-		return "Attrezzatura [modelloAttrezzatura=" + modello + ", valore=" + valore
+		return "Attrezzatura [modelloAttrezzatura=" + modello 
 				+ ", speseManutenzione=" + speseManutenzione + ", speseRiparazione=" + speseRiparazione + ", id=" + id
 				+ ", identificativo=" + identificativo + ", stato=" + stato + "]";
 	}
