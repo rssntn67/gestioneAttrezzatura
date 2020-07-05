@@ -17,10 +17,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import it.arsinfo.ga.dao.repository.AttrezzaturaDao;
 import it.arsinfo.ga.dao.repository.CantiereDao;
 import it.arsinfo.ga.dao.repository.ModelloAttrezzaturaDao;
-import it.arsinfo.ga.dao.repository.OperazioneDao;
+import it.arsinfo.ga.dao.repository.OperazioneAttrezzaturaDao;
 import it.arsinfo.ga.data.Anno;
+import it.arsinfo.ga.data.Fornitore;
 import it.arsinfo.ga.data.MarcaAttrezzatura;
-import it.arsinfo.ga.data.StatoAttrezzatura;
+import it.arsinfo.ga.data.StatoOperabile;
 import it.arsinfo.ga.data.StatoCantiere;
 import it.arsinfo.ga.data.TipoAttrezzatura;
 import it.arsinfo.ga.entity.Attrezzatura;
@@ -42,7 +43,7 @@ public class GestioneAttrezzaturaApplicationTests {
 	private CantiereDao cantiereDao;
 	
 	@Autowired
-	private OperazioneDao operazioneDao;
+	private OperazioneAttrezzaturaDao operazioneDao;
 	
     private static final Logger log = LoggerFactory.getLogger(GestioneAttrezzaturaApplicationTests.class);
 
@@ -98,7 +99,7 @@ public class GestioneAttrezzaturaApplicationTests {
     	
     	assertEquals(1, modelloAttrezzaturaDao.count());
     	
-    	ModelloAttrezzatura mdaDb = modelloAttrezzaturaDao.findByNome("prova");
+    	ModelloAttrezzatura mdaDb = modelloAttrezzaturaDao.findByNomeAndFornitoreAndAnnoProduzione("prova",Fornitore.NonDisponibile,Anno.ANNOND);
     	assertNotNull(mdaDb);
     	
     	ModelloAttrezzatura mda2 = new ModelloAttrezzatura();
@@ -142,7 +143,7 @@ public class GestioneAttrezzaturaApplicationTests {
     	
     	Attrezzatura a =  new Attrezzatura();
     	a.setIdentificativo("xp37jkf");
-    	a.setModelloAttrezzatura(mda1);
+    	a.setModello(mda1);
     	
     	attrezzaturaDao.save(a);
     	assertEquals(1, attrezzaturaDao.count());
@@ -153,13 +154,13 @@ public class GestioneAttrezzaturaApplicationTests {
     	assertNotNull(fromDb);
     	log.info("saved: {} ", fromDb);
     	
-    	fromDb.setStatoAttrezzatura(StatoAttrezzatura.InRiparazione);
+    	fromDb.setStato(StatoOperabile.InRiparazione);
     	
     	attrezzaturaDao.save(fromDb);
 
     	log.info("saved: {} ", fromDb);
 
-    	assertEquals(StatoAttrezzatura.InRiparazione, fromDb.getStatoAttrezzatura());
+    	assertEquals(StatoOperabile.InRiparazione, fromDb.getStato());
     	
     	attrezzaturaDao.delete(fromDb);
     	
@@ -192,12 +193,12 @@ public class GestioneAttrezzaturaApplicationTests {
     	
     	Attrezzatura a =  new Attrezzatura();
     	a.setIdentificativo("xp37jkf");
-    	a.setModelloAttrezzatura(mda1);
+    	a.setModello(mda1);
     	attrezzaturaDao.save(a);
     	
     	OperazioneAttrezzatura o = new OperazioneAttrezzatura();
     	o.setCantiere(c);
-    	o.setAttrezzatura(a);
+    	o.setOperabile(a);
     	operazioneDao.save(o);
     	
     	log.info("{}",o);

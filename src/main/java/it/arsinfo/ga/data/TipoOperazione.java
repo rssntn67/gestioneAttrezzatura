@@ -1,6 +1,6 @@
 package it.arsinfo.ga.data;
 
-public enum TipoOperazioneAttrezzatura {
+public enum TipoOperazione {
 	Carico,
 	Scarico,
 	Furto,

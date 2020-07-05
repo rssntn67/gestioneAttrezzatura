@@ -9,7 +9,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
 import it.arsinfo.ga.dao.AttrezzaturaServiceDao;
-import it.arsinfo.ga.data.StatoAttrezzatura;
+import it.arsinfo.ga.data.StatoOperabile;
 import it.arsinfo.ga.entity.Attrezzatura;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.vaadin.Search;
@@ -17,11 +17,11 @@ import it.arsinfo.ga.vaadin.Search;
 public class AttrezzaturaSearch extends Search<Attrezzatura> {
 
     private String searchIdentificativo;
-    private StatoAttrezzatura searchStatoAttrezzatura;
+    private StatoOperabile searchStatoAttrezzatura;
     private ModelloAttrezzatura searchModelloAttrezzatura;
 
-    private final ComboBox<StatoAttrezzatura> filterStatoAttrezzatura = new ComboBox<StatoAttrezzatura>("Cerca per Stato",
-            EnumSet.allOf(StatoAttrezzatura.class));
+    private final ComboBox<StatoOperabile> filterStatoAttrezzatura = new ComboBox<StatoOperabile>("Cerca per Stato",
+            EnumSet.allOf(StatoOperabile.class));
 
     private final ComboBox<ModelloAttrezzatura> filterModelloAttrezzatura = new ComboBox<ModelloAttrezzatura>("Cerca per Modello");
     

@@ -54,33 +54,33 @@ public class ModelloAttrezzaturaServiceDaoImpl implements ModelloAttrezzaturaSer
 		if (searchAnnoProduzione == null && searchTipoModello == null && searchMarcaModello == null)
 			return repository.findByNomeContainingIgnoreCase(searchNome);
 		if (searchAnnoProduzione == null && StringUtils.isEmpty(searchNome) && searchMarcaModello == null)
-			return repository.findByTipoModello(searchTipoModello);
+			return repository.findByTipo(searchTipoModello);
 		if (searchAnnoProduzione == null && StringUtils.isEmpty(searchNome) && searchTipoModello == null)
-			return repository.findByMarcaModello(searchMarcaModello);
+			return repository.findByMarca(searchMarcaModello);
 		
 		if (searchTipoModello == null && searchMarcaModello == null)
 			return repository.findByNomeContainingIgnoreCaseAndAnnoProduzione(searchNome, searchAnnoProduzione);
 		if (searchAnnoProduzione == null && searchMarcaModello == null)
-			return repository.findByNomeContainingIgnoreCaseAndTipoModello(searchNome, searchTipoModello);
+			return repository.findByNomeContainingIgnoreCaseAndTipo(searchNome, searchTipoModello);
 		if (searchAnnoProduzione == null && searchTipoModello == null)
-			return repository.findByNomeContainingIgnoreCaseAndMarcaModello(searchNome, searchMarcaModello);	
+			return repository.findByNomeContainingIgnoreCaseAndMarca(searchNome, searchMarcaModello);	
 		if (StringUtils.isEmpty(searchNome) && searchMarcaModello == null)
-			return repository.findByAnnoProduzioneAndTipoModello(searchAnnoProduzione,searchTipoModello);
+			return repository.findByAnnoProduzioneAndTipo(searchAnnoProduzione,searchTipoModello);
 		if (StringUtils.isEmpty(searchNome) && searchTipoModello == null)
-			return repository.findByAnnoProduzioneAndMarcaModello(searchAnnoProduzione,searchMarcaModello);
+			return repository.findByAnnoProduzioneAndMarca(searchAnnoProduzione,searchMarcaModello);
 		if (searchAnnoProduzione == null && StringUtils.isEmpty(searchNome))
-			return repository.findByMarcaModelloAndTipoModello(searchMarcaModello, searchTipoModello);
+			return repository.findByMarcaAndTipo(searchMarcaModello, searchTipoModello);
 		
 		if (searchMarcaModello == null)
-			return repository.findByNomeContainingIgnoreCaseAndAnnoProduzioneAndTipoModello(searchNome, searchAnnoProduzione, searchTipoModello);
+			return repository.findByNomeContainingIgnoreCaseAndAnnoProduzioneAndTipo(searchNome, searchAnnoProduzione, searchTipoModello);
 		if (searchTipoModello == null)
-			return repository.findByNomeContainingIgnoreCaseAndAnnoProduzioneAndMarcaModello(searchNome, searchAnnoProduzione, searchMarcaModello);
+			return repository.findByNomeContainingIgnoreCaseAndAnnoProduzioneAndMarca(searchNome, searchAnnoProduzione, searchMarcaModello);
 		if (searchAnnoProduzione == null)
-			return repository.findByNomeContainingIgnoreCaseAndTipoModelloAndMarcaModello(searchNome, searchTipoModello, searchMarcaModello);
+			return repository.findByNomeContainingIgnoreCaseAndTipoAndMarca(searchNome, searchTipoModello, searchMarcaModello);
 		if (StringUtils.isEmpty(searchNome))
-			return repository.findByAnnoProduzioneAndTipoModelloAndMarcaModello(searchAnnoProduzione, searchTipoModello, searchMarcaModello);
+			return repository.findByAnnoProduzioneAndTipoAndMarca(searchAnnoProduzione, searchTipoModello, searchMarcaModello);
 		
-		return repository.findByNomeContainingIgnoreCaseAndAnnoProduzioneAndTipoModelloAndMarcaModello(searchNome, searchAnnoProduzione, searchTipoModello, searchMarcaModello);
+		return repository.findByNomeContainingIgnoreCaseAndAnnoProduzioneAndTipoAndMarca(searchNome, searchAnnoProduzione, searchTipoModello, searchMarcaModello);
 	}
 
 	

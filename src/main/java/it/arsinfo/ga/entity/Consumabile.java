@@ -1,7 +1,5 @@
 package it.arsinfo.ga.entity;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,74 +13,70 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import it.arsinfo.ga.data.StatoConsumabile;
+import it.arsinfo.ga.data.StatoOperabile;
 
 @Entity
 @Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"identificativo"})
         })
-public class Consumabile implements EntityBase {
+public class Consumabile extends Operabile<ModelloConsumabile> {
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    private ModelloConsumabile modello;
+    
+    
+    private Integer numero=0;
+    private Integer disponibili=0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @ManyToOne(fetch=FetchType.EAGER)
-    private ModelloConsumabile modelloConsumabile;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private StatoConsumabile statoConsumabile=StatoConsumabile.Disponibile;
-    
-    private BigDecimal importo=BigDecimal.ZERO;
-    private Integer numero=0;
-    private Integer disponibili=0;
 
+    private String identificativo;
+        
 	@Override
 	public Long getId() {
 		return id;
 	}
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StatoOperabile stato=StatoOperabile.Disponibile;
+
+    @Override
+	public String getIdentificativo() {
+		return identificativo;
+	}
+
+    @Override
+	public void setIdentificativo(String identificativo) {
+		this.identificativo = identificativo;
+	}
+
+	public StatoOperabile getStato() {
+		return stato;
+	}
+
+	public void setStato(StatoOperabile stato) {
+		this.stato = stato;
+	}
+
 	@Override
     @Transient
     public String getHeader() {
-        return String.format("%s:%s:%s:%d", modelloConsumabile.getHeader(),statoConsumabile,numero);
+        return String.format("%s:%s:%s", identificativo,getModello().getHeader(),stato);
     }
 
-    @Transient
-    public String getModello() {
-    	if (modelloConsumabile != null)
-    		return modelloConsumabile.getHeader();
-    	return "NA";
-    }
-
-	public ModelloConsumabile getModelloConsumabile() {
-		return modelloConsumabile;
+    @Override
+	public ModelloConsumabile getModello() {
+		return modello;
 	}
 
-	public void setModelloConsumabile(ModelloConsumabile modelloConsumabile) {
-		this.modelloConsumabile = modelloConsumabile;
+    @Override
+	public void setModello(ModelloConsumabile modelloConsumabile) {
+		this.modello = modelloConsumabile;
 	}
 
-	public StatoConsumabile getStatoConsumabile() {
-		return statoConsumabile;
-	}
-
-	public void setStatoConsumabile(StatoConsumabile statoConsumabile) {
-		this.statoConsumabile = statoConsumabile;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public BigDecimal getImporto() {
-		return importo;
-	}
-
-	public void setImporto(BigDecimal importo) {
-		this.importo = importo;
-	}
 
 	public Integer getNumero() {
 		return numero;
@@ -102,11 +96,8 @@ public class Consumabile implements EntityBase {
 
 	@Override
 	public String toString() {
-		return "Consumabile [id=" + id + ", modelloConsumabile=" + modelloConsumabile + ", statoConsumabile="
-				+ statoConsumabile + ", importo=" + importo + ", numero=" + numero + ", disponibili=" + disponibili
-				+ "]";
+		return "Consumabile [modelloConsumabile=" + modello + ", numero=" + numero + ", disponibili="
+				+ disponibili + ", id=" + id + ", identificativo=" + identificativo + ", stato=" + stato + "]";
 	}
-
-	
 
 }

@@ -1,76 +1,82 @@
 package it.arsinfo.ga.entity;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import it.arsinfo.ga.data.StatoPersonale;
-import it.arsinfo.ga.data.TipoPersonale;
+import it.arsinfo.ga.data.StatoOperabile;
 
 @Entity
 @Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"identificativo"})
         })
-public class Personale implements EntityBase {
+public class Personale extends Operabile<ModelloPersonale> {
+
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    private ModelloPersonale modello;
+
+    private Integer numero=0;
+    private Integer disponibili=0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TipoPersonale tipoPersonale = TipoPersonale.Operai;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private StatoPersonale statoPersonale=StatoPersonale.Disponibile;
-    
-    private BigDecimal importo=BigDecimal.ZERO;
-    private Integer numero=0;
-    private Integer disponibili=0;
 
+    private String identificativo;
+        
 	@Override
 	public Long getId() {
 		return id;
 	}
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StatoOperabile stato=StatoOperabile.Disponibile;
+
+    @Override
+	public String getIdentificativo() {
+		return identificativo;
+	}
+
+    @Override
+	public void setIdentificativo(String identificativo) {
+		this.identificativo = identificativo;
+	}
+
+	public StatoOperabile getStato() {
+		return stato;
+	}
+
+	public void setStato(StatoOperabile stato) {
+		this.stato = stato;
+	}
+
 	@Override
     @Transient
     public String getHeader() {
-        return String.format("%s:%s:%s:%d", tipoPersonale,statoPersonale,numero);
+        return String.format("%s:%s:%s", identificativo,getModello().getHeader(),stato);
     }
 
-	public TipoPersonale getTipoPersonale() {
-		return tipoPersonale;
+
+
+    @Override
+	public ModelloPersonale getModello() {
+		return modello;
 	}
 
-	public void setTipoPersonale(TipoPersonale tipoPersonale) {
-		this.tipoPersonale = tipoPersonale;
-	}
-
-	public StatoPersonale getStatoPersonale() {
-		return statoPersonale;
-	}
-
-	public void setStatoPersonale(StatoPersonale statoPersonale) {
-		this.statoPersonale = statoPersonale;
-	}
-
-	public BigDecimal getImporto() {
-		return importo;
-	}
-
-	public void setImporto(BigDecimal importo) {
-		this.importo = importo;
+    @Override
+	public void setModello(ModelloPersonale modelloPersonale) {
+		this.modello = modelloPersonale;
 	}
 
 	public Integer getNumero() {
@@ -89,16 +95,10 @@ public class Personale implements EntityBase {
 		this.disponibili = disponibili;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	@Override
 	public String toString() {
-		return "Personale [id=" + id + ", tipoPersonale=" + tipoPersonale + ", statoPersonale=" + statoPersonale
-				+ ", importo=" + importo + ", numero=" + numero + ", disponibili=" + disponibili + "]";
+		return "Personale [modelloPersonale=" + modello + ", numero=" + numero + ", disponibili=" + disponibili
+				+ ", id=" + id + ", identificativo=" + identificativo + ", stato=" + stato + "]";
 	}
 	
-	
-
 }

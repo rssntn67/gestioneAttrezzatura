@@ -9,7 +9,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
 import it.arsinfo.ga.dao.AttrezzaturaServiceDao;
-import it.arsinfo.ga.data.StatoAttrezzatura;
+import it.arsinfo.ga.data.StatoOperabile;
 import it.arsinfo.ga.entity.Attrezzatura;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.vaadin.EntityEditor;
@@ -17,8 +17,8 @@ import it.arsinfo.ga.vaadin.EntityEditor;
 public class AttrezzaturaEditor extends EntityEditor<Attrezzatura> {
 
     private final ComboBox<ModelloAttrezzatura> modelloAttrezzatura = new ComboBox<ModelloAttrezzatura>("Modello");
-    private final ComboBox<StatoAttrezzatura> statoAttrezzatura = new ComboBox<StatoAttrezzatura>("Stato",
-                                                                           EnumSet.allOf(StatoAttrezzatura.class));
+    private final ComboBox<StatoOperabile> statoAttrezzatura = new ComboBox<StatoOperabile>("Stato",
+                                                                           EnumSet.allOf(StatoOperabile.class));
     private final TextField identificativo = new TextField("Identificativo");
     private final TextField valore = new TextField("Valore");
     private final TextField speseManutenzione = new TextField("Spese Manutenzione");

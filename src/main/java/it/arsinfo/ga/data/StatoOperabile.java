@@ -1,8 +1,8 @@
 package it.arsinfo.ga.data;
 
-public enum StatoAttrezzatura {
+public enum StatoOperabile {
 	Disponibile,
-	InUso,
+	Occupato,
 	InRiparazione,
-	Dismessa
+	Dismesso
 }

@@ -9,7 +9,7 @@ import org.springframework.util.StringUtils;
 import it.arsinfo.ga.dao.AttrezzaturaServiceDao;
 import it.arsinfo.ga.dao.repository.AttrezzaturaDao;
 import it.arsinfo.ga.dao.repository.ModelloAttrezzaturaDao;
-import it.arsinfo.ga.data.StatoAttrezzatura;
+import it.arsinfo.ga.data.StatoOperabile;
 import it.arsinfo.ga.entity.Attrezzatura;
 import it.arsinfo.ga.entity.ModelloAttrezzatura;
 
@@ -47,30 +47,30 @@ public class AttrezzaturaServiceDaoImpl implements AttrezzaturaServiceDao {
 	}
 
 	@Override
-	public List<Attrezzatura> searchBy(StatoAttrezzatura searchStatoAttrezzatura, String searchIdentificativo,
+	public List<Attrezzatura> searchBy(StatoOperabile searchStatoAttrezzatura, String searchIdentificativo,
 			ModelloAttrezzatura searchModello) {
 		if (StringUtils.isEmpty(searchIdentificativo) && searchStatoAttrezzatura == null && searchModello == null)
 			return repository.findAll();
 
 		if (StringUtils.isEmpty(searchIdentificativo) && searchStatoAttrezzatura == null )
-			return repository.findByModelloAttrezzatura(searchModello);
+			return repository.findByModello(searchModello);
 
 		if (StringUtils.isEmpty(searchIdentificativo) && searchModello == null)
-			return repository.findByStatoAttrezzatura(searchStatoAttrezzatura);
+			return repository.findByStato(searchStatoAttrezzatura);
 
 		if (searchStatoAttrezzatura == null && searchModello == null)
 			return repository.findByIdentificativoContainingIgnoreCase(searchIdentificativo);
 
 		if ( searchModello == null)
-			return repository.findByIdentificativoContainingIgnoreCaseAndStatoAttrezzatura(searchIdentificativo, searchStatoAttrezzatura);
+			return repository.findByIdentificativoContainingIgnoreCaseAndStato(searchIdentificativo, searchStatoAttrezzatura);
 
 		if (searchStatoAttrezzatura == null )
-			return repository.findByIdentificativoContainingIgnoreCaseAndModelloAttrezzatura(searchIdentificativo, searchModello);
+			return repository.findByIdentificativoContainingIgnoreCaseAndModello(searchIdentificativo, searchModello);
 
 		if (StringUtils.isEmpty(searchIdentificativo))
-			return repository.findByStatoAttrezzaturaAndModelloAttrezzatura(searchStatoAttrezzatura, searchModello);
+			return repository.findByStatoAndModello(searchStatoAttrezzatura, searchModello);
 
-		return repository.findByIdentificativoContainingIgnoreCaseAndStatoAttrezzaturaAndModelloAttrezzatura(searchIdentificativo, searchStatoAttrezzatura, searchModello);
+		return repository.findByIdentificativoContainingIgnoreCaseAndStatoAndModello(searchIdentificativo, searchStatoAttrezzatura, searchModello);
 	}
 
 	@Override

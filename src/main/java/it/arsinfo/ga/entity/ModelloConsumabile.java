@@ -1,5 +1,7 @@
 package it.arsinfo.ga.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,15 +14,25 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import it.arsinfo.ga.data.Anno;
+import it.arsinfo.ga.data.Fornitore;
 import it.arsinfo.ga.data.MarcaConsumabile;
 import it.arsinfo.ga.data.TipoConsumabile;
 
 @Entity
 @Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"nome"})
-        })
-public class ModelloConsumabile implements EntityBase {
+        @UniqueConstraint(columnNames = {"nome","fornitore","annoProduzione"})
+})
+public class ModelloConsumabile extends Modello {
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MarcaConsumabile marca = MarcaConsumabile.NonDefinita;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoConsumabile tipo = TipoConsumabile.NonDisponibile;    
 
+    private BigDecimal importo=BigDecimal.ZERO;
+	 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,41 +42,18 @@ public class ModelloConsumabile implements EntityBase {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private MarcaConsumabile marca = MarcaConsumabile.NonDefinita;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TipoConsumabile tipo = TipoConsumabile.NonDisponibile;    
+    private Fornitore fornitore = Fornitore.NonDisponibile;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Anno annoProduzione = Anno.ANNOND;
+
 
 	@Override
 	public Long getId() {
 		return id;
 	}
-
-	@Override
-    @Transient
-    public String getHeader() {
-        return String.format("%s:%s", nome,annoProduzione.getAnnoAsString());
-    }
 	 
-	public MarcaConsumabile getMarca() {
-		return marca;
-	}
-
-	public void setMarcaModello(MarcaConsumabile marcaModello) {
-		this.marca = marcaModello;
-	}
-
-	public TipoConsumabile getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoConsumabile tipoModello) {
-		this.tipo = tipoModello;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -81,6 +70,14 @@ public class ModelloConsumabile implements EntityBase {
 		this.descrizione = descrizione;
 	}
 
+	public Fornitore getFornitore() {
+		return fornitore;
+	}
+
+	public void setFornitore(Fornitore fornitore) {
+		this.fornitore = fornitore;
+	}
+
 	public Anno getAnnoProduzione() {
 		return annoProduzione;
 	}
@@ -89,14 +86,42 @@ public class ModelloConsumabile implements EntityBase {
 		this.annoProduzione = annoProduzione;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	@Override
+    @Transient
+    public String getHeader() {
+        return String.format("%s:%s", nome,annoProduzione.getAnnoAsString());
+    }
+
+	public MarcaConsumabile getMarca() {
+		return marca;
+	}
+
+	public TipoConsumabile getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoConsumabile tipoModello) {
+		this.tipo = tipoModello;
+	}
+
+
+	public BigDecimal getImporto() {
+		return importo;
+	}
+
+	public void setImporto(BigDecimal importo) {
+		this.importo = importo;
+	}
+
+	public void setMarca(MarcaConsumabile marca) {
+		this.marca = marca;
 	}
 
 	@Override
 	public String toString() {
-		return "ModelloConsumabile [id=" + id + ", nome=" + nome + ", descrizione=" + descrizione + ", marca="
-				+ marca + ", tipo=" + tipo + ", annoProduzione=" + annoProduzione + "]";
+		return "ModelloConsumabile [marca=" + marca + ", tipo=" + tipo + ", importo=" + importo + ", id=" + id
+				+ ", nome=" + nome + ", descrizione=" + descrizione + ", fornitore=" + fornitore + ", annoProduzione="
+				+ annoProduzione + "]";
 	}
 
 }

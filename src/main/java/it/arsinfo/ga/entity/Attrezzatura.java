@@ -15,75 +15,70 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import it.arsinfo.ga.data.StatoAttrezzatura;
+import it.arsinfo.ga.data.StatoOperabile;
 
 @Entity
 @Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"identificativo"})
         })
-public class Attrezzatura implements EntityBase {
+public class Attrezzatura extends Operabile<ModelloAttrezzatura> {
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+    private ModelloAttrezzatura modello;
+    
+    
+    private BigDecimal valore=BigDecimal.ZERO;
+    private BigDecimal speseManutenzione=BigDecimal.ZERO;
+    private BigDecimal speseRiparazione=BigDecimal.ZERO;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String identificativo;
-    
-    @ManyToOne(fetch=FetchType.EAGER)
-    private ModelloAttrezzatura modelloAttrezzatura;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private StatoAttrezzatura statoAttrezzatura=StatoAttrezzatura.Disponibile;
-    
-    private BigDecimal valore=BigDecimal.ZERO;
-    private BigDecimal speseManutenzione=BigDecimal.ZERO;
-    private BigDecimal speseRiparazione=BigDecimal.ZERO;
-
+        
 	@Override
 	public Long getId() {
 		return id;
 	}
 
-	@Override
-    @Transient
-    public String getHeader() {
-        return String.format("%s:%s:%s", identificativo,modelloAttrezzatura.getHeader(),statoAttrezzatura);
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StatoOperabile stato=StatoOperabile.Disponibile;
 
-    @Transient
-    public String getModello() {
-    	if (modelloAttrezzatura != null)
-    		return modelloAttrezzatura.getHeader();
-    	return "NA";
-    }
-
+    @Override
 	public String getIdentificativo() {
 		return identificativo;
 	}
 
+    @Override
 	public void setIdentificativo(String identificativo) {
 		this.identificativo = identificativo;
 	}
 
-	public ModelloAttrezzatura getModelloAttrezzatura() {
-		return modelloAttrezzatura;
+	public StatoOperabile getStato() {
+		return stato;
 	}
 
-	public void setModelloAttrezzatura(ModelloAttrezzatura modelloAttrezzatura) {
-		this.modelloAttrezzatura = modelloAttrezzatura;
+	public void setStato(StatoOperabile stato) {
+		this.stato = stato;
 	}
 
-	public StatoAttrezzatura getStatoAttrezzatura() {
-		return statoAttrezzatura;
+	@Override
+    @Transient
+    public String getHeader() {
+        return String.format("%s:%s:%s", identificativo,getModello().getHeader(),stato);
+    }
+
+
+    @Override
+	public ModelloAttrezzatura getModello() {
+		return modello;
 	}
 
-	public void setStatoAttrezzatura(StatoAttrezzatura statoAttrezzatura) {
-		this.statoAttrezzatura = statoAttrezzatura;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+    @Override
+	public void setModello(ModelloAttrezzatura modelloAttrezzatura) {
+		this.modello = modelloAttrezzatura;
 	}
 
 	public BigDecimal getValore() {
@@ -112,15 +107,9 @@ public class Attrezzatura implements EntityBase {
 
 	@Override
 	public String toString() {
-		return String.format(
-		"Attrezzatura [id=%d identificativo=%s, modelloAttrezzatura=%s, statoAttrezzatura=%s, valore=%.2f, speseManutenzione=%.2f, speseRiparazione=%.2f]",
-				id,
-				identificativo,
-				modelloAttrezzatura,
-				statoAttrezzatura,
-				valore,
-				speseManutenzione,
-				speseRiparazione);
+		return "Attrezzatura [modelloAttrezzatura=" + modello + ", valore=" + valore
+				+ ", speseManutenzione=" + speseManutenzione + ", speseRiparazione=" + speseRiparazione + ", id=" + id
+				+ ", identificativo=" + identificativo + ", stato=" + stato + "]";
 	}
 
 }

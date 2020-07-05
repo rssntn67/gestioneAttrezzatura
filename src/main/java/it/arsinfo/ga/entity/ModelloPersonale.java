@@ -1,5 +1,7 @@
 package it.arsinfo.ga.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,22 +15,18 @@ import javax.persistence.UniqueConstraint;
 
 import it.arsinfo.ga.data.Anno;
 import it.arsinfo.ga.data.Fornitore;
-import it.arsinfo.ga.data.MarcaAttrezzatura;
-import it.arsinfo.ga.data.TipoAttrezzatura;
+import it.arsinfo.ga.data.TipoPersonale;
 
 @Entity
 @Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"nome","fornitore","annoProduzione"})
 })
-public class ModelloAttrezzatura extends Modello {
+public class ModelloPersonale extends Modello {
     
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private MarcaAttrezzatura marca = MarcaAttrezzatura.NonDefinita;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TipoAttrezzatura tipo = TipoAttrezzatura.NonDisponibile;    
+    private TipoPersonale tipo = TipoPersonale.Altri;    
 
+	private BigDecimal costo;
+	 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -88,27 +86,28 @@ public class ModelloAttrezzatura extends Modello {
         return String.format("%s:%s", nome,annoProduzione.getAnnoAsString());
     }
 
-	public MarcaAttrezzatura getMarca() {
-		return marca;
-	}
-
-	public void setMarcaModello(MarcaAttrezzatura marcaModello) {
-		this.marca = marcaModello;
-	}
-
-	public TipoAttrezzatura getTipo() {
+	public TipoPersonale getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoAttrezzatura tipoModello) {
+	public void setTipo(TipoPersonale tipoModello) {
 		this.tipo = tipoModello;
+	}
+
+	public BigDecimal getCosto() {
+		return costo;
+	}
+
+	public void setCosto(BigDecimal costo) {
+		this.costo = costo;
 	}
 
 	@Override
 	public String toString() {
-		return "ModelloAttrezzatura [marca=" + marca + ", tipo=" + tipo + ", id=" + id + ", nome=" + nome
+		return "ModelloPersonale [tipo=" + tipo + ", costo=" + costo + ", id=" + id + ", nome=" + nome
 				+ ", descrizione=" + descrizione + ", fornitore=" + fornitore + ", annoProduzione=" + annoProduzione
 				+ "]";
 	}
 
+	
 }
