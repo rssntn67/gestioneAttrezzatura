@@ -12,9 +12,9 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.service.AttrezzaturaService;
-import it.arsinfo.ga.ui.vaadin.EntityEditor;
+import it.arsinfo.ga.ui.vaadin.Editor;
 
-public class AttrezzaturaEditor extends EntityEditor<Attrezzatura> {
+public class AttrezzaturaEditor extends Editor<Attrezzatura> {
 
     private final ComboBox<ModelloAttrezzatura> modello = new ComboBox<ModelloAttrezzatura>("Modello");
     private final ComboBox<StatoOperabile> stato = new ComboBox<StatoOperabile>("Stato",

@@ -10,9 +10,9 @@ import com.vaadin.ui.TextField;
 import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.service.CantiereService;
-import it.arsinfo.ga.ui.vaadin.EntityEditor;
+import it.arsinfo.ga.ui.vaadin.Editor;
 
-public class CantiereEditor extends EntityEditor<Cantiere> {
+public class CantiereEditor extends Editor<Cantiere> {
 
     private final ComboBox<StatoCantiere> statoCantiere = new ComboBox<StatoCantiere>("Stato",
                                                                            EnumSet.allOf(StatoCantiere.class));

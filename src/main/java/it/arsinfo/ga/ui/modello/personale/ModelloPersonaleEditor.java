@@ -13,9 +13,9 @@ import it.arsinfo.ga.model.data.Fornitore;
 import it.arsinfo.ga.model.data.TipoPersonale;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.service.ModelloPersonaleService;
-import it.arsinfo.ga.ui.vaadin.EntityEditor;
+import it.arsinfo.ga.ui.vaadin.Editor;
 
-public class ModelloPersonaleEditor extends EntityEditor<ModelloPersonale> {
+public class ModelloPersonaleEditor extends Editor<ModelloPersonale> {
 
     private final ComboBox<Fornitore> fornitore = new ComboBox<Fornitore>("Fornitore",
             EnumSet.allOf(Fornitore.class));

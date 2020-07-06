@@ -12,9 +12,9 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Consumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.service.ConsumabileService;
-import it.arsinfo.ga.ui.vaadin.EntityEditor;
+import it.arsinfo.ga.ui.vaadin.Editor;
 
-public class ConsumabileEditor extends EntityEditor<Consumabile> {
+public class ConsumabileEditor extends Editor<Consumabile> {
 
     private final ComboBox<ModelloConsumabile> modello = new ComboBox<ModelloConsumabile>("Modello");
     private final ComboBox<StatoOperabile> stato = new ComboBox<StatoOperabile>("Stato",

@@ -1,17 +1,29 @@
 package it.arsinfo.ga.ui.vaadin;
 
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.ui.Button;
 
 import it.arsinfo.ga.model.entity.EntityBase;
 
 public abstract class Add<T extends EntityBase>
-        extends CustomButton {
+        extends UIChangeHandler {
+
+    private final Button button;
 
     public Add(String caption) {
-        super(caption, VaadinIcons.PLUS);
-
+        button = new Button(caption, VaadinIcons.PLUS);
+        button.addClickListener(e -> onChange());
+        setComponents(button);
     }
 
     public abstract T generate();
     
+    public void enable() {
+    	button.setEnabled(true);
+    }
+    
+    public void disable() {
+    	button.setEnabled(false);
+    }
+
 }
