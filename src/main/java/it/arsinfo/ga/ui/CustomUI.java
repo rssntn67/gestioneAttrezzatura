@@ -55,7 +55,8 @@ public abstract class CustomUI extends UI {
             }
         });
 
-        menu.addItem(TITLE_MODELLO_ATTREZZATURA,new MenuBar.Command() {
+        MenuItem modelli = menu.addItem("Gestione Modelli",null);
+        modelli.addItem(TITLE_MODELLO_ATTREZZATURA,new MenuBar.Command() {
             private static final long serialVersionUID = 1L;
             
             public void menuSelected(MenuItem selectedItem) {
@@ -63,7 +64,7 @@ public abstract class CustomUI extends UI {
             }
         });
 
-        menu.addItem(TITLE_MODELLO_CONSUMABILE,new MenuBar.Command() {
+        modelli.addItem(TITLE_MODELLO_CONSUMABILE,new MenuBar.Command() {
             private static final long serialVersionUID = 1L;
             
             public void menuSelected(MenuItem selectedItem) {
@@ -71,15 +72,25 @@ public abstract class CustomUI extends UI {
             }
         });
 
-        menu.addItem(TITLE_ATTREZZATURA,new MenuBar.Command() {
+        MenuItem operabili = menu.addItem("Gestione Operabili",null);
+        operabili.addItem(TITLE_ATTREZZATURA,new MenuBar.Command() {
             private static final long serialVersionUID = 1L;
             
             public void menuSelected(MenuItem selectedItem) {
                 getUI().getPage().setLocation(URL_ATTREZZATURA);
             }
         });
-        
-        menu.addItem(TITLE_CANTIERE,new MenuBar.Command() {
+
+        operabili.addItem(TITLE_CONSUMABILE,new MenuBar.Command() {
+            private static final long serialVersionUID = 1L;
+            
+            public void menuSelected(MenuItem selectedItem) {
+                getUI().getPage().setLocation(URL_CONSUMABILE);
+            }
+        });
+
+        MenuItem cantiere = menu.addItem("Gestione Cantiere",null);
+        cantiere.addItem(TITLE_CANTIERE,new MenuBar.Command() {
             private static final long serialVersionUID = 1L;
             
             public void menuSelected(MenuItem selectedItem) {
@@ -87,6 +98,7 @@ public abstract class CustomUI extends UI {
             }
         });
 
+        MenuItem Operazioni = menu.addItem("Operazioni Cantiere",null);
 
 
     }
