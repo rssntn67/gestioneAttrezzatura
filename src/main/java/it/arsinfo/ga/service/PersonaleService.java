@@ -9,7 +9,7 @@ import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.model.entity.Personale;
 
 @Service
-public interface PersonaleService extends ServiceDao<Personale>{
+public interface PersonaleService extends EntityBaseService<Personale>{
 
 	List<Personale> searchBy(StatoOperabile searchStatoPersonale, String searchIdentificativo, ModelloPersonale searchModello);
 

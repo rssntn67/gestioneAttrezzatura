@@ -9,7 +9,7 @@ import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 
 @Service
-public interface AttrezzaturaService extends ServiceDao<Attrezzatura>{
+public interface AttrezzaturaService extends EntityBaseService<Attrezzatura>{
 
 	List<Attrezzatura> searchBy(StatoOperabile searchStatoAttrezzatura, String searchIdentificativo, ModelloAttrezzatura searchModello);
 

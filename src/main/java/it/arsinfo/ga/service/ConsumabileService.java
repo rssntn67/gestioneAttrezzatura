@@ -9,7 +9,7 @@ import it.arsinfo.ga.model.entity.Consumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 
 @Service
-public interface ConsumabileService extends ServiceDao<Consumabile>{
+public interface ConsumabileService extends EntityBaseService<Consumabile>{
 
 	List<Consumabile> searchBy(StatoOperabile searchStatoConsumabile, String searchIdentificativo, ModelloConsumabile searchModello);
 

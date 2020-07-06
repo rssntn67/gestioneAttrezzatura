@@ -11,7 +11,7 @@ import it.arsinfo.ga.model.data.TipoConsumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 
 @Service
-public interface ModelloConsumabileService extends ServiceDao<ModelloConsumabile>{
+public interface ModelloConsumabileService extends EntityBaseService<ModelloConsumabile>{
 
 	List<ModelloConsumabile> searchBy(Fornitore fornitore, Anno searchAnnoProduzione, String searchNome, TipoConsumabile searchTipoModello,
 			MarcaConsumabile searchMarcaModello);

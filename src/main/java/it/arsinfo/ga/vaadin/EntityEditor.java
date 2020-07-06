@@ -10,12 +10,12 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
 import it.arsinfo.ga.model.entity.EntityBase;
-import it.arsinfo.ga.service.ServiceDao;
+import it.arsinfo.ga.service.EntityBaseService;
 
 public abstract class EntityEditor<T extends EntityBase>
         extends Editor<T> {
 
-    private final ServiceDao<T> repositoryDao;
+    private final EntityBaseService<T> repositoryDao;
     private T smdObj;
 
     private Button save = new Button("Salva", VaadinIcons.CHECK);
@@ -26,7 +26,7 @@ public abstract class EntityEditor<T extends EntityBase>
     private final Binder<T> binder;
     private static final Logger log = LoggerFactory.getLogger(EntityEditor.class);
 
-    public EntityEditor(ServiceDao<T> repositoryDao, Binder<T> binder) {
+    public EntityEditor(EntityBaseService<T> repositoryDao, Binder<T> binder) {
 
         this.repositoryDao = repositoryDao;
         this.binder = binder;
@@ -116,7 +116,7 @@ public abstract class EntityEditor<T extends EntityBase>
         return smdObj;
     }
 
-    public ServiceDao<T> getServiceDao() {
+    public EntityBaseService<T> getServiceDao() {
         return repositoryDao;
     }
 
