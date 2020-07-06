@@ -8,9 +8,9 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.CantiereServiceDao;
-import it.arsinfo.ga.data.StatoCantiere;
-import it.arsinfo.ga.entity.Cantiere;
+import it.arsinfo.ga.model.data.StatoCantiere;
+import it.arsinfo.ga.model.entity.Cantiere;
+import it.arsinfo.ga.service.CantiereService;
 import it.arsinfo.ga.vaadin.Search;
 
 public class CantiereSearch extends Search<Cantiere> {
@@ -21,9 +21,9 @@ public class CantiereSearch extends Search<Cantiere> {
     private final ComboBox<StatoCantiere> filterStatoCantiere = new ComboBox<StatoCantiere>("Cerca per Stato",
             EnumSet.allOf(StatoCantiere.class));
     
-    private final CantiereServiceDao dao;
+    private final CantiereService dao;
 
-    public CantiereSearch(CantiereServiceDao dao) {
+    public CantiereSearch(CantiereService dao) {
         super(dao);
         this.dao=dao;
         TextField filterIdentificativo = new TextField("Cerca per Identificativo");

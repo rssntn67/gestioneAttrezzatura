@@ -8,12 +8,12 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.ModelloAttrezzaturaServiceDao;
-import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.Fornitore;
-import it.arsinfo.ga.data.MarcaAttrezzatura;
-import it.arsinfo.ga.data.TipoAttrezzatura;
-import it.arsinfo.ga.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.data.Anno;
+import it.arsinfo.ga.model.data.Fornitore;
+import it.arsinfo.ga.model.data.MarcaAttrezzatura;
+import it.arsinfo.ga.model.data.TipoAttrezzatura;
+import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.service.ModelloAttrezzaturaService;
 import it.arsinfo.ga.vaadin.EntityEditor;
 
 public class ModelloAttrezzaturaEditor extends EntityEditor<ModelloAttrezzatura> {
@@ -30,7 +30,7 @@ public class ModelloAttrezzaturaEditor extends EntityEditor<ModelloAttrezzatura>
     private final TextField descrizione = new TextField("Descrizione");
     private final TextField costo = new TextField("costo");
 
-    public ModelloAttrezzaturaEditor(ModelloAttrezzaturaServiceDao dao) {
+    public ModelloAttrezzaturaEditor(ModelloAttrezzaturaService dao) {
         super(dao, new Binder<>(ModelloAttrezzatura.class));
 
         HorizontalLayout intestazioni = new HorizontalLayout(nome,fornitore,annoProduzione);

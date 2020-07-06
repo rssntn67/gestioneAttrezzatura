@@ -14,20 +14,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import it.arsinfo.ga.dao.repository.AttrezzaturaDao;
-import it.arsinfo.ga.dao.repository.CantiereDao;
-import it.arsinfo.ga.dao.repository.ModelloAttrezzaturaDao;
-import it.arsinfo.ga.dao.repository.OperazioneAttrezzaturaDao;
-import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.Fornitore;
-import it.arsinfo.ga.data.MarcaAttrezzatura;
-import it.arsinfo.ga.data.StatoOperabile;
-import it.arsinfo.ga.data.StatoCantiere;
-import it.arsinfo.ga.data.TipoAttrezzatura;
-import it.arsinfo.ga.entity.Attrezzatura;
-import it.arsinfo.ga.entity.Cantiere;
-import it.arsinfo.ga.entity.ModelloAttrezzatura;
-import it.arsinfo.ga.entity.OperazioneAttrezzatura;
+import it.arsinfo.ga.dao.AttrezzaturaDao;
+import it.arsinfo.ga.dao.CantiereDao;
+import it.arsinfo.ga.dao.ModelloAttrezzaturaDao;
+import it.arsinfo.ga.dao.OperazioneAttrezzaturaDao;
+import it.arsinfo.ga.model.data.Anno;
+import it.arsinfo.ga.model.data.Fornitore;
+import it.arsinfo.ga.model.data.MarcaAttrezzatura;
+import it.arsinfo.ga.model.data.StatoCantiere;
+import it.arsinfo.ga.model.data.StatoOperabile;
+import it.arsinfo.ga.model.data.TipoAttrezzatura;
+import it.arsinfo.ga.model.entity.Attrezzatura;
+import it.arsinfo.ga.model.entity.Cantiere;
+import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

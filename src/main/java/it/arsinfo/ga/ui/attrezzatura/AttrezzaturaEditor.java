@@ -8,10 +8,10 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.AttrezzaturaServiceDao;
-import it.arsinfo.ga.data.StatoOperabile;
-import it.arsinfo.ga.entity.Attrezzatura;
-import it.arsinfo.ga.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.data.StatoOperabile;
+import it.arsinfo.ga.model.entity.Attrezzatura;
+import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.service.AttrezzaturaService;
 import it.arsinfo.ga.vaadin.EntityEditor;
 
 public class AttrezzaturaEditor extends EntityEditor<Attrezzatura> {
@@ -23,7 +23,7 @@ public class AttrezzaturaEditor extends EntityEditor<Attrezzatura> {
     private final TextField speseManutenzione = new TextField("Spese Manutenzione");
     private final TextField speseRiparazione = new TextField("Spese Riparazione");
 
-    public AttrezzaturaEditor(AttrezzaturaServiceDao dao) {
+    public AttrezzaturaEditor(AttrezzaturaService dao) {
         super(dao, new Binder<>(Attrezzatura.class));
 
         HorizontalLayout intestazioni = new HorizontalLayout(identificativo,stato);

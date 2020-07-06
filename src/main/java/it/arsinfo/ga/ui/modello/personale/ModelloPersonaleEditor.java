@@ -8,11 +8,11 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.ModelloPersonaleServiceDao;
-import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.Fornitore;
-import it.arsinfo.ga.data.TipoPersonale;
-import it.arsinfo.ga.entity.ModelloPersonale;
+import it.arsinfo.ga.model.data.Anno;
+import it.arsinfo.ga.model.data.Fornitore;
+import it.arsinfo.ga.model.data.TipoPersonale;
+import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.service.ModelloPersonaleService;
 import it.arsinfo.ga.vaadin.EntityEditor;
 
 public class ModelloPersonaleEditor extends EntityEditor<ModelloPersonale> {
@@ -27,7 +27,7 @@ public class ModelloPersonaleEditor extends EntityEditor<ModelloPersonale> {
     private final TextField descrizione = new TextField("Descrizione");
     private final TextField costo = new TextField("costo");
 
-    public ModelloPersonaleEditor(ModelloPersonaleServiceDao dao) {
+    public ModelloPersonaleEditor(ModelloPersonaleService dao) {
         super(dao, new Binder<>(ModelloPersonale.class));
 
         HorizontalLayout intestazioni = new HorizontalLayout(nome,fornitore,annoProduzione);

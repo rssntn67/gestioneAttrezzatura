@@ -8,10 +8,10 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.ConsumabileServiceDao;
-import it.arsinfo.ga.data.StatoOperabile;
-import it.arsinfo.ga.entity.Consumabile;
-import it.arsinfo.ga.entity.ModelloConsumabile;
+import it.arsinfo.ga.model.data.StatoOperabile;
+import it.arsinfo.ga.model.entity.Consumabile;
+import it.arsinfo.ga.model.entity.ModelloConsumabile;
+import it.arsinfo.ga.service.ConsumabileService;
 import it.arsinfo.ga.vaadin.Search;
 
 public class ConsumabileSearch extends Search<Consumabile> {
@@ -25,9 +25,9 @@ public class ConsumabileSearch extends Search<Consumabile> {
 
     private final ComboBox<ModelloConsumabile> filterModelloConsumabile = new ComboBox<ModelloConsumabile>("Cerca per Modello");
     
-    private final ConsumabileServiceDao dao;
+    private final ConsumabileService dao;
 
-    public ConsumabileSearch(ConsumabileServiceDao dao) {
+    public ConsumabileSearch(ConsumabileService dao) {
         super(dao);
         this.dao=dao;
         TextField filterIdentificativo = new TextField("Cerca per Identificativo");

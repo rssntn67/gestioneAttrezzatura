@@ -2,7 +2,7 @@ package it.arsinfo.ga.vaadin;
 
 import com.vaadin.ui.HorizontalLayout;
 
-import it.arsinfo.ga.entity.EntityBase;
+import it.arsinfo.ga.model.entity.EntityBase;
 
 public abstract class Editor<T extends EntityBase>
         extends UIChangeHandler {

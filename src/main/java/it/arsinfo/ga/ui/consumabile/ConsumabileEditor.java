@@ -8,10 +8,10 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.ConsumabileServiceDao;
-import it.arsinfo.ga.data.StatoOperabile;
-import it.arsinfo.ga.entity.Consumabile;
-import it.arsinfo.ga.entity.ModelloConsumabile;
+import it.arsinfo.ga.model.data.StatoOperabile;
+import it.arsinfo.ga.model.entity.Consumabile;
+import it.arsinfo.ga.model.entity.ModelloConsumabile;
+import it.arsinfo.ga.service.ConsumabileService;
 import it.arsinfo.ga.vaadin.EntityEditor;
 
 public class ConsumabileEditor extends EntityEditor<Consumabile> {
@@ -24,7 +24,7 @@ public class ConsumabileEditor extends EntityEditor<Consumabile> {
     private final TextField disponibili = new TextField("Disponibili");
     private final TextField utilizzati = new TextField("Utilizzati");
 
-    public ConsumabileEditor(ConsumabileServiceDao dao) {
+    public ConsumabileEditor(ConsumabileService dao) {
         super(dao, new Binder<>(Consumabile.class));
 
         HorizontalLayout intestazioni = new HorizontalLayout(identificativo,stato);

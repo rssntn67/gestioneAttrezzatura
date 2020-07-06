@@ -9,7 +9,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
-import it.arsinfo.ga.entity.EntityBase;
+import it.arsinfo.ga.model.entity.EntityBase;
 
 public abstract class RepositoryDaoEditor<T extends EntityBase>
         extends UIChangeHandler {

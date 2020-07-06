@@ -7,9 +7,9 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.CantiereServiceDao;
-import it.arsinfo.ga.data.StatoCantiere;
-import it.arsinfo.ga.entity.Cantiere;
+import it.arsinfo.ga.model.data.StatoCantiere;
+import it.arsinfo.ga.model.entity.Cantiere;
+import it.arsinfo.ga.service.CantiereService;
 import it.arsinfo.ga.vaadin.EntityEditor;
 
 public class CantiereEditor extends EntityEditor<Cantiere> {
@@ -18,7 +18,7 @@ public class CantiereEditor extends EntityEditor<Cantiere> {
                                                                            EnumSet.allOf(StatoCantiere.class));
     private final TextField identificativo = new TextField("Identificativo");
  
-    public CantiereEditor(CantiereServiceDao dao) {
+    public CantiereEditor(CantiereService dao) {
         super(dao, new Binder<>(Cantiere.class));
 
         HorizontalLayout intestazioni = new HorizontalLayout(identificativo,statoCantiere);

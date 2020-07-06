@@ -2,7 +2,7 @@ package it.arsinfo.ga.ui;
 
 import com.vaadin.server.VaadinRequest;
 
-import it.arsinfo.ga.entity.EntityBase;
+import it.arsinfo.ga.model.entity.EntityBase;
 import it.arsinfo.ga.vaadin.Add;
 import it.arsinfo.ga.vaadin.CustomGrid;
 import it.arsinfo.ga.vaadin.Editor;

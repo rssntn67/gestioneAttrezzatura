@@ -8,12 +8,12 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.ModelloConsumabileServiceDao;
-import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.Fornitore;
-import it.arsinfo.ga.data.MarcaConsumabile;
-import it.arsinfo.ga.data.TipoConsumabile;
-import it.arsinfo.ga.entity.ModelloConsumabile;
+import it.arsinfo.ga.model.data.Anno;
+import it.arsinfo.ga.model.data.Fornitore;
+import it.arsinfo.ga.model.data.MarcaConsumabile;
+import it.arsinfo.ga.model.data.TipoConsumabile;
+import it.arsinfo.ga.model.entity.ModelloConsumabile;
+import it.arsinfo.ga.service.ModelloConsumabileService;
 import it.arsinfo.ga.vaadin.EntityEditor;
 
 public class ModelloConsumabileEditor extends EntityEditor<ModelloConsumabile> {
@@ -30,7 +30,7 @@ public class ModelloConsumabileEditor extends EntityEditor<ModelloConsumabile> {
     private final TextField descrizione = new TextField("Descrizione");
     private final TextField costo = new TextField("costo");
 
-    public ModelloConsumabileEditor(ModelloConsumabileServiceDao dao) {
+    public ModelloConsumabileEditor(ModelloConsumabileService dao) {
         super(dao, new Binder<>(ModelloConsumabile.class));
 
         HorizontalLayout intestazioni = new HorizontalLayout(nome,fornitore,annoProduzione);

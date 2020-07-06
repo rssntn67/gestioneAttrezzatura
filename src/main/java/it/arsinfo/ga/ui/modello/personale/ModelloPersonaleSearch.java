@@ -8,11 +8,11 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.ModelloPersonaleServiceDao;
-import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.Fornitore;
-import it.arsinfo.ga.data.TipoPersonale;
-import it.arsinfo.ga.entity.ModelloPersonale;
+import it.arsinfo.ga.model.data.Anno;
+import it.arsinfo.ga.model.data.Fornitore;
+import it.arsinfo.ga.model.data.TipoPersonale;
+import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.service.ModelloPersonaleService;
 import it.arsinfo.ga.vaadin.Search;
 
 public class ModelloPersonaleSearch extends Search<ModelloPersonale> {
@@ -32,9 +32,9 @@ public class ModelloPersonaleSearch extends Search<ModelloPersonale> {
             EnumSet.allOf(TipoPersonale.class));
 
     
-    private final ModelloPersonaleServiceDao dao;
+    private final ModelloPersonaleService dao;
 
-    public ModelloPersonaleSearch(ModelloPersonaleServiceDao dao) {
+    public ModelloPersonaleSearch(ModelloPersonaleService dao) {
         super(dao);
         this.dao=dao;
         TextField filterNome = new TextField("Cerca per Nome");

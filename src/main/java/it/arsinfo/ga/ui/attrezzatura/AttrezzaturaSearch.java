@@ -8,10 +8,10 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.AttrezzaturaServiceDao;
-import it.arsinfo.ga.data.StatoOperabile;
-import it.arsinfo.ga.entity.Attrezzatura;
-import it.arsinfo.ga.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.data.StatoOperabile;
+import it.arsinfo.ga.model.entity.Attrezzatura;
+import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.service.AttrezzaturaService;
 import it.arsinfo.ga.vaadin.Search;
 
 public class AttrezzaturaSearch extends Search<Attrezzatura> {
@@ -25,9 +25,9 @@ public class AttrezzaturaSearch extends Search<Attrezzatura> {
 
     private final ComboBox<ModelloAttrezzatura> filterModelloAttrezzatura = new ComboBox<ModelloAttrezzatura>("Cerca per Modello");
     
-    private final AttrezzaturaServiceDao dao;
+    private final AttrezzaturaService dao;
 
-    public AttrezzaturaSearch(AttrezzaturaServiceDao dao) {
+    public AttrezzaturaSearch(AttrezzaturaService dao) {
         super(dao);
         this.dao=dao;
         TextField filterIdentificativo = new TextField("Cerca per Identificativo");

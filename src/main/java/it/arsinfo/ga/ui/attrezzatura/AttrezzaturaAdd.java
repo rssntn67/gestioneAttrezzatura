@@ -1,6 +1,6 @@
 package it.arsinfo.ga.ui.attrezzatura;
 
-import it.arsinfo.ga.entity.Attrezzatura;
+import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.vaadin.Add;
 
 public class AttrezzaturaAdd extends Add<Attrezzatura> {

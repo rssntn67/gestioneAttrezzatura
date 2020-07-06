@@ -3,8 +3,8 @@ package it.arsinfo.ga.vaadin;
 
 import java.util.List;
 
-import it.arsinfo.ga.dao.ServiceDao;
-import it.arsinfo.ga.entity.EntityBase;
+import it.arsinfo.ga.model.entity.EntityBase;
+import it.arsinfo.ga.service.ServiceDao;
 
 public abstract class Search<T extends EntityBase>
         extends UIChangeHandler {

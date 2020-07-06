@@ -6,8 +6,8 @@ import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 
-import it.arsinfo.ga.dao.ModelloPersonaleServiceDao;
-import it.arsinfo.ga.entity.ModelloPersonale;
+import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.service.ModelloPersonaleService;
 import it.arsinfo.ga.ui.EditorUI;
 
 @SpringUI(path = EditorUI.URL_MODELLO_PERSONALE)
@@ -20,7 +20,7 @@ public class ModelloPersonaleUI extends EditorUI<ModelloPersonale> {
     private static final long serialVersionUID = 7884064928998716106L;
 
     @Autowired
-    ModelloPersonaleServiceDao serviceDao;
+    ModelloPersonaleService serviceDao;
 
     @Override
     protected void init(VaadinRequest request) {

@@ -8,12 +8,12 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.ModelloConsumabileServiceDao;
-import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.Fornitore;
-import it.arsinfo.ga.data.MarcaConsumabile;
-import it.arsinfo.ga.data.TipoConsumabile;
-import it.arsinfo.ga.entity.ModelloConsumabile;
+import it.arsinfo.ga.model.data.Anno;
+import it.arsinfo.ga.model.data.Fornitore;
+import it.arsinfo.ga.model.data.MarcaConsumabile;
+import it.arsinfo.ga.model.data.TipoConsumabile;
+import it.arsinfo.ga.model.entity.ModelloConsumabile;
+import it.arsinfo.ga.service.ModelloConsumabileService;
 import it.arsinfo.ga.vaadin.Search;
 
 public class ModelloConsumabileSearch extends Search<ModelloConsumabile> {
@@ -37,9 +37,9 @@ public class ModelloConsumabileSearch extends Search<ModelloConsumabile> {
             EnumSet.allOf(TipoConsumabile.class));
 
     
-    private final ModelloConsumabileServiceDao dao;
+    private final ModelloConsumabileService dao;
 
-    public ModelloConsumabileSearch(ModelloConsumabileServiceDao dao) {
+    public ModelloConsumabileSearch(ModelloConsumabileService dao) {
         super(dao);
         this.dao=dao;
         TextField filterNome = new TextField("Cerca per Nome");

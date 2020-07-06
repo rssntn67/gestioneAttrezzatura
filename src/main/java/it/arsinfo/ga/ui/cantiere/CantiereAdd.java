@@ -1,6 +1,6 @@
 package it.arsinfo.ga.ui.cantiere;
 
-import it.arsinfo.ga.entity.Cantiere;
+import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.vaadin.Add;
 
 public class CantiereAdd extends Add<Cantiere> {

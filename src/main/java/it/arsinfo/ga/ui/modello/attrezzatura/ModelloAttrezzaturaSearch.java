@@ -8,12 +8,12 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.ModelloAttrezzaturaServiceDao;
-import it.arsinfo.ga.data.Anno;
-import it.arsinfo.ga.data.Fornitore;
-import it.arsinfo.ga.data.MarcaAttrezzatura;
-import it.arsinfo.ga.data.TipoAttrezzatura;
-import it.arsinfo.ga.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.data.Anno;
+import it.arsinfo.ga.model.data.Fornitore;
+import it.arsinfo.ga.model.data.MarcaAttrezzatura;
+import it.arsinfo.ga.model.data.TipoAttrezzatura;
+import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.service.ModelloAttrezzaturaService;
 import it.arsinfo.ga.vaadin.Search;
 
 public class ModelloAttrezzaturaSearch extends Search<ModelloAttrezzatura> {
@@ -37,9 +37,9 @@ public class ModelloAttrezzaturaSearch extends Search<ModelloAttrezzatura> {
             EnumSet.allOf(TipoAttrezzatura.class));
 
     
-    private final ModelloAttrezzaturaServiceDao dao;
+    private final ModelloAttrezzaturaService dao;
 
-    public ModelloAttrezzaturaSearch(ModelloAttrezzaturaServiceDao dao) {
+    public ModelloAttrezzaturaSearch(ModelloAttrezzaturaService dao) {
         super(dao);
         this.dao=dao;
         TextField filterNome = new TextField("Cerca per Nome");

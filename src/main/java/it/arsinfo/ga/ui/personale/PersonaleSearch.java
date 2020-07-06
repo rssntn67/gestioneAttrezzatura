@@ -8,10 +8,10 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.PersonaleServiceDao;
-import it.arsinfo.ga.data.StatoOperabile;
-import it.arsinfo.ga.entity.Personale;
-import it.arsinfo.ga.entity.ModelloPersonale;
+import it.arsinfo.ga.model.data.StatoOperabile;
+import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.model.entity.Personale;
+import it.arsinfo.ga.service.PersonaleService;
 import it.arsinfo.ga.vaadin.Search;
 
 public class PersonaleSearch extends Search<Personale> {
@@ -25,9 +25,9 @@ public class PersonaleSearch extends Search<Personale> {
 
     private final ComboBox<ModelloPersonale> filterModelloPersonale = new ComboBox<ModelloPersonale>("Cerca per Modello");
     
-    private final PersonaleServiceDao dao;
+    private final PersonaleService dao;
 
-    public PersonaleSearch(PersonaleServiceDao dao) {
+    public PersonaleSearch(PersonaleService dao) {
         super(dao);
         this.dao=dao;
         TextField filterIdentificativo = new TextField("Cerca per Identificativo");

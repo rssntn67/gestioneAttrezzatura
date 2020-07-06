@@ -6,8 +6,8 @@ import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 
-import it.arsinfo.ga.dao.CantiereServiceDao;
-import it.arsinfo.ga.entity.Cantiere;
+import it.arsinfo.ga.model.entity.Cantiere;
+import it.arsinfo.ga.service.CantiereService;
 import it.arsinfo.ga.ui.EditorUI;
 
 @SpringUI(path = EditorUI.URL_CANTIERE)
@@ -20,7 +20,7 @@ public class CantiereUI extends EditorUI<Cantiere> {
     private static final long serialVersionUID = 7884064928998716106L;
 
     @Autowired
-    CantiereServiceDao serviceDao;
+    CantiereService serviceDao;
 
     @Override
     protected void init(VaadinRequest request) {

@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import com.vaadin.ui.Notification;
 
-import it.arsinfo.ga.dao.ServiceItemDao;
-import it.arsinfo.ga.entity.EntityBase;
-import it.arsinfo.ga.entity.EntityItems;
+import it.arsinfo.ga.model.entity.EntityBase;
+import it.arsinfo.ga.model.entity.EntityItems;
+import it.arsinfo.ga.service.ServiceItemDao;
 
 public abstract class EntityItemEditor<I extends EntityBase, T extends EntityItems<I>>
         extends Editor<T> {

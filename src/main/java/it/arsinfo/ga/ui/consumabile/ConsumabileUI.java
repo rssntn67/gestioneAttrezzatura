@@ -6,8 +6,8 @@ import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 
-import it.arsinfo.ga.dao.ConsumabileServiceDao;
-import it.arsinfo.ga.entity.Consumabile;
+import it.arsinfo.ga.model.entity.Consumabile;
+import it.arsinfo.ga.service.ConsumabileService;
 import it.arsinfo.ga.ui.EditorUI;
 
 @SpringUI(path = EditorUI.URL_CONSUMABILE)
@@ -20,7 +20,7 @@ public class ConsumabileUI extends EditorUI<Consumabile> {
     private static final long serialVersionUID = 7884064928998716106L;
 
     @Autowired
-    ConsumabileServiceDao serviceDao;
+    ConsumabileService serviceDao;
 
     @Override
     protected void init(VaadinRequest request) {

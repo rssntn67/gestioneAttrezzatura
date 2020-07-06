@@ -8,10 +8,10 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.dao.PersonaleServiceDao;
-import it.arsinfo.ga.data.StatoOperabile;
-import it.arsinfo.ga.entity.Personale;
-import it.arsinfo.ga.entity.ModelloPersonale;
+import it.arsinfo.ga.model.data.StatoOperabile;
+import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.model.entity.Personale;
+import it.arsinfo.ga.service.PersonaleService;
 import it.arsinfo.ga.vaadin.EntityEditor;
 
 public class PersonaleEditor extends EntityEditor<Personale> {
@@ -24,7 +24,7 @@ public class PersonaleEditor extends EntityEditor<Personale> {
     private final TextField disponibili = new TextField("Disponibili");
     private final TextField utilizzati = new TextField("Utilizzati");
 
-    public PersonaleEditor(PersonaleServiceDao dao) {
+    public PersonaleEditor(PersonaleService dao) {
         super(dao, new Binder<>(Personale.class));
 
         HorizontalLayout intestazioni = new HorizontalLayout(identificativo,stato);

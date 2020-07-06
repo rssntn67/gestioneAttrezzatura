@@ -2,7 +2,7 @@ package it.arsinfo.ga.vaadin;
 
 import com.vaadin.icons.VaadinIcons;
 
-import it.arsinfo.ga.entity.EntityBase;
+import it.arsinfo.ga.model.entity.EntityBase;
 
 public abstract class Add<T extends EntityBase>
         extends CustomButton {

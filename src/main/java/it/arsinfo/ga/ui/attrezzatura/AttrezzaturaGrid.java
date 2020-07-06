@@ -2,7 +2,7 @@ package it.arsinfo.ga.ui.attrezzatura;
 
 import com.vaadin.ui.Grid;
 
-import it.arsinfo.ga.entity.Attrezzatura;
+import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.vaadin.CustomGrid;
 
 public class AttrezzaturaGrid extends CustomGrid<Attrezzatura> {

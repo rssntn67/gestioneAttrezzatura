@@ -9,8 +9,8 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
-import it.arsinfo.ga.dao.ServiceDao;
-import it.arsinfo.ga.entity.EntityBase;
+import it.arsinfo.ga.model.entity.EntityBase;
+import it.arsinfo.ga.service.ServiceDao;
 
 public abstract class EntityEditor<T extends EntityBase>
         extends Editor<T> {
