@@ -11,7 +11,7 @@ import com.vaadin.ui.TextField;
 import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.service.CantiereService;
-import it.arsinfo.ga.vaadin.Search;
+import it.arsinfo.ga.ui.vaadin.Search;
 
 public class CantiereSearch extends Search<Cantiere> {
 

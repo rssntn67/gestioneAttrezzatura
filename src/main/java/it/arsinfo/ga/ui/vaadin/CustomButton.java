@@ -1,4 +1,4 @@
-package it.arsinfo.ga.vaadin;
+package it.arsinfo.ga.ui.vaadin;
 
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;

@@ -1,5 +1,5 @@
 
-package it.arsinfo.ga.vaadin;
+package it.arsinfo.ga.ui.vaadin;
 
 import java.util.List;
 

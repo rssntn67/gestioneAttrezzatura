@@ -12,7 +12,7 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Consumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.service.ConsumabileService;
-import it.arsinfo.ga.vaadin.Search;
+import it.arsinfo.ga.ui.vaadin.Search;
 
 public class ConsumabileSearch extends Search<Consumabile> {
 

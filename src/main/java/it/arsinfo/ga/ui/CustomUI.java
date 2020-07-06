@@ -9,7 +9,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.MenuBar.MenuItem;
 
-import it.arsinfo.ga.vaadin.UIChangeHandler;
+import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
 @Push
 public abstract class CustomUI extends UI {

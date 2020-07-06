@@ -12,7 +12,7 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.service.AttrezzaturaService;
-import it.arsinfo.ga.vaadin.EntityEditor;
+import it.arsinfo.ga.ui.vaadin.EntityEditor;
 
 public class AttrezzaturaEditor extends EntityEditor<Attrezzatura> {
 

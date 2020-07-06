@@ -3,7 +3,7 @@ package it.arsinfo.ga.ui.modello.consumabile;
 import com.vaadin.ui.Grid;
 
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
-import it.arsinfo.ga.vaadin.CustomGrid;
+import it.arsinfo.ga.ui.vaadin.CustomGrid;
 
 public class ModelloConsumabileGrid extends CustomGrid<ModelloConsumabile> {
 

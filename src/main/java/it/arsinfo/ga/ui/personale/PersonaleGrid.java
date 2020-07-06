@@ -3,7 +3,7 @@ package it.arsinfo.ga.ui.personale;
 import com.vaadin.ui.Grid;
 
 import it.arsinfo.ga.model.entity.Personale;
-import it.arsinfo.ga.vaadin.CustomGrid;
+import it.arsinfo.ga.ui.vaadin.CustomGrid;
 
 public class PersonaleGrid extends CustomGrid<Personale> {
 

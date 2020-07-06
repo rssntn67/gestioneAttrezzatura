@@ -14,7 +14,7 @@ import it.arsinfo.ga.model.data.MarcaAttrezzatura;
 import it.arsinfo.ga.model.data.TipoAttrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.service.ModelloAttrezzaturaService;
-import it.arsinfo.ga.vaadin.EntityEditor;
+import it.arsinfo.ga.ui.vaadin.EntityEditor;
 
 public class ModelloAttrezzaturaEditor extends EntityEditor<ModelloAttrezzatura> {
 

@@ -13,7 +13,7 @@ import it.arsinfo.ga.model.data.Fornitore;
 import it.arsinfo.ga.model.data.TipoPersonale;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.service.ModelloPersonaleService;
-import it.arsinfo.ga.vaadin.Search;
+import it.arsinfo.ga.ui.vaadin.Search;
 
 public class ModelloPersonaleSearch extends Search<ModelloPersonale> {
 

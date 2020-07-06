@@ -10,7 +10,7 @@ import com.vaadin.ui.TextField;
 import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.service.CantiereService;
-import it.arsinfo.ga.vaadin.EntityEditor;
+import it.arsinfo.ga.ui.vaadin.EntityEditor;
 
 public class CantiereEditor extends EntityEditor<Cantiere> {
 

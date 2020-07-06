@@ -14,7 +14,7 @@ import it.arsinfo.ga.model.data.MarcaConsumabile;
 import it.arsinfo.ga.model.data.TipoConsumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.service.ModelloConsumabileService;
-import it.arsinfo.ga.vaadin.EntityEditor;
+import it.arsinfo.ga.ui.vaadin.EntityEditor;
 
 public class ModelloConsumabileEditor extends EntityEditor<ModelloConsumabile> {
 
