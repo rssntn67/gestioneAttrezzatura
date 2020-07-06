@@ -30,14 +30,18 @@ public abstract class CustomUI extends UI {
     public final static String URL_ATTREZZATURA = "/attrezzatura";
     public final static String URL_MODELLO_CONSUMABILE = "/modello/consumabile";
     public final static String URL_CONSUMABILE = "/consumabile";
+    public final static String URL_MODELLO_PERSONALE = "/modello/personale";
+    public final static String URL_PERSONALE = "/personale";
     public final static String URL_CANTIERE = "/cantiere";
 
 
     public static final String TITLE_HOME = "Home";
     public final static String TITLE_MODELLO_ATTREZZATURA = "Modello Attrezzatura";
     public final static String TITLE_MODELLO_CONSUMABILE = "Modello Consumabile";
+    public final static String TITLE_MODELLO_PERSONALE = "Modello Personale";
     public final static String TITLE_ATTREZZATURA = "Attrezzatura";
     public final static String TITLE_CONSUMABILE = "Consumabile";
+    public final static String TITLE_PERSONALE = "Personale";
     public final static String TITLE_CANTIERE = "Cantiere";
 
     protected void init(VaadinRequest request, String head) {
@@ -72,6 +76,14 @@ public abstract class CustomUI extends UI {
             }
         });
 
+        modelli.addItem(TITLE_MODELLO_PERSONALE,new MenuBar.Command() {
+            private static final long serialVersionUID = 1L;
+            
+            public void menuSelected(MenuItem selectedItem) {
+                getUI().getPage().setLocation(URL_MODELLO_PERSONALE);
+            }
+        });
+
         MenuItem operabili = menu.addItem("Gestione Operabili",null);
         operabili.addItem(TITLE_ATTREZZATURA,new MenuBar.Command() {
             private static final long serialVersionUID = 1L;
@@ -98,7 +110,7 @@ public abstract class CustomUI extends UI {
             }
         });
 
-        MenuItem Operazioni = menu.addItem("Operazioni Cantiere",null);
+        cantiere.addItem("Operazioni Cantiere",null);
 
 
     }
