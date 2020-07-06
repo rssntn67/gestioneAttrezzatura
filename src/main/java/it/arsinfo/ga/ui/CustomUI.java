@@ -101,6 +101,14 @@ public abstract class CustomUI extends UI {
             }
         });
 
+        operabili.addItem(TITLE_PERSONALE,new MenuBar.Command() {
+            private static final long serialVersionUID = 1L;
+            
+            public void menuSelected(MenuItem selectedItem) {
+                getUI().getPage().setLocation(URL_PERSONALE);
+            }
+        });
+
         MenuItem cantiere = menu.addItem("Gestione Cantiere",null);
         cantiere.addItem(TITLE_CANTIERE,new MenuBar.Command() {
             private static final long serialVersionUID = 1L;

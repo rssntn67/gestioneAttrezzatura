@@ -26,7 +26,7 @@ public class Consumabile extends Operabile<ModelloConsumabile> {
     
     
     private Integer numero=0;
-    private Integer disponibili=0;
+    private Integer utilizzati=0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -87,17 +87,22 @@ public class Consumabile extends Operabile<ModelloConsumabile> {
 	}
 
 	public Integer getDisponibili() {
-		return disponibili;
+		return numero-utilizzati;
 	}
 
-	public void setDisponibili(Integer disponibili) {
-		this.disponibili = disponibili;
-	}
 
 	@Override
 	public String toString() {
-		return "Consumabile [modelloConsumabile=" + modello + ", numero=" + numero + ", disponibili="
-				+ disponibili + ", id=" + id + ", identificativo=" + identificativo + ", stato=" + stato + "]";
+		return "Consumabile [modelloConsumabile=" + modello + ", numero=" + numero + ", utilizzati="
+				+ utilizzati + ", id=" + id + ", identificativo=" + identificativo + ", stato=" + stato + "]";
+	}
+
+	public Integer getUtilizzati() {
+		return utilizzati;
+	}
+
+	public void setUtilizzati(Integer utilizzati) {
+		this.utilizzati = utilizzati;
 	}
 
 }

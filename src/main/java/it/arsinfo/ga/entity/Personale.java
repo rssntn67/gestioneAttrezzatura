@@ -26,7 +26,7 @@ public class Personale extends Operabile<ModelloPersonale> {
     private ModelloPersonale modello;
 
     private Integer numero=0;
-    private Integer disponibili=0;
+    private Integer utilizzati=0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -87,17 +87,22 @@ public class Personale extends Operabile<ModelloPersonale> {
 		this.numero = numero;
 	}
 
-	public Integer getDisponibili() {
-		return disponibili;
+	public Integer getUtilizzati() {
+		return utilizzati;
 	}
 
-	public void setDisponibili(Integer disponibili) {
-		this.disponibili = disponibili;
+	public void setUtilizzati(Integer utilizzati) {
+		this.utilizzati = utilizzati;
+	}
+
+	@Transient
+	public Integer getDisponibili() {
+		return numero-utilizzati;
 	}
 
 	@Override
 	public String toString() {
-		return "Personale [modelloPersonale=" + modello + ", numero=" + numero + ", disponibili=" + disponibili
+		return "Personale [modelloPersonale=" + modello + ", numero=" + numero + ", utilizzati=" + utilizzati
 				+ ", id=" + id + ", identificativo=" + identificativo + ", stato=" + stato + "]";
 	}
 	
