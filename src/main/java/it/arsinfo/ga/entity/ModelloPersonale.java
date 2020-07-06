@@ -25,7 +25,7 @@ public class ModelloPersonale extends Modello {
     
     private TipoPersonale tipo = TipoPersonale.Altri;    
 
-	private BigDecimal costo;
+	private BigDecimal costo = BigDecimal.ZERO;
 	 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
