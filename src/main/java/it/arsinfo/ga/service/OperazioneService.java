@@ -7,6 +7,6 @@ import it.arsinfo.ga.model.entity.Operabile;
 
 public interface OperazioneService<K extends Modello,T extends Operabile<K>> {
 
-	void esegui(TipoOperazione tipo, Cantiere cantiere, T operabile);
+	void esegui(TipoOperazione tipo, Cantiere cantiere, T operabile, int numero) throws UnsupportedOperationException;
 	
 }
