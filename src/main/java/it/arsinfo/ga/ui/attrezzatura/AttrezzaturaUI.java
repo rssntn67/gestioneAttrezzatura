@@ -8,11 +8,11 @@ import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.service.AttrezzaturaService;
-import it.arsinfo.ga.ui.EditorUI;
+import it.arsinfo.ga.ui.vaadin.EntityBaseUI;
 
-@SpringUI(path = EditorUI.URL_ATTREZZATURA)
-@Title(EditorUI.TITLE_ATTREZZATURA)
-public class AttrezzaturaUI extends EditorUI<Attrezzatura> {
+@SpringUI(path = EntityBaseUI.URL_ATTREZZATURA)
+@Title(EntityBaseUI.TITLE_ATTREZZATURA)
+public class AttrezzaturaUI extends EntityBaseUI<Attrezzatura> {
 
     /**
      * 

@@ -12,7 +12,7 @@ import com.vaadin.ui.MenuBar.MenuItem;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
 @Push
-public abstract class CustomUI extends UI {
+public abstract class AbstractUI extends UI {
 
     /**
      * 

@@ -8,11 +8,11 @@ import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.service.ModelloConsumabileService;
-import it.arsinfo.ga.ui.EditorUI;
+import it.arsinfo.ga.ui.vaadin.EntityBaseUI;
 
-@SpringUI(path = EditorUI.URL_MODELLO_CONSUMABILE)
-@Title(EditorUI.TITLE_MODELLO_CONSUMABILE)
-public class ModelloConsumabileUI extends EditorUI<ModelloConsumabile> {
+@SpringUI(path = EntityBaseUI.URL_MODELLO_CONSUMABILE)
+@Title(EntityBaseUI.TITLE_MODELLO_CONSUMABILE)
+public class ModelloConsumabileUI extends EntityBaseUI<ModelloConsumabile> {
 
     /**
      * 

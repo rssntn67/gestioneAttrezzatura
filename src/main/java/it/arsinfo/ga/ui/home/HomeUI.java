@@ -8,11 +8,11 @@ import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Label;
 
-import it.arsinfo.ga.ui.CustomUI;
+import it.arsinfo.ga.ui.AbstractUI;
 
-@SpringUI(path=CustomUI.HOME)
+@SpringUI(path=AbstractUI.HOME)
 @Title("Gestione Abbonamenti ADP")
-public class HomeUI extends CustomUI {
+public class HomeUI extends AbstractUI {
 
     /**
      * 

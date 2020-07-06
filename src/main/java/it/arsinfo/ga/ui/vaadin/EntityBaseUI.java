@@ -1,14 +1,11 @@
-package it.arsinfo.ga.ui;
+package it.arsinfo.ga.ui.vaadin;
 
 import com.vaadin.server.VaadinRequest;
 
 import it.arsinfo.ga.model.entity.EntityBase;
-import it.arsinfo.ga.ui.vaadin.Add;
-import it.arsinfo.ga.ui.vaadin.CustomGrid;
-import it.arsinfo.ga.ui.vaadin.Editor;
-import it.arsinfo.ga.ui.vaadin.Search;
+import it.arsinfo.ga.ui.AbstractUI;
 
-public abstract class EditorUI<T extends EntityBase> extends CustomUI {
+public abstract class EntityBaseUI<T extends EntityBase> extends AbstractUI {
 
     /**
      * 

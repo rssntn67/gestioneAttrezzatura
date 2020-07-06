@@ -8,11 +8,11 @@ import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.PersonaleService;
-import it.arsinfo.ga.ui.EditorUI;
+import it.arsinfo.ga.ui.vaadin.EntityBaseUI;
 
-@SpringUI(path = EditorUI.URL_PERSONALE)
-@Title(EditorUI.TITLE_PERSONALE)
-public class PersonaleUI extends EditorUI<Personale> {
+@SpringUI(path = EntityBaseUI.URL_PERSONALE)
+@Title(EntityBaseUI.TITLE_PERSONALE)
+public class PersonaleUI extends EntityBaseUI<Personale> {
 
     /**
      * 

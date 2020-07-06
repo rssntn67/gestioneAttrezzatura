@@ -8,11 +8,11 @@ import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.service.CantiereService;
-import it.arsinfo.ga.ui.EditorUI;
+import it.arsinfo.ga.ui.vaadin.EntityBaseUI;
 
-@SpringUI(path = EditorUI.URL_CANTIERE)
-@Title(EditorUI.TITLE_CANTIERE)
-public class CantiereUI extends EditorUI<Cantiere> {
+@SpringUI(path = EntityBaseUI.URL_CANTIERE)
+@Title(EntityBaseUI.TITLE_CANTIERE)
+public class CantiereUI extends EntityBaseUI<Cantiere> {
 
     /**
      * 
