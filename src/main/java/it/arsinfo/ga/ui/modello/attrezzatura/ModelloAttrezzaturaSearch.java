@@ -14,7 +14,7 @@ import it.arsinfo.ga.model.data.MarcaAttrezzatura;
 import it.arsinfo.ga.model.data.TipoAttrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.service.ModelloAttrezzaturaService;
-import it.arsinfo.ga.ui.vaadin.Search;
+import it.arsinfo.ga.ui.vaadin.entity.Search;
 
 public class ModelloAttrezzaturaSearch extends Search<ModelloAttrezzatura> {
 

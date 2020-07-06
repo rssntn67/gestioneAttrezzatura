@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui.vaadin;
+package it.arsinfo.ga.ui.vaadin.entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import it.arsinfo.ga.model.entity.EntityBase;
 import it.arsinfo.ga.service.EntityBaseService;
+import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
 public abstract class Editor<T extends EntityBase>
         extends UIChangeHandler {

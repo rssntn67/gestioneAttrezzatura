@@ -8,7 +8,7 @@ import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.service.CantiereService;
-import it.arsinfo.ga.ui.vaadin.EntityBaseUI;
+import it.arsinfo.ga.ui.vaadin.entity.EntityBaseUI;
 
 @SpringUI(path = EntityBaseUI.URL_CANTIERE)
 @Title(EntityBaseUI.TITLE_CANTIERE)

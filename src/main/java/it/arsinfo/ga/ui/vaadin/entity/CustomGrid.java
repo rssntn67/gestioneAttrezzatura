@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui.vaadin;
+package it.arsinfo.ga.ui.vaadin.entity;
 
 import java.util.List;
 
@@ -14,6 +14,8 @@ import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.SingleSelect;
+
+import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
 public abstract class CustomGrid<T>
         extends UIChangeHandler {

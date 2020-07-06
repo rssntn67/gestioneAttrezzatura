@@ -12,7 +12,7 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.PersonaleService;
-import it.arsinfo.ga.ui.vaadin.Editor;
+import it.arsinfo.ga.ui.vaadin.entity.Editor;
 
 public class PersonaleEditor extends Editor<Personale> {
 

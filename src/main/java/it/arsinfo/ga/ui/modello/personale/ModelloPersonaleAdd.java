@@ -1,7 +1,7 @@
 package it.arsinfo.ga.ui.modello.personale;
 
 import it.arsinfo.ga.model.entity.ModelloPersonale;
-import it.arsinfo.ga.ui.vaadin.Add;
+import it.arsinfo.ga.ui.vaadin.entity.Add;
 
 public class ModelloPersonaleAdd extends Add<ModelloPersonale> {
 

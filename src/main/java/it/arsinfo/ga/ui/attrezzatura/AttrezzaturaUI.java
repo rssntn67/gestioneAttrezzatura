@@ -8,7 +8,7 @@ import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.service.AttrezzaturaService;
-import it.arsinfo.ga.ui.vaadin.EntityBaseUI;
+import it.arsinfo.ga.ui.vaadin.entity.EntityBaseUI;
 
 @SpringUI(path = EntityBaseUI.URL_ATTREZZATURA)
 @Title(EntityBaseUI.TITLE_ATTREZZATURA)

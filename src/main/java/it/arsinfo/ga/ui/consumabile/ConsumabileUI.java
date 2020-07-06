@@ -8,7 +8,7 @@ import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.model.entity.Consumabile;
 import it.arsinfo.ga.service.ConsumabileService;
-import it.arsinfo.ga.ui.vaadin.EntityBaseUI;
+import it.arsinfo.ga.ui.vaadin.entity.EntityBaseUI;
 
 @SpringUI(path = EntityBaseUI.URL_CONSUMABILE)
 @Title(EntityBaseUI.TITLE_CONSUMABILE)

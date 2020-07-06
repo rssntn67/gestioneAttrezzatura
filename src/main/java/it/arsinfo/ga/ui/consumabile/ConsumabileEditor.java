@@ -12,7 +12,7 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Consumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.service.ConsumabileService;
-import it.arsinfo.ga.ui.vaadin.Editor;
+import it.arsinfo.ga.ui.vaadin.entity.Editor;
 
 public class ConsumabileEditor extends Editor<Consumabile> {
 

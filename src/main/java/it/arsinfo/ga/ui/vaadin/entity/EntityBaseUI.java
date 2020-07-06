@@ -1,4 +1,4 @@
-package it.arsinfo.ga.ui.vaadin;
+package it.arsinfo.ga.ui.vaadin.entity;
 
 import com.vaadin.server.VaadinRequest;
 

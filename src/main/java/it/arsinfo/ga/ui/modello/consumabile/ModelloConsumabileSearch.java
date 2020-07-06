@@ -14,7 +14,7 @@ import it.arsinfo.ga.model.data.MarcaConsumabile;
 import it.arsinfo.ga.model.data.TipoConsumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.service.ModelloConsumabileService;
-import it.arsinfo.ga.ui.vaadin.Search;
+import it.arsinfo.ga.ui.vaadin.entity.Search;
 
 public class ModelloConsumabileSearch extends Search<ModelloConsumabile> {
 

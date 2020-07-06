@@ -1,7 +1,7 @@
 package it.arsinfo.ga.ui.consumabile;
 
 import it.arsinfo.ga.model.entity.Consumabile;
-import it.arsinfo.ga.ui.vaadin.Add;
+import it.arsinfo.ga.ui.vaadin.entity.Add;
 
 public class ConsumabileAdd extends Add<Consumabile> {
 

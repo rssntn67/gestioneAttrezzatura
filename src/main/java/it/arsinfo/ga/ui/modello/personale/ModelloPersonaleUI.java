@@ -8,7 +8,7 @@ import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.service.ModelloPersonaleService;
-import it.arsinfo.ga.ui.vaadin.EntityBaseUI;
+import it.arsinfo.ga.ui.vaadin.entity.EntityBaseUI;
 
 @SpringUI(path = EntityBaseUI.URL_MODELLO_PERSONALE)
 @Title(EntityBaseUI.TITLE_MODELLO_PERSONALE)

@@ -1,9 +1,10 @@
-package it.arsinfo.ga.ui.vaadin;
+package it.arsinfo.ga.ui.vaadin.entity;
 
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 
 import it.arsinfo.ga.model.entity.EntityBase;
+import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
 public abstract class Add<T extends EntityBase>
         extends UIChangeHandler {
