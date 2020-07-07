@@ -69,6 +69,10 @@ public class Attrezzatura extends Operabile<ModelloAttrezzatura> {
         return String.format("%s:%s:%s", identificativo,getModello().getHeader(),stato);
     }
 
+    @Transient
+    public String getQRCode() {
+        return String.format("ClassName:%s\nIdentificativo:%s\n%s", this.getClass().getName(),identificativo,modello.getQRCode());
+    }
 
     @Override
 	public ModelloAttrezzatura getModello() {

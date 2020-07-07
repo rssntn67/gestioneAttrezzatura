@@ -38,6 +38,11 @@ public class Cantiere implements EntityBase {
         return identificativo;
     }
 
+    @Transient
+    public String getQRCode() {
+        return String.format("ClassName:%s\nIdentificativo:%s\n%s", this.getClass().getName(),identificativo);
+    }
+
     private String identificativo;
 
     @Enumerated(EnumType.STRING)

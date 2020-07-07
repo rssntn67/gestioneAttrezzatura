@@ -7,10 +7,12 @@ import com.vaadin.data.Binder;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
 import it.arsinfo.ga.model.entity.EntityBase;
+import it.arsinfo.ga.qrcode.QRGenBarcodeGenerator;
 import it.arsinfo.ga.service.EntityBaseService;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
@@ -19,6 +21,7 @@ public abstract class Editor<T extends EntityBase>
 
 	private HorizontalLayout actions = new HorizontalLayout();
 	
+	private Image image;
     public HorizontalLayout getActions() {
         return actions;
     }
@@ -36,6 +39,12 @@ public abstract class Editor<T extends EntityBase>
 
     public Editor(EntityBaseService<T> repositoryDao, Binder<T> binder) {
 
+		try {
+			image = new Image("No QRCode", createStreamResource(QRGenBarcodeGenerator.generateQRCodeImage("No")));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
         this.repositoryDao = repositoryDao;
         this.binder = binder;
 
@@ -51,6 +60,8 @@ public abstract class Editor<T extends EntityBase>
         actions.addComponent(delete);
         actions.addComponent(cancel);
         actions.addComponent(back);
+        
+        image.setVisible(false);
     }
 
     public abstract void focus(boolean persisted, T obj);
@@ -80,15 +91,22 @@ public abstract class Editor<T extends EntityBase>
     public void edit(T c) {
         if (c == null) {
             setVisible(false);
+            image = null;
             return;
         }
         final boolean persisted = c.getId() != null;
         if (persisted) {
             // Find fresh entity for editing
             smdObj = repositoryDao.findById(c.getId());
+            try {
+				image = new Image("QRCode", createStreamResource(QRGenBarcodeGenerator.generateQRCodeImage(smdObj.getQRCode())));
+			} catch (Exception e) {
+			}
+            image.setVisible(true);
         } else {
             smdObj = c;
-        }
+            image.setVisible(false);
+       }
         // Bind customer properties to similarly named fields
         // Could also use annotation or "manual binding" or programmatically
         // moving values from fields to entities before saving
@@ -127,5 +145,13 @@ public abstract class Editor<T extends EntityBase>
     public EntityBaseService<T> getServiceDao() {
         return repositoryDao;
     }
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
 
 }

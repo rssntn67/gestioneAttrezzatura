@@ -7,5 +7,5 @@ public abstract class Modello implements EntityBase {
 	
 	public abstract void setNome(String nome);
 	public abstract void setDescrizione(String descrizione);
-
+	
 }

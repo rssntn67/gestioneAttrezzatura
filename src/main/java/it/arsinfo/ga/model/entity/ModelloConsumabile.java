@@ -89,7 +89,12 @@ public class ModelloConsumabile extends Modello {
 	@Override
     @Transient
     public String getHeader() {
-        return String.format("%s:%s", nome,annoProduzione.getAnnoAsString());
+        return String.format("%s:%s:%s", nome,fornitore,annoProduzione.getAnnoAsString());
+    }
+
+    @Transient
+    public String getQRCode() {
+        return String.format("ClassName:%s\nNome:%s\nFornitore:%s\nAnnoProduzione:%s", this.getClass().getName(),nome,fornitore,annoProduzione);
     }
 
 	public MarcaConsumabile getMarca() {
