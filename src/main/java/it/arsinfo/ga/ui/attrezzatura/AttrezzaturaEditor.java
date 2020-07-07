@@ -30,7 +30,7 @@ public class AttrezzaturaEditor extends Editor<Attrezzatura> {
         intestazioni.addComponentsAndExpand(modello);
         
         HorizontalLayout importi = new HorizontalLayout(speseManutenzione,speseRiparazione);
-        setComponents(getActions(), intestazioni,importi);
+        setComponents(getActions(), intestazioni,importi,getImage());
 
 
         getBinder().forField(identificativo).asRequired();

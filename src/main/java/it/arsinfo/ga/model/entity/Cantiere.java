@@ -40,7 +40,7 @@ public class Cantiere implements EntityBase {
 
     @Transient
     public String getQRCode() {
-        return String.format("ClassName:%s\nIdentificativo:%s\n%s", this.getClass().getName(),identificativo);
+        return String.format("ClassName:%s\nIdentificativo:%s", this.getClass().getName(),identificativo);
     }
 
     private String identificativo;

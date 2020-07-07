@@ -1,17 +1,8 @@
 package it.arsinfo.ga.ui.vaadin;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import javax.imageio.ImageIO;
-
-import com.vaadin.server.StreamResource;
-import com.vaadin.server.StreamResource.StreamSource;
 import com.vaadin.ui.Component;
 
 public abstract class UIChangeHandler {
@@ -59,27 +50,5 @@ public abstract class UIChangeHandler {
     public void setComponents(Component ... components) {
         this.components = components;
     }
-
-    public StreamResource createStreamResource(BufferedImage bi) {
-        return new StreamResource(new StreamSource() {
-			
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 5371943965586727249L;
-
-			@Override
-            public InputStream getStream() {
- 
-                try {
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    ImageIO.write(bi, "png", bos);
-                    return new ByteArrayInputStream(bos.toByteArray());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-        }, "qrcode.png");
-    }
+    
 }

@@ -1,10 +1,20 @@
 package it.arsinfo.ga.ui.vaadin.entity;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.data.Binder;
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.StreamResource;
+import com.vaadin.server.StreamResource.StreamSource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
@@ -14,14 +24,16 @@ import com.vaadin.ui.themes.ValoTheme;
 import it.arsinfo.ga.model.entity.EntityBase;
 import it.arsinfo.ga.qrcode.QRGenBarcodeGenerator;
 import it.arsinfo.ga.service.EntityBaseService;
+import it.arsinfo.ga.ui.vaadin.NoQRCodeImageSource;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
 public abstract class Editor<T extends EntityBase>
         extends UIChangeHandler {
 
+    private static StreamResource noqrcoderesource = new StreamResource(new NoQRCodeImageSource(),"noqrcode.png");
 	private HorizontalLayout actions = new HorizontalLayout();
 	
-	private Image image;
+	private final Image image = new Image();
     public HorizontalLayout getActions() {
         return actions;
     }
@@ -39,11 +51,6 @@ public abstract class Editor<T extends EntityBase>
 
     public Editor(EntityBaseService<T> repositoryDao, Binder<T> binder) {
 
-		try {
-			image = new Image("No QRCode", createStreamResource(QRGenBarcodeGenerator.generateQRCodeImage("No")));
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
 
         this.repositoryDao = repositoryDao;
         this.binder = binder;
@@ -59,9 +66,7 @@ public abstract class Editor<T extends EntityBase>
         actions.addComponent(save);
         actions.addComponent(delete);
         actions.addComponent(cancel);
-        actions.addComponent(back);
-        
-        image.setVisible(false);
+        actions.addComponent(back);        
     }
 
     public abstract void focus(boolean persisted, T obj);
@@ -91,25 +96,19 @@ public abstract class Editor<T extends EntityBase>
     public void edit(T c) {
         if (c == null) {
             setVisible(false);
-            image = null;
             return;
         }
         final boolean persisted = c.getId() != null;
         if (persisted) {
-            // Find fresh entity for editing
             smdObj = repositoryDao.findById(c.getId());
-            try {
-				image = new Image("QRCode", createStreamResource(QRGenBarcodeGenerator.generateQRCodeImage(smdObj.getQRCode())));
-			} catch (Exception e) {
-			}
-            image.setVisible(true);
+            log.info("edit: {}", smdObj.getQRCode());
+			image.setCaption("QR Code");
+			image.setIcon(createQRCodeStreamResource(smdObj.getQRCode()));
         } else {
+			image.setCaption("No QR Code yet");
+			image.setIcon(noqrcoderesource);
             smdObj = c;
-            image.setVisible(false);
-       }
-        // Bind customer properties to similarly named fields
-        // Could also use annotation or "manual binding" or programmatically
-        // moving values from fields to entities before saving
+        }
         binder.setBean(smdObj);
 
         cancel.setEnabled(persisted);
@@ -149,9 +148,37 @@ public abstract class Editor<T extends EntityBase>
 	public Image getImage() {
 		return image;
 	}
-
-	public void setImage(Image image) {
-		this.image = image;
+    
+	public static StreamResource createQRCodeStreamResource(String qrcode) {
+		try {
+			return createStreamResource(QRGenBarcodeGenerator.generateQRCodeImage(qrcode));
+		} catch (Exception e) {
+			log.error("createQRCodeStreamResource: {}", e.getMessage(),e);
+		}
+		return noqrcoderesource;
 	}
+    
+	public static StreamResource createStreamResource(BufferedImage bi) {
+        return new StreamResource(new StreamSource() {
+			
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 5371943965586727249L;
+
+			@Override
+            public InputStream getStream() {
+ 
+                try {
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    ImageIO.write(bi, "png", bos);
+                    return new ByteArrayInputStream(bos.toByteArray());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        }, "qrcode.png");
+    }
 
 }

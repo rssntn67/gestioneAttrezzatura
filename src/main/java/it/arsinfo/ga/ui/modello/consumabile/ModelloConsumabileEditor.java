@@ -38,7 +38,7 @@ public class ModelloConsumabileEditor extends Editor<ModelloConsumabile> {
         HorizontalLayout residenza = new HorizontalLayout(costo,tipo,marca);
         residenza.addComponentsAndExpand(descrizione);
         
-        setComponents(getActions(), intestazioni,residenza);
+        setComponents(getActions(), intestazioni,residenza,getImage());
 
 
         getBinder().forField(nome).asRequired();

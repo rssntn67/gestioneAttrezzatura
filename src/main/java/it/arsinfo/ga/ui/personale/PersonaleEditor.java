@@ -31,7 +31,7 @@ public class PersonaleEditor extends Editor<Personale> {
         intestazioni.addComponentsAndExpand(modello);
         
         HorizontalLayout importi = new HorizontalLayout(numero,utilizzati,disponibili);
-        setComponents(getActions(), intestazioni,importi);
+        setComponents(getActions(), intestazioni,importi,getImage());
 
 
         getBinder().forField(identificativo).asRequired();
