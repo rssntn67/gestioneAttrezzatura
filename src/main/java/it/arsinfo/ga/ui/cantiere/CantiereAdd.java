@@ -12,7 +12,7 @@ public class CantiereAdd extends Add<Cantiere> {
     @Override
     public Cantiere generate() {
     	Cantiere cantiere = new Cantiere();
-    	cantiere.setIdentificativo("InserisciIdentificativoUnico");
+    	cantiere.setIdentificativo("");
         return cantiere;
     }
 

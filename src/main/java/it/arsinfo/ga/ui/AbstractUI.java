@@ -139,7 +139,7 @@ public abstract class AbstractUI extends UI {
         header.setValue(head);
     }
 
-    protected void addSmdComponents(UIChangeHandler ... smdChangeHandlers) {
+    protected void addComponents(UIChangeHandler...smdChangeHandlers) {
         for (UIChangeHandler smdChangeHandler: smdChangeHandlers) {
             layout.addComponents(smdChangeHandler.getComponents());
         }

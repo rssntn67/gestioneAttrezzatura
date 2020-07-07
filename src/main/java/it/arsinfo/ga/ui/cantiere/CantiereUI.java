@@ -30,7 +30,7 @@ public class CantiereUI extends EntityBaseUI<Cantiere> {
         CantiereEditor editor = new CantiereEditor(serviceDao);
         super.init(request,add,search,editor,grid, "Cantiere");        
         
-        addSmdComponents(editor, 
+        addComponents(editor, 
                 add,
                 search, 
                 grid);

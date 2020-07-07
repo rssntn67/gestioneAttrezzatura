@@ -1,5 +1,7 @@
 package it.arsinfo.ga.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.arsinfo.ga.dao.AttrezzaturaDao;
+import it.arsinfo.ga.dao.CantiereDao;
 import it.arsinfo.ga.dao.OperazioneAttrezzaturaDao;
+import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.data.StatoOperabile;
-import it.arsinfo.ga.model.data.TipoOperazione;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
@@ -17,97 +20,65 @@ import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.service.OperazioneService;
 
 @Service
-public class OperazioneAttrezzaturaService implements OperazioneService<ModelloAttrezzatura, Attrezzatura> {
+public class OperazioneAttrezzaturaService implements OperazioneService<ModelloAttrezzatura, Attrezzatura, OperazioneAttrezzatura> {
 	
 	@Autowired
 	private AttrezzaturaDao operabileDao;
-	
+
+	@Autowired
+	private CantiereDao cantiereDao;
+
 	@Autowired
 	private OperazioneAttrezzaturaDao operazioneDao;
 	
     private static final Logger log = LoggerFactory.getLogger(OperazioneAttrezzaturaService.class);
 
 	@Override
-	public void esegui(TipoOperazione tipo, Cantiere cantiere, Attrezzatura operabile, int numero) throws UnsupportedOperationException {
-		log.info("esegui: {}, {}, {}, {}",tipo,cantiere,operabile,numero);
-		if (numero != 1) 
-			throw new UnsupportedOperationException("Non posso Caricare Operabile al Cantiere numero deve essere 1:" + numero);
-		switch (tipo) {
+	@Transactional
+	public void esegui(OperazioneAttrezzatura operazione) throws Exception {
+		if (operazione.getTipoOperazione() == null)
+			throw new UnsupportedOperationException("TipoOperazione non può essere null");
+		if (operazione.getOperabile() == null)
+			throw new UnsupportedOperationException("Operabile non può essere null");
+		if (operazione.getCantiere() == null)
+			throw new UnsupportedOperationException("Cantiere non può essere null");
+		Cantiere cantiere = cantiereDao.findById(operazione.getCantiere().getId()).get();
+		if (cantiere.getStatoCantiere() != StatoCantiere.InOpera) {
+			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStatoCantiere());			
+		}
+		Attrezzatura operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
+		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),cantiere,operabile);
+		switch (operazione.getTipoOperazione()) {
 			case Carico:
-				carico(cantiere,operabile);
+				operabile.setStato(StatoOperabile.Occupato);
 				break;
 			case Scarico:
-				scarico(cantiere,operabile);
+				operabile.setStato(StatoOperabile.Disponibile);
 				break;
 			case Furto:
-				furto(cantiere,operabile);
+				operabile.setStato(StatoOperabile.Dismesso);
 				break;
 			case Rottura:
-				rottura(cantiere,operabile);
+				operabile.setStato(StatoOperabile.Dismesso);
 				break;
 			case Smarrimento:
-				smarrimento(cantiere,operabile);
+				operabile.setStato(StatoOperabile.Dismesso);
 				break;
 	
 			default:
 				break;
-			}		
-	}
-
-	@Transactional
-	private void smarrimento(Cantiere cantiere, Attrezzatura operabile) throws UnsupportedOperationException {
-		operabile.setStato(StatoOperabile.Dismesso);
-		OperazioneAttrezzatura operazione = new OperazioneAttrezzatura();
-		operazione.setCantiere(cantiere);
-		operazione.setOperabile(operabile);
-		operazione.setTipoOperazione(TipoOperazione.Smarrimento);
+		}		
 		operabileDao.save(operabile);
 		operazioneDao.save(operazione);						
 	}
 
-	@Transactional
-	private void rottura(Cantiere cantiere, Attrezzatura operabile) throws UnsupportedOperationException  {
-		operabile.setStato(StatoOperabile.Dismesso);
-		OperazioneAttrezzatura operazione = new OperazioneAttrezzatura();
-		operazione.setCantiere(cantiere);
-		operazione.setOperabile(operabile);
-		operazione.setTipoOperazione(TipoOperazione.Rottura);
-		operabileDao.save(operabile);
-		operazioneDao.save(operazione);				
+	@Override
+	public List<Cantiere> getCantieri() {
+		return cantiereDao.findByStatoCantiere(StatoCantiere.InOpera);
 	}
 
-	@Transactional
-	private void furto(Cantiere cantiere, Attrezzatura operabile) throws UnsupportedOperationException {
-		operabile.setStato(StatoOperabile.Dismesso);
-		OperazioneAttrezzatura operazione = new OperazioneAttrezzatura();
-		operazione.setCantiere(cantiere);
-		operazione.setOperabile(operabile);
-		operazione.setTipoOperazione(TipoOperazione.Furto);
-		operabileDao.save(operabile);
-		operazioneDao.save(operazione);		
-		
+	@Override
+	public List<Attrezzatura> getOperabili() {
+		return operabileDao.findAll();
 	}
-
-	@Transactional
-	private void scarico(Cantiere cantiere, Attrezzatura operabile) throws UnsupportedOperationException  {
-		operabile.setStato(StatoOperabile.Disponibile);
-		OperazioneAttrezzatura operazione = new OperazioneAttrezzatura();
-		operazione.setCantiere(cantiere);
-		operazione.setOperabile(operabile);
-		operazione.setTipoOperazione(TipoOperazione.Scarico);
-		operabileDao.save(operabile);
-		operazioneDao.save(operazione);		
-	}
-
-	@Transactional
-	private void carico(Cantiere cantiere, Attrezzatura operabile) throws UnsupportedOperationException {
-		operabile.setStato(StatoOperabile.Occupato);
-		OperazioneAttrezzatura operazione = new OperazioneAttrezzatura();
-		operazione.setCantiere(cantiere);
-		operazione.setOperabile(operabile);
-		operazione.setTipoOperazione(TipoOperazione.Carico);
-		operabileDao.save(operabile);
-		operazioneDao.save(operazione);
-	}
-
 }

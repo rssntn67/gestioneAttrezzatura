@@ -47,10 +47,10 @@ public abstract class Editor<T extends EntityBase>
         cancel.addClickListener(e -> edit(smdObj));
         back.addClickListener(e -> onChange());
 
-        getActions().addComponent(save);
-        getActions().addComponent(delete);
-        getActions().addComponent(cancel);
-        getActions().addComponent(back);
+        actions.addComponent(save);
+        actions.addComponent(delete);
+        actions.addComponent(cancel);
+        actions.addComponent(back);
     }
 
     public abstract void focus(boolean persisted, T obj);

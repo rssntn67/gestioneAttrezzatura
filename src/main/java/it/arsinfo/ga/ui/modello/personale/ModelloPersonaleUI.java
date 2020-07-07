@@ -30,7 +30,7 @@ public class ModelloPersonaleUI extends EntityBaseUI<ModelloPersonale> {
         ModelloPersonaleEditor editor = new ModelloPersonaleEditor(serviceDao);
         super.init(request,add,search,editor,grid, "Modello Personale");        
         
-        addSmdComponents(editor, 
+        addComponents(editor, 
                 add,
                 search, 
                 grid);

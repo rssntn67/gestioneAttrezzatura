@@ -30,7 +30,7 @@ public class ConsumabileUI extends EntityBaseUI<Consumabile> {
         ConsumabileEditor editor = new ConsumabileEditor(serviceDao);
         super.init(request,add,search,editor,grid, "Consumabile");        
         
-        addSmdComponents(editor, 
+        addComponents(editor, 
                 add,
                 search, 
                 grid);

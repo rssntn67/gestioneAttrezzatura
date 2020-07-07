@@ -30,7 +30,7 @@ public class ModelloAttrezzaturaUI extends EntityBaseUI<ModelloAttrezzatura> {
         ModelloAttrezzaturaEditor editor = new ModelloAttrezzaturaEditor(serviceDao);
         super.init(request,add,search,editor,grid, "Modello Attrezzatura");        
         
-        addSmdComponents(editor, 
+        addComponents(editor, 
                 add,
                 search, 
                 grid);
