@@ -20,5 +20,9 @@ public interface AttrezzaturaDao extends JpaRepository<Attrezzatura, Long> {
 	List<Attrezzatura> findByIdentificativoContainingIgnoreCaseAndModello(String nome,ModelloAttrezzatura modello);
     List<Attrezzatura> findByStatoAndModello(StatoOperabile stato,ModelloAttrezzatura modello);
 	List<Attrezzatura> findByIdentificativoContainingIgnoreCaseAndStatoAndModello(String nome,StatoOperabile stato,ModelloAttrezzatura modello);
+
+	List<Attrezzatura> findByStatoNot(StatoOperabile dismesso);
+
+	List<Attrezzatura> findByStatoNotOrStatoNot(StatoOperabile dismesso, StatoOperabile inriparazione);
     
 }

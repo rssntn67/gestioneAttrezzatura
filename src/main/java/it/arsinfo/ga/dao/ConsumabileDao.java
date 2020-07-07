@@ -20,5 +20,7 @@ public interface ConsumabileDao extends JpaRepository<Consumabile, Long> {
 	List<Consumabile> findByIdentificativoContainingIgnoreCaseAndModello(String nome,ModelloConsumabile modello);
     List<Consumabile> findByStatoAndModello(StatoOperabile stato,ModelloConsumabile modello);
 	List<Consumabile> findByIdentificativoContainingIgnoreCaseAndStatoAndModello(String nome,StatoOperabile stato,ModelloConsumabile modello);
+
+	List<Consumabile> findByStatoNot(StatoOperabile stato);
     
 }

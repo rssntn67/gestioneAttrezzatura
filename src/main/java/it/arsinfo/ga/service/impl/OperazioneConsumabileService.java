@@ -8,34 +8,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.arsinfo.ga.dao.AttrezzaturaDao;
+import it.arsinfo.ga.dao.ConsumabileDao;
 import it.arsinfo.ga.dao.CantiereDao;
-import it.arsinfo.ga.dao.OperazioneAttrezzaturaDao;
+import it.arsinfo.ga.dao.OperazioneConsumabileDao;
 import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.data.StatoOperabile;
-import it.arsinfo.ga.model.entity.Attrezzatura;
+import it.arsinfo.ga.model.entity.Consumabile;
 import it.arsinfo.ga.model.entity.Cantiere;
-import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
-import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
+import it.arsinfo.ga.model.entity.ModelloConsumabile;
+import it.arsinfo.ga.model.entity.OperazioneConsumabile;
 import it.arsinfo.ga.service.OperazioneService;
 
 @Service
-public class OperazioneAttrezzaturaService implements OperazioneService<ModelloAttrezzatura, Attrezzatura, OperazioneAttrezzatura> {
+public class OperazioneConsumabileService implements OperazioneService<ModelloConsumabile, Consumabile, OperazioneConsumabile> {
 	
 	@Autowired
-	private AttrezzaturaDao operabileDao;
+	private ConsumabileDao operabileDao;
 
 	@Autowired
 	private CantiereDao cantiereDao;
 
 	@Autowired
-	private OperazioneAttrezzaturaDao operazioneDao;
+	private OperazioneConsumabileDao operazioneDao;
 	
-    private static final Logger log = LoggerFactory.getLogger(OperazioneAttrezzaturaService.class);
+    private static final Logger log = LoggerFactory.getLogger(OperazioneConsumabileService.class);
 
 	@Override
 	@Transactional
-	public void esegui(OperazioneAttrezzatura operazione) throws Exception {
+	public void esegui(OperazioneConsumabile operazione) throws Exception {
 		if (operazione.getTipoOperazione() == null)
 			throw new UnsupportedOperationException("TipoOperazione non può essere null");
 		if (operazione.getOperabile() == null)
@@ -46,25 +46,26 @@ public class OperazioneAttrezzaturaService implements OperazioneService<ModelloA
 		if (cantiere.getStato() != StatoCantiere.InOpera) {
 			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStato());			
 		}
-		Attrezzatura operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
+		Consumabile operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
 		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),cantiere,operabile);
+		if (operazione.getNumero() > operabile.getDisponibili()) {
+			throw new UnsupportedOperationException("Numero operabile minore disponibile");
+		}
 		switch (operazione.getTipoOperazione()) {
 			case Carico:
-				operabile.setStato(StatoOperabile.Occupato);
+				operabile.setUtilizzati(operabile.getUtilizzati()+operazione.getNumero());
+				if (operabile.getDisponibili() == 0) {
+					operabile.setStato(StatoOperabile.Occupato);
+				}
 				break;
 			case Scarico:
-				operabile.setStato(StatoOperabile.Disponibile);
-				break;
+				throw new UnsupportedOperationException("Operazione Scarico non disponibile");
 			case Furto:
-				operabile.setStato(StatoOperabile.Dismesso);
 				break;
 			case Rottura:
-				operabile.setStato(StatoOperabile.Dismesso);
 				break;
 			case Smarrimento:
-				operabile.setStato(StatoOperabile.Dismesso);
 				break;
-	
 			default:
 				break;
 		}		
@@ -78,7 +79,7 @@ public class OperazioneAttrezzaturaService implements OperazioneService<ModelloA
 	}
 
 	@Override
-	public List<Attrezzatura> getOperabili() {
-		return operabileDao.findByStatoNotOrStatoNot(StatoOperabile.Dismesso,StatoOperabile.InRiparazione);
+	public List<Consumabile> getOperabili() {
+		return operabileDao.findByStato(StatoOperabile.Disponibile);
 	}
 }
