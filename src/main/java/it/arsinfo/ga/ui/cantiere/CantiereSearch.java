@@ -9,6 +9,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
 import it.arsinfo.ga.model.data.StatoCantiere;
+import it.arsinfo.ga.model.data.TipoCantiere;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.service.CantiereService;
 import it.arsinfo.ga.ui.vaadin.entity.Search;
@@ -16,11 +17,15 @@ import it.arsinfo.ga.ui.vaadin.entity.Search;
 public class CantiereSearch extends Search<Cantiere> {
 
     private String searchIdentificativo;
-    private StatoCantiere searchStatoCantiere;
+    private StatoCantiere searchStato;
+    private TipoCantiere searchTipo;
 
-    private final ComboBox<StatoCantiere> filterStatoCantiere = new ComboBox<StatoCantiere>("Cerca per Stato",
+    private final ComboBox<StatoCantiere> filterStato = new ComboBox<StatoCantiere>("Cerca per Stato",
             EnumSet.allOf(StatoCantiere.class));
-    
+
+    private final ComboBox<TipoCantiere> filterTipo = new ComboBox<TipoCantiere>("Cerca per Tipo",
+            EnumSet.allOf(TipoCantiere.class));
+
     private final CantiereService dao;
 
     public CantiereSearch(CantiereService dao) {
@@ -31,18 +36,31 @@ public class CantiereSearch extends Search<Cantiere> {
         setComponents(
                       new HorizontalLayout(
                                            filterIdentificativo,
-                                           filterStatoCantiere 
+                                           filterStato,
+                                           filterTipo
                                            ));
 
 
-        filterStatoCantiere.setEmptySelectionAllowed(true);
-        filterStatoCantiere.setPlaceholder("Seleziona Stato");
+        filterStato.setEmptySelectionAllowed(true);
+        filterStato.setPlaceholder("Seleziona Stato");
 
-        filterStatoCantiere.addSelectionListener(e -> {
+        filterStato.addSelectionListener(e -> {
             if (e.getValue() == null) {
-                searchStatoCantiere = null;
+                searchStato = null;
             } else {
-                searchStatoCantiere = e.getSelectedItem().get();
+                searchStato = e.getSelectedItem().get();
+            }
+            onChange();
+        });
+
+        filterTipo.setEmptySelectionAllowed(true);
+        filterTipo.setPlaceholder("Seleziona Tipo");
+
+        filterTipo.addSelectionListener(e -> {
+            if (e.getValue() == null) {
+                searchTipo = null;
+            } else {
+                searchTipo = e.getSelectedItem().get();
             }
             onChange();
         });
@@ -59,7 +77,7 @@ public class CantiereSearch extends Search<Cantiere> {
 
     @Override
     public List<Cantiere> find() {
-        return dao.searchBy(searchIdentificativo,searchStatoCantiere);
+        return dao.searchBy(searchIdentificativo,searchStato,searchTipo);
     }
 
 }

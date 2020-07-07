@@ -70,13 +70,13 @@ public class GestioneAttrezzaturaApplicationTests {
     	
     	assertNotNull(fromDb);
     	
-    	assertEquals(StatoCantiere.InOpera, fromDb.getStatoCantiere());
+    	assertEquals(StatoCantiere.InOpera, fromDb.getStato());
     	
-    	fromDb.setStatoCantiere(StatoCantiere.Terminato);
+    	fromDb.setStato(StatoCantiere.Terminato);
     	cantiereDao.save(fromDb);
     	assertEquals(1, cantiereDao.count());
     	
-    	Cantiere fromDb2 = cantiereDao.findByStatoCantiere(StatoCantiere.Terminato).iterator().next();
+    	Cantiere fromDb2 = cantiereDao.findByStato(StatoCantiere.Terminato).iterator().next();
     	assertNotNull(fromDb2);
     	
     	cantiereDao.delete(fromDb2);

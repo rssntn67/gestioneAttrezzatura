@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 
 import it.arsinfo.ga.dao.CantiereDao;
 import it.arsinfo.ga.model.data.StatoCantiere;
+import it.arsinfo.ga.model.data.TipoCantiere;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.service.CantiereService;
 
@@ -42,15 +43,22 @@ public class CantiereServiceDaoImpl implements CantiereService {
 	}
 
 	@Override
-	public List<Cantiere> searchBy(String searchIdentificativo, StatoCantiere statoCantiere) {
-		if (StringUtils.isEmpty(searchIdentificativo) && statoCantiere == null) 
+	public List<Cantiere> searchBy(String search, StatoCantiere stato, TipoCantiere tipo) {
+		if (StringUtils.isEmpty(search) && stato == null && tipo == null) 
 			return repository.findAll();
-		if (StringUtils.isEmpty(searchIdentificativo))
-			return repository.findByStatoCantiere(statoCantiere);
-		if (statoCantiere == null) 
-			return repository.findByIdentificativoContainingIgnoreCase(searchIdentificativo);
-		
-		return repository.findByIdentificativoContainingIgnoreCaseAndStatoCantiere(searchIdentificativo, statoCantiere);
+		if (StringUtils.isEmpty(search) && tipo == null)
+			return repository.findByStato(stato);
+		if (StringUtils.isEmpty(search) && stato == null)
+			return repository.findByTipo(tipo);
+		if (stato == null && tipo == null)
+			return repository.findByIdentificativoContainingIgnoreCase(search);
+		if (StringUtils.isEmpty(search))
+			return repository.findByStatoAndTipo(stato, tipo);
+		if (stato == null)
+			return repository.findByIdentificativoContainingIgnoreCaseAndTipo(search, tipo);
+		if (tipo == null)
+			return repository.findByIdentificativoContainingIgnoreCaseAndStato(search, stato);
+		return repository.findByIdentificativoContainingIgnoreCaseAndStatoAndTipo(search, stato, tipo);
 	}
 
 	

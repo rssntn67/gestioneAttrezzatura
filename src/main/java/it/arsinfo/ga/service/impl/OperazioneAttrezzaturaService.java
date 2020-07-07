@@ -43,8 +43,8 @@ public class OperazioneAttrezzaturaService implements OperazioneService<ModelloA
 		if (operazione.getCantiere() == null)
 			throw new UnsupportedOperationException("Cantiere non può essere null");
 		Cantiere cantiere = cantiereDao.findById(operazione.getCantiere().getId()).get();
-		if (cantiere.getStatoCantiere() != StatoCantiere.InOpera) {
-			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStatoCantiere());			
+		if (cantiere.getStato() != StatoCantiere.InOpera) {
+			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStato());			
 		}
 		Attrezzatura operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
 		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),cantiere,operabile);
@@ -74,7 +74,7 @@ public class OperazioneAttrezzaturaService implements OperazioneService<ModelloA
 
 	@Override
 	public List<Cantiere> getCantieri() {
-		return cantiereDao.findByStatoCantiere(StatoCantiere.InOpera);
+		return cantiereDao.findByStato(StatoCantiere.InOpera);
 	}
 
 	@Override
