@@ -8,7 +8,7 @@ import it.arsinfo.ga.model.data.MarcaAttrezzatura;
 import it.arsinfo.ga.model.data.TipoAttrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 
-public interface ModelloAttrezzaturaService extends EntityBaseService<ModelloAttrezzatura>{
+public interface ModelloAttrezzaturaService extends ModelloService<ModelloAttrezzatura>{
 
 	List<ModelloAttrezzatura> searchBy(Fornitore fornitore, Anno searchAnnoProduzione, String searchNome, TipoAttrezzatura searchTipoModello,
 			MarcaAttrezzatura searchMarcaModello);

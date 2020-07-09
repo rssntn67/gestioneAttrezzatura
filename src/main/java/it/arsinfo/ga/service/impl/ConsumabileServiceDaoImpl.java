@@ -78,5 +78,10 @@ public class ConsumabileServiceDaoImpl implements ConsumabileService {
 		return modelliDao.findAll();
 	}
 
+	@Override
+	public Consumabile findByIdentificativo(String identificatico) {
+		return repository.findByIdentificativo(identificatico);
+	}
+
 	
 }

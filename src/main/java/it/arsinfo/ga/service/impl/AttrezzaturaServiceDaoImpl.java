@@ -78,5 +78,10 @@ public class AttrezzaturaServiceDaoImpl implements AttrezzaturaService {
 		return modelliDao.findAll();
 	}
 
+	@Override
+	public Attrezzatura findByIdentificativo(String identificatico) {
+		return repository.findByIdentificativo(identificatico);
+	}
+
 	
 }

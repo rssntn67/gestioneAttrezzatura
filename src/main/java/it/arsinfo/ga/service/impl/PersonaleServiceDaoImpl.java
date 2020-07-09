@@ -78,5 +78,10 @@ public class PersonaleServiceDaoImpl implements PersonaleService {
 		return modelliDao.findAll();
 	}
 
+	@Override
+	public Personale findByIdentificativo(String identificatico) {
+		return repository.findByIdentificativo(identificatico);
+	}
+
 	
 }

@@ -119,5 +119,10 @@ public class ModelloConsumabileServiceDaoImpl implements ModelloConsumabileServi
 		return repository.findByNomeContainingIgnoreCaseAndFornitoreAndAnnoProduzioneAndTipoAndMarca(nome, fornitore,anno, tipo, marca);
 	}
 
+	@Override
+	public ModelloConsumabile findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore, Anno anno) {
+		return repository.findByNomeAndFornitoreAndAnnoProduzione(nome, fornitore, anno);
+	}
+
 	
 }

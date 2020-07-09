@@ -9,5 +9,6 @@ import it.arsinfo.ga.model.entity.Cantiere;
 public interface CantiereService extends EntityBaseService<Cantiere>{
 
 	List<Cantiere> searchBy(String searchIdentificativo, StatoCantiere statoCantiere, TipoCantiere tipo);
+	Cantiere findByIdentificativo(String identificatico);
 
 }

@@ -6,10 +6,8 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 
-public interface AttrezzaturaService extends EntityBaseService<Attrezzatura>{
+public interface AttrezzaturaService extends OperabileService<ModelloAttrezzatura,Attrezzatura>{
 
 	List<Attrezzatura> searchBy(StatoOperabile searchStatoAttrezzatura, String searchIdentificativo, ModelloAttrezzatura searchModello);
-
-	List<ModelloAttrezzatura> getModelli();
 
 }

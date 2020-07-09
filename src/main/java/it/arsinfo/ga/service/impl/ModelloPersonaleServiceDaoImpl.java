@@ -84,5 +84,10 @@ public class ModelloPersonaleServiceDaoImpl implements ModelloPersonaleService {
 		return repository.findByNomeContainingIgnoreCaseAndFornitoreAndAnnoProduzioneAndTipo(nome, fornitore, anno, tipo);		
 	}
 
+	@Override
+	public ModelloPersonale findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore, Anno anno) {
+		return repository.findByNomeAndFornitoreAndAnnoProduzione(nome, fornitore, anno);
+	}
+
 	
 }

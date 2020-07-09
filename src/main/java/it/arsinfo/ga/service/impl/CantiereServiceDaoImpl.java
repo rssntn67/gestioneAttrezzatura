@@ -61,5 +61,10 @@ public class CantiereServiceDaoImpl implements CantiereService {
 		return repository.findByIdentificativoContainingIgnoreCaseAndStatoAndTipo(search, stato, tipo);
 	}
 
+	@Override
+	public Cantiere findByIdentificativo(String identificatico) {
+		return repository.findByIdentificativo(identificatico);
+	}
+
 	
 }

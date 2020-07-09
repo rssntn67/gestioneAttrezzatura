@@ -6,7 +6,7 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.model.entity.Personale;
 
-public interface PersonaleService extends EntityBaseService<Personale>{
+public interface PersonaleService extends OperabileService<ModelloPersonale,Personale>{
 	List<Personale> searchBy(StatoOperabile searchStatoPersonale, String searchIdentificativo, ModelloPersonale searchModello);
 
 	List<ModelloPersonale> getModelli();
