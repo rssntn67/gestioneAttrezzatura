@@ -14,5 +14,9 @@ public abstract class Modello implements EntityBase {
 	public abstract void setFornitore(Fornitore fornitore);
 	public abstract void setAnnoProduzione(Anno anno);
 	public abstract void setDescrizione(String descrizione);
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

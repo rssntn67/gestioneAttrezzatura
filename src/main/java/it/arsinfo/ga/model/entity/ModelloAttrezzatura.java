@@ -40,7 +40,7 @@ public class ModelloAttrezzatura extends Modello {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Fornitore fornitore = Fornitore.NonDisponibile;
+    private Fornitore fornitore = Fornitore.FORNITOREA;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -88,7 +88,7 @@ public class ModelloAttrezzatura extends Modello {
 	@Override
     @Transient
     public String getHeader() {
-        return String.format("%s:%s:%s", nome,fornitore,annoProduzione.getAnnoAsString());
+        return String.format("%s:%s:%s:%s", nome,fornitore,tipo,marca);
     }
 
     @Transient

@@ -1,8 +1,18 @@
 package it.arsinfo.ga.model.data;
 
 public enum Fornitore {
-	FornitoreA,
-	FornitoreB,
-	NonDisponibile;
+	FORNITOREA,
+	Oliva,
+	EcoService,
+	Casillo,
+	BTE,
+    TopStore,
+    
+    
+	FornitoreB1
+	;
+	
+
+	  ;
 	
 }

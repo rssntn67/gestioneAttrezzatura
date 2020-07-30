@@ -28,6 +28,7 @@ public class AttrezzaturaEditor extends Editor<Attrezzatura> {
 
         HorizontalLayout intestazioni = new HorizontalLayout(identificativo,stato);
         intestazioni.addComponentsAndExpand(modello);
+        							
         
         HorizontalLayout importi = new HorizontalLayout(speseManutenzione,speseRiparazione);
         setComponents(getActions(), intestazioni,importi,getImage());

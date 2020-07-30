@@ -99,7 +99,7 @@ public class GestioneAttrezzaturaApplicationTests {
     	
     	assertEquals(1, modelloAttrezzaturaDao.count());
     	
-    	ModelloAttrezzatura mdaDb = modelloAttrezzaturaDao.findByNomeAndFornitoreAndAnnoProduzione("prova",Fornitore.NonDisponibile,Anno.ANNOND);
+    	ModelloAttrezzatura mdaDb = modelloAttrezzaturaDao.findByNomeAndFornitoreAndAnnoProduzione("prova",Fornitore.FORNITOREA,Anno.ANNOND);
     	assertNotNull(mdaDb);
     	
     	ModelloAttrezzatura mda2 = new ModelloAttrezzatura();

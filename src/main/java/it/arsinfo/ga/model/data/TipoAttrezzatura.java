@@ -5,5 +5,7 @@ public enum TipoAttrezzatura {
 	MotoSeghe,
 	Soffiatori,
 	TagliaSiepe,
+	Cassone,
+	
 	NonDisponibile
 }
