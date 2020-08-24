@@ -42,7 +42,7 @@ public class ModelloConsumabile extends Modello {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Fornitore fornitore = Fornitore.FORNITOREA;
+    private Fornitore fornitore = Fornitore.NonDefinito;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

@@ -32,12 +32,13 @@ public class AttrezzaturaSearch extends Search<Attrezzatura> {
         this.dao=dao;
         TextField filterIdentificativo = new TextField("Cerca per Identificativo");
 
-        setComponents(
-                      new HorizontalLayout(
-                                           filterIdentificativo,
-                                           filterStatoAttrezzatura, 
-                                           filterModelloAttrezzatura
-                                           ));
+        HorizontalLayout layout = new HorizontalLayout(
+                filterIdentificativo,
+                filterStatoAttrezzatura 
+                );
+        layout.addComponentsAndExpand(filterModelloAttrezzatura);
+        setComponents(layout
+                      );
 
 
         filterStatoAttrezzatura.setEmptySelectionAllowed(true);

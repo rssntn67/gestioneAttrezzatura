@@ -20,7 +20,7 @@ import it.arsinfo.ga.model.data.TipoAttrezzatura;
 
 @Entity
 @Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"nome","fornitore","annoProduzione"})
+        @UniqueConstraint(columnNames = {"nome","fornitore","marca","tipo","annoProduzione"})
 })
 public class ModelloAttrezzatura extends Modello {
     
@@ -40,7 +40,7 @@ public class ModelloAttrezzatura extends Modello {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Fornitore fornitore = Fornitore.FORNITOREA;
+    private Fornitore fornitore = Fornitore.NonDefinito;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
