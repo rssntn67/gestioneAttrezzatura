@@ -6,6 +6,12 @@ public enum TipoAttrezzatura {
 	Soffiatori,
 	TagliaSiepe,
 	Cassone,
+	Tosaerba,
+	Vasca,
+	Polipo,
+	Compattatore,
+	Pressa,
+	
 	
 	NonDisponibile
 }

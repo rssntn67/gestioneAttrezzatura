@@ -3,7 +3,7 @@ package it.arsinfo.ga.model.data;
 public enum MarcaAttrezzatura {
 	Sthil,
 	Echo,
-	Hitacghi,
+	Hitachi,
 	Oleomac,
 	Subaru,
 	JohnDeere,
@@ -14,6 +14,10 @@ public enum MarcaAttrezzatura {
 	Husquarna,
 	CinaByMaster,
 	Maruyama,
+	Honda,
+
+
+
 	
 	NonDefinita
 }

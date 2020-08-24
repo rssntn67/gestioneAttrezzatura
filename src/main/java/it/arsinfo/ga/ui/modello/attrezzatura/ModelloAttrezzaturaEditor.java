@@ -43,6 +43,7 @@ public class ModelloAttrezzaturaEditor extends Editor<ModelloAttrezzatura> {
 
         getBinder().forField(nome).asRequired();
         getBinder().forField(fornitore).asRequired();
+        fornitore.setEmptySelectionAllowed(false);
         getBinder().forField(annoProduzione).asRequired();
         getBinder()
         .forField(costo)
