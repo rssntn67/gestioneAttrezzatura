@@ -19,7 +19,7 @@ import it.arsinfo.ga.model.data.TipoPersonale;
 
 @Entity
 @Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"nome","fornitore","annoProduzione"})
+        @UniqueConstraint(columnNames = {"nome","fornitore","tipo","annoProduzione"})
 })
 public class ModelloPersonale implements Modello {
     

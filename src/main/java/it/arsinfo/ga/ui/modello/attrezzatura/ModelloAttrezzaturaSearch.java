@@ -48,8 +48,7 @@ public class ModelloAttrezzaturaSearch extends Search<ModelloAttrezzatura> {
                       new HorizontalLayout(
                                            filterNome,
                                            filterAnno,
-                                           filterFornitore),
-                      new HorizontalLayout(
+                                           filterFornitore,
                                            filterTipo,
                                            filterMarca
                                            ));

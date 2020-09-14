@@ -31,7 +31,7 @@ public class AttrezzaturaEditor extends Editor<Attrezzatura> {
         							
         
         HorizontalLayout importi = new HorizontalLayout(speseManutenzione,speseRiparazione);
-        setComponents(getActions(), intestazioni,importi,getImage());
+        setComponents(getActions(), intestazioni,importi,getQrCodeImage(),getBarCodeImage());
 
 
         getBinder().forField(identificativo).asRequired();

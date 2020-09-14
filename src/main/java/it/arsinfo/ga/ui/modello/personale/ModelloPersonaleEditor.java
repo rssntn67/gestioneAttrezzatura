@@ -35,7 +35,7 @@ public class ModelloPersonaleEditor extends Editor<ModelloPersonale> {
         HorizontalLayout residenza = new HorizontalLayout(costo,tipo);
         residenza.addComponentsAndExpand(descrizione);
         
-        setComponents(getActions(), intestazioni,residenza,getImage());
+        setComponents(getActions(), intestazioni,residenza,getQrCodeImage(),getBarCodeImage());
 
 
         getBinder().forField(nome).asRequired();

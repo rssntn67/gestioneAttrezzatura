@@ -43,8 +43,7 @@ public class ModelloPersonaleSearch extends Search<ModelloPersonale> {
                       new HorizontalLayout(
                                            filterNome,
                                            filterAnno,
-                                           filterFornitore),
-                      new HorizontalLayout(
+                                           filterFornitore,
                                            filterTipo
                                            ));
 

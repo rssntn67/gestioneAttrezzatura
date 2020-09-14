@@ -33,7 +33,8 @@ public abstract class Editor<T extends EntityBase>
     private static StreamResource noqrcoderesource = new StreamResource(new NoQRCodeImageSource(),"noqrcode.png");
 	private HorizontalLayout actions = new HorizontalLayout();
 	
-	private final Image image = new Image();
+	private final Image qrcode = new Image();
+	private final Image barcode = new Image();
     public HorizontalLayout getActions() {
         return actions;
     }
@@ -102,11 +103,13 @@ public abstract class Editor<T extends EntityBase>
         if (persisted) {
             smdObj = repositoryDao.findById(c.getId());
             log.info("edit: {}", smdObj.getQRCode());
-			image.setCaption("QR Code");
-			image.setIcon(createQRCodeStreamResource(smdObj.getQRCode()));
+			qrcode.setCaption("QR Code");
+			qrcode.setIcon(createQRCodeStreamResource(smdObj.getQRCode()));
+			barcode.setCaption("Bar Code");
+			barcode.setIcon(createBarCodeStreamResource(smdObj.getQRCode()));
         } else {
-			image.setCaption("No QR Code yet");
-			image.setIcon(noqrcoderesource);
+			qrcode.setCaption("No QR Code yet");
+			qrcode.setIcon(noqrcoderesource);
             smdObj = c;
         }
         binder.setBean(smdObj);
@@ -145,10 +148,23 @@ public abstract class Editor<T extends EntityBase>
         return repositoryDao;
     }
 
-	public Image getImage() {
-		return image;
+	public Image getQrCodeImage() {
+		return qrcode;
 	}
-    
+
+	public Image getBarCodeImage() {
+		return barcode;
+	}
+
+	public static StreamResource createBarCodeStreamResource(String code) {
+		try {
+			return createStreamResource(BarcodeGenerator.generateEAN13BarcodeImage(code));
+		} catch (Exception e) {
+			log.error("createBarCodeStreamResource: {}", e.getMessage(),e);
+		}
+		return noqrcoderesource;
+	}
+
 	public static StreamResource createQRCodeStreamResource(String qrcode) {
 		try {
 			return createStreamResource(BarcodeGenerator.generateQRCodeImage(qrcode));
@@ -178,7 +194,7 @@ public abstract class Editor<T extends EntityBase>
                     return null;
                 }
             }
-        }, "qrcode.png");
+        }, "code.png");
     }
 
 }

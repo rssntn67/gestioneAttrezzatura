@@ -48,8 +48,7 @@ public class ModelloConsumabileSearch extends Search<ModelloConsumabile> {
                       new HorizontalLayout(
                                            filterNome,
                                            filterAnno,
-                                           filterFornitore),
-                      new HorizontalLayout(
+                                           filterFornitore,
                                            filterTipo,
                                            filterMarca
                                            ));

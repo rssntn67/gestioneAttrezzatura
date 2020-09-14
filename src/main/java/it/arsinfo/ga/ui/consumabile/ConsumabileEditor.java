@@ -31,7 +31,7 @@ public class ConsumabileEditor extends Editor<Consumabile> {
         intestazioni.addComponentsAndExpand(modello);
         
         HorizontalLayout importi = new HorizontalLayout(numero,utilizzati,disponibili);
-        setComponents(getActions(), intestazioni,importi,getImage());
+        setComponents(getActions(), intestazioni,importi,getQrCodeImage(),getBarCodeImage());
 
 
         getBinder().forField(identificativo).asRequired();

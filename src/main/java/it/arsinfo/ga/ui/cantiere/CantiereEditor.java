@@ -37,7 +37,7 @@ public class CantiereEditor extends Editor<Cantiere> {
         		new HorizontalLayout(identificativo,stato,tipo),
         		new HorizontalLayout(sitoIn,distanzaChilometrica),
         		new HorizontalLayout(aperturaCantiere,chiusuraCantiere),
-        		getImage()
+        		getQrCodeImage(),getBarCodeImage()
         		);
 
 

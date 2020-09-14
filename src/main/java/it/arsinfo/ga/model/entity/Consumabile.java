@@ -70,7 +70,7 @@ public class Consumabile implements Operabile<ModelloConsumabile> {
 	@Override
     @Transient
     public String getQRCode() {
-        return String.format("ClassName:%s\nIdentificativo:%s\n%s", this.getClass().getName(),identificativo,modello.getQRCode());
+        return identificativo;
     }
 
     @Override
