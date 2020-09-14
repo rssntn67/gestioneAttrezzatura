@@ -9,8 +9,4 @@ public enum Fornitore {
     TopStore,
 	FornitoreB1
 	;
-	
-
-	  ;
-	
 }

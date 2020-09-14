@@ -15,9 +15,5 @@ public enum MarcaAttrezzatura {
 	CinaByMaster,
 	Maruyama,
 	Honda,
-
-
-
-	
 	NonDefinita
 }

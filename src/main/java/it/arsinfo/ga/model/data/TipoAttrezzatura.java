@@ -11,7 +11,5 @@ public enum TipoAttrezzatura {
 	Polipo,
 	Compattatore,
 	Pressa,
-	
-	
 	NonDisponibile
 }
