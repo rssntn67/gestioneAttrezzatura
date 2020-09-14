@@ -7,8 +7,6 @@ public enum Fornitore {
 	Casillo,
 	BTE,
     TopStore,
-    
-    
 	FornitoreB1
 	;
 	
