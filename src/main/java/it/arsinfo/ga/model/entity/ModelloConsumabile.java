@@ -22,7 +22,7 @@ import it.arsinfo.ga.model.data.TipoConsumabile;
 @Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"nome","fornitore","annoProduzione"})
 })
-public class ModelloConsumabile extends Modello {
+public class ModelloConsumabile implements Modello {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

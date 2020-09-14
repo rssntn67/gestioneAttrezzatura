@@ -22,7 +22,7 @@ import it.arsinfo.ga.model.data.TipoAttrezzatura;
 @Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"nome","fornitore","marca","tipo","annoProduzione"})
 })
-public class ModelloAttrezzatura extends Modello {
+public class ModelloAttrezzatura implements Modello {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 import it.arsinfo.ga.model.data.TipoOperazione;
 
 @Entity
-public class OperazioneConsumabile extends Operazione<ModelloConsumabile,Consumabile> {
+public class OperazioneConsumabile implements Operazione<ModelloConsumabile,Consumabile> {
     
     @ManyToOne(fetch=FetchType.LAZY)
     private Consumabile operabile;

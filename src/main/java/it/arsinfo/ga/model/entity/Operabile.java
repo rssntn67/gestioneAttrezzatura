@@ -1,11 +1,11 @@
 package it.arsinfo.ga.model.entity;
 
-public abstract class Operabile<T extends Modello> implements EntityBase {
+public interface Operabile<T extends Modello> extends EntityBase {
 
-	public abstract String getIdentificativo();
-	public abstract void setIdentificativo(String identificativo);
+	String getIdentificativo();
+	void setIdentificativo(String identificativo);
 
-	public abstract T getModello();
-	public abstract void setModello(T modello);
+	T getModello();
+	void setModello(T modello);
 
 }

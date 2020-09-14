@@ -21,7 +21,7 @@ import it.arsinfo.ga.model.data.TipoPersonale;
 @Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"nome","fornitore","annoProduzione"})
 })
-public class ModelloPersonale extends Modello {
+public class ModelloPersonale implements Modello {
     
     private TipoPersonale tipo = TipoPersonale.Altri;    
 

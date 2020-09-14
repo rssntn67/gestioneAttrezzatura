@@ -19,7 +19,7 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 @Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"identificativo"})
         })
-public class Personale extends Operabile<ModelloPersonale> {
+public class Personale implements Operabile<ModelloPersonale> {
 
 
     @ManyToOne(fetch=FetchType.EAGER)
