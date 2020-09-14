@@ -11,7 +11,7 @@ import it.arsinfo.ga.model.entity.ModelloPersonale;
 
 public interface ModelloPersonaleDao extends JpaRepository<ModelloPersonale, Long> {
 
-	ModelloPersonale findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore,Anno anno);
+	List<ModelloPersonale> findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore,Anno anno);
 
 	List<ModelloPersonale> findByNomeContainingIgnoreCase(String nome);
     List<ModelloPersonale> findByAnnoProduzione(Anno anno);

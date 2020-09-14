@@ -12,7 +12,7 @@ import it.arsinfo.ga.model.entity.ModelloConsumabile;
 
 public interface ModelloConsumabileDao extends JpaRepository<ModelloConsumabile, Long> {
 
-	ModelloConsumabile findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore,Anno anno);
+	List<ModelloConsumabile> findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore,Anno anno);
 
 	List<ModelloConsumabile> findByNomeContainingIgnoreCase(String nome);
     List<ModelloConsumabile> findByAnnoProduzione(Anno anno);

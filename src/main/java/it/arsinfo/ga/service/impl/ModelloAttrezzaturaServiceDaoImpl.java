@@ -120,7 +120,7 @@ public class ModelloAttrezzaturaServiceDaoImpl implements ModelloAttrezzaturaSer
 	}
 
 	@Override
-	public ModelloAttrezzatura findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore, Anno anno) {
+	public List<ModelloAttrezzatura> findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore, Anno anno) {
 		return repository.findByNomeAndFornitoreAndAnnoProduzione(nome, fornitore, anno);
 	}
 

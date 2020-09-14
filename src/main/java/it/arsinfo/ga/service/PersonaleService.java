@@ -8,7 +8,4 @@ import it.arsinfo.ga.model.entity.Personale;
 
 public interface PersonaleService extends OperabileService<ModelloPersonale,Personale>{
 	List<Personale> searchBy(StatoOperabile searchStatoPersonale, String searchIdentificativo, ModelloPersonale searchModello);
-
-	List<ModelloPersonale> getModelli();
-
 }

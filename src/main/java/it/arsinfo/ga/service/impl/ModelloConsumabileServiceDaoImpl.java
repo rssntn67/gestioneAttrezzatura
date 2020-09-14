@@ -120,7 +120,7 @@ public class ModelloConsumabileServiceDaoImpl implements ModelloConsumabileServi
 	}
 
 	@Override
-	public ModelloConsumabile findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore, Anno anno) {
+	public List<ModelloConsumabile> findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore, Anno anno) {
 		return repository.findByNomeAndFornitoreAndAnnoProduzione(nome, fornitore, anno);
 	}
 

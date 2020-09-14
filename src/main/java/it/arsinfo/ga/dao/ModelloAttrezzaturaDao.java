@@ -12,7 +12,7 @@ import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 
 public interface ModelloAttrezzaturaDao extends JpaRepository<ModelloAttrezzatura, Long> {
 
-	ModelloAttrezzatura findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore,Anno anno);
+	List<ModelloAttrezzatura> findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore,Anno anno);
 
 	List<ModelloAttrezzatura> findByNomeContainingIgnoreCase(String nome);
     List<ModelloAttrezzatura> findByAnnoProduzione(Anno anno);

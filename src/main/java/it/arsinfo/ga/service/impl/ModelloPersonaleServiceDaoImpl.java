@@ -85,7 +85,7 @@ public class ModelloPersonaleServiceDaoImpl implements ModelloPersonaleService {
 	}
 
 	@Override
-	public ModelloPersonale findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore, Anno anno) {
+	public List<ModelloPersonale> findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore, Anno anno) {
 		return repository.findByNomeAndFornitoreAndAnnoProduzione(nome, fornitore, anno);
 	}
 

@@ -20,7 +20,7 @@ import it.arsinfo.ga.model.data.TipoConsumabile;
 
 @Entity
 @Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"nome","fornitore","annoProduzione"})
+        @UniqueConstraint(columnNames = {"nome","fornitore","marca","tipo","annoProduzione"})
 })
 public class ModelloConsumabile implements Modello {
     
