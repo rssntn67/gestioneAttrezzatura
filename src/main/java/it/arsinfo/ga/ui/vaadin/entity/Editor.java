@@ -22,7 +22,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
 import it.arsinfo.ga.model.entity.EntityBase;
-import it.arsinfo.ga.qrcode.QRGenBarcodeGenerator;
+import it.arsinfo.ga.qrcode.BarcodeGenerator;
 import it.arsinfo.ga.service.EntityBaseService;
 import it.arsinfo.ga.ui.vaadin.NoQRCodeImageSource;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
@@ -151,7 +151,7 @@ public abstract class Editor<T extends EntityBase>
     
 	public static StreamResource createQRCodeStreamResource(String qrcode) {
 		try {
-			return createStreamResource(QRGenBarcodeGenerator.generateQRCodeImage(qrcode));
+			return createStreamResource(BarcodeGenerator.generateQRCodeImage(qrcode));
 		} catch (Exception e) {
 			log.error("createQRCodeStreamResource: {}", e.getMessage(),e);
 		}
