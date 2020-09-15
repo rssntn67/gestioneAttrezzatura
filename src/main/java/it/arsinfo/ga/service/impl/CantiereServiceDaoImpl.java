@@ -9,14 +9,33 @@ import org.springframework.util.StringUtils;
 import it.arsinfo.ga.dao.CantiereDao;
 import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.data.TipoCantiere;
+import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.Cantiere;
+import it.arsinfo.ga.model.entity.Consumabile;
+import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.entity.ModelloConsumabile;
+import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
+import it.arsinfo.ga.model.entity.OperazioneConsumabile;
+import it.arsinfo.ga.model.entity.OperazionePersonale;
+import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.CantiereService;
+import it.arsinfo.ga.service.OperazioneService;
 
 @Service
 public class CantiereServiceDaoImpl implements CantiereService {
 
     @Autowired
     private CantiereDao repository;
+    
+    @Autowired
+    private OperazioneService<ModelloAttrezzatura, Attrezzatura, OperazioneAttrezzatura> operAttrService;
+    
+    @Autowired 
+    private OperazioneService<ModelloConsumabile,Consumabile,OperazioneConsumabile> operConsService;
+    
+    @Autowired
+    private OperazioneService<ModelloPersonale, Personale, OperazionePersonale> operPersService;
 
 	@Override
 	public Cantiere save(Cantiere entity) throws Exception {
@@ -64,6 +83,21 @@ public class CantiereServiceDaoImpl implements CantiereService {
 	@Override
 	public Cantiere findByIdentificativo(String identificatico) {
 		return repository.findByIdentificativo(identificatico);
+	}
+
+	@Override
+	public List<OperazioneAttrezzatura> findOperazioneAttrezzatura(Cantiere cantiere) {
+		return operAttrService.searchBy(cantiere, null, null);
+	}
+
+	@Override
+	public List<OperazioneConsumabile> findOperazioneConsumabile(Cantiere cantiere) {
+		return operConsService.searchBy(cantiere, null, null);
+	}
+
+	@Override
+	public List<OperazionePersonale> findOperazionePersonale(Cantiere cantiere) {
+		return operPersService.searchBy(cantiere, null, null);
 	}
 
 	

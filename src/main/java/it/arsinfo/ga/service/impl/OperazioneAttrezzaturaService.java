@@ -111,7 +111,8 @@ public class OperazioneAttrezzaturaService implements OperazioneService<ModelloA
 		return populate(operazioneDao.findByCantiereAndOperabileAndTipoOperazione(cantiere, operabile, t));
 	}
 	
-	private List<OperazioneAttrezzatura> populate(List<OperazioneAttrezzatura> operazioni) {
+	@Override
+	public List<OperazioneAttrezzatura> populate(List<OperazioneAttrezzatura> operazioni) {
 		Map<Long,Cantiere> cmap = cantiereDao.findAll().stream().collect(Collectors.toMap(Cantiere::getId, Function.identity()));
 		Map<Long,Attrezzatura> omap = operabileDao.findAll().stream().collect(Collectors.toMap(Attrezzatura::getId, Function.identity()));
 		List<OperazioneAttrezzatura> list = new ArrayList<OperazioneAttrezzatura>();

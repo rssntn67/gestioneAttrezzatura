@@ -15,5 +15,6 @@ public interface OperazioneService<K extends Modello,T extends Operabile<K>, S e
 	List<T> getOperabili();
 	List<S> findAll();	
 	List<S> searchBy(Cantiere cantiere, T operabile, TipoOperazione t);
+	List<S> populate(List<S> operazioni);
 
 }

@@ -119,7 +119,8 @@ public class OperazionePersonaleService implements OperazioneService<ModelloPers
 		return populate(operazioneDao.findByCantiereAndOperabileAndTipoOperazione(cantiere, operabile, t));
 	}
 	
-	private List<OperazionePersonale> populate(List<OperazionePersonale> operazioni) {
+	@Override
+	public List<OperazionePersonale> populate(List<OperazionePersonale> operazioni) {
 		Map<Long,Cantiere> cmap = cantiereDao.findAll().stream().collect(Collectors.toMap(Cantiere::getId, Function.identity()));
 		Map<Long,Personale> omap = operabileDao.findAll().stream().collect(Collectors.toMap(Personale::getId, Function.identity()));
 		List<OperazionePersonale> list = new ArrayList<OperazionePersonale>();

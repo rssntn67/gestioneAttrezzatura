@@ -112,7 +112,8 @@ public class OperazioneConsumabileService implements OperazioneService<ModelloCo
 		return populate(operazioneDao.findByCantiereAndOperabileAndTipoOperazione(cantiere, operabile, t));
 	}
 	
-	private List<OperazioneConsumabile> populate(List<OperazioneConsumabile> operazioni) {
+	@Override
+	public List<OperazioneConsumabile> populate(List<OperazioneConsumabile> operazioni) {
 		Map<Long,Cantiere> cmap = cantiereDao.findAll().stream().collect(Collectors.toMap(Cantiere::getId, Function.identity()));
 		Map<Long,Consumabile> omap = operabileDao.findAll().stream().collect(Collectors.toMap(Consumabile::getId, Function.identity()));
 		List<OperazioneConsumabile> list = new ArrayList<OperazioneConsumabile>();
