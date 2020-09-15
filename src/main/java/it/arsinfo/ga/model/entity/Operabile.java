@@ -7,5 +7,6 @@ public interface Operabile<T extends Modello> extends EntityBase {
 
 	T getModello();
 	void setModello(T modello);
+	String getCode();
 
 }

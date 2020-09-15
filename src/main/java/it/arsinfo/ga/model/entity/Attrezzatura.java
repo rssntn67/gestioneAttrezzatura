@@ -70,7 +70,7 @@ public class Attrezzatura implements Operabile<ModelloAttrezzatura> {
     }
 
     @Transient
-    public String getQRCode() {
+    public String getCode() {
         return identificativo;
     }
 

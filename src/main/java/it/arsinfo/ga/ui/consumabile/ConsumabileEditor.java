@@ -12,9 +12,9 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Consumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.service.ConsumabileService;
-import it.arsinfo.ga.ui.vaadin.entity.Editor;
+import it.arsinfo.ga.ui.vaadin.entity.OperabileEditor;
 
-public class ConsumabileEditor extends Editor<Consumabile> {
+public class ConsumabileEditor extends OperabileEditor<Consumabile> {
 
     private final ComboBox<ModelloConsumabile> modello = new ComboBox<ModelloConsumabile>("Modello");
     private final ComboBox<StatoOperabile> stato = new ComboBox<StatoOperabile>("Stato",
@@ -31,7 +31,8 @@ public class ConsumabileEditor extends Editor<Consumabile> {
         intestazioni.addComponentsAndExpand(modello);
         
         HorizontalLayout importi = new HorizontalLayout(numero,utilizzati,disponibili);
-        setComponents(getActions(), intestazioni,importi,getQrCodeImage(),getBarCodeImage());
+        HorizontalLayout code = new HorizontalLayout(getQrCodeImage(),getBarCodeImage());							
+        setComponents(getActions(), intestazioni,importi,code);
 
 
         getBinder().forField(identificativo).asRequired();

@@ -38,7 +38,7 @@ public class ModelloAttrezzaturaEditor extends Editor<ModelloAttrezzatura> {
         HorizontalLayout residenza = new HorizontalLayout(costo,tipo,marca);
         residenza.addComponentsAndExpand(descrizione);
         
-        setComponents(getActions(), intestazioni,residenza,getQrCodeImage(),getBarCodeImage());
+        setComponents(getActions(), intestazioni,residenza);
 
 
         getBinder().forField(nome).asRequired();

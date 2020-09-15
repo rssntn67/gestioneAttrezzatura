@@ -91,11 +91,6 @@ public class ModelloAttrezzatura implements Modello {
         return String.format("%s:%s:%s:%s", nome,fornitore,tipo,marca);
     }
 
-    @Transient
-    public String getQRCode() {
-        return String.format("ClassName:%s\nNome:%s\nFornitore:%s\nAnnoProduzione:%s", this.getClass().getName(),nome,fornitore,annoProduzione);
-    }
-
 	public MarcaAttrezzatura getMarca() {
 		return marca;
 	}

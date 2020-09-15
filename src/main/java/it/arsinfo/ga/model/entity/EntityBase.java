@@ -4,8 +4,5 @@ public interface EntityBase {
     
 	Long getId();
 	
-	String getHeader();
-	
-	String getQRCode();
-    
+	String getHeader();    
 }

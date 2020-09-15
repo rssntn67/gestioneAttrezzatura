@@ -1,40 +1,24 @@
 package it.arsinfo.ga.ui.vaadin.entity;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.data.Binder;
 import com.vaadin.icons.VaadinIcons;
-import com.vaadin.server.StreamResource;
-import com.vaadin.server.StreamResource.StreamSource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Image;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
 import it.arsinfo.ga.model.entity.EntityBase;
-import it.arsinfo.ga.qrcode.BarcodeGenerator;
 import it.arsinfo.ga.service.EntityBaseService;
-import it.arsinfo.ga.ui.vaadin.NoQRCodeImageSource;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
 public abstract class Editor<T extends EntityBase>
         extends UIChangeHandler {
 
-    private static StreamResource noqrcoderesource = new StreamResource(new NoQRCodeImageSource(),"noqrcode.png");
 	private HorizontalLayout actions = new HorizontalLayout();
 	
-	private final Image qrcode = new Image();
-	private final Image barcode = new Image();
     public HorizontalLayout getActions() {
         return actions;
     }
@@ -102,14 +86,7 @@ public abstract class Editor<T extends EntityBase>
         final boolean persisted = c.getId() != null;
         if (persisted) {
             smdObj = repositoryDao.findById(c.getId());
-            log.info("edit: {}", smdObj.getQRCode());
-			qrcode.setCaption("QR Code");
-			qrcode.setIcon(createQRCodeStreamResource(smdObj.getQRCode()));
-			barcode.setCaption("Bar Code");
-			barcode.setIcon(createBarCodeStreamResource(smdObj.getQRCode()));
         } else {
-			qrcode.setCaption("No QR Code yet");
-			qrcode.setIcon(noqrcoderesource);
             smdObj = c;
         }
         binder.setBean(smdObj);
@@ -146,55 +123,6 @@ public abstract class Editor<T extends EntityBase>
 
     public EntityBaseService<T> getServiceDao() {
         return repositoryDao;
-    }
-
-	public Image getQrCodeImage() {
-		return qrcode;
-	}
-
-	public Image getBarCodeImage() {
-		return barcode;
-	}
-
-	public static StreamResource createBarCodeStreamResource(String code) {
-		try {
-			return createStreamResource(BarcodeGenerator.generateEAN13BarcodeImage(code));
-		} catch (Exception e) {
-			log.error("createBarCodeStreamResource: {}", e.getMessage(),e);
-		}
-		return noqrcoderesource;
-	}
-
-	public static StreamResource createQRCodeStreamResource(String qrcode) {
-		try {
-			return createStreamResource(BarcodeGenerator.generateQRCodeImage(qrcode));
-		} catch (Exception e) {
-			log.error("createQRCodeStreamResource: {}", e.getMessage(),e);
-		}
-		return noqrcoderesource;
-	}
-    
-	public static StreamResource createStreamResource(BufferedImage bi) {
-        return new StreamResource(new StreamSource() {
-			
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 5371943965586727249L;
-
-			@Override
-            public InputStream getStream() {
- 
-                try {
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    ImageIO.write(bi, "png", bos);
-                    return new ByteArrayInputStream(bos.toByteArray());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-        }, "code.png");
     }
 
 }

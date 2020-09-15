@@ -69,7 +69,7 @@ public class Consumabile implements Operabile<ModelloConsumabile> {
 
 	@Override
     @Transient
-    public String getQRCode() {
+    public String getCode() {
         return identificativo;
     }
 

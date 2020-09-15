@@ -50,16 +50,6 @@ public class OperazioneConsumabile implements Operazione<ModelloConsumabile,Cons
         return String.format("%s:%s:%s",tipoOperazione, cantiere.getHeader(),getOperabile().getHeader() );
     }
 
-    @Transient
-    public String getQRCode() {
-        return String.format("ClassName:%s\n%s\n%s\n%s\n%s", 
-        		this.getClass().getName(),
-        		cantiere.getQRCode(),
-        		operabile.getQRCode(),
-        		tipoOperazione,
-        		dataOperazione.toString());
-    }
-
 	@Override
 	public Cantiere getCantiere() {
 		return cantiere;

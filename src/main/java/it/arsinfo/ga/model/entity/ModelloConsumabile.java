@@ -92,11 +92,6 @@ public class ModelloConsumabile implements Modello {
         return String.format("%s:%s:%s", nome,fornitore,annoProduzione.getAnnoAsString());
     }
 
-    @Transient
-    public String getQRCode() {
-        return String.format("ClassName:%s\nNome:%s\nFornitore:%s\nAnnoProduzione:%s", this.getClass().getName(),nome,fornitore,annoProduzione);
-    }
-
 	public MarcaConsumabile getMarca() {
 		return marca;
 	}

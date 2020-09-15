@@ -86,11 +86,6 @@ public class ModelloPersonale implements Modello {
         return String.format("%s:%s", nome,annoProduzione.getAnnoAsString());
     }
 
-    @Transient
-    public String getQRCode() {
-        return String.format("ClassName:%s\nNome:%s\nFornitore:%s\nAnnoProduzione:%s", this.getClass().getName(),nome,fornitore,annoProduzione);
-    }
-
 	public TipoPersonale getTipo() {
 		return tipo;
 	}

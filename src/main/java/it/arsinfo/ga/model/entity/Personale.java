@@ -68,7 +68,7 @@ public class Personale implements Operabile<ModelloPersonale> {
     }
 
     @Transient
-    public String getQRCode() {
+    public String getCode() {
         return identificativo;
     }
 

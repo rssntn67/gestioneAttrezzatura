@@ -12,9 +12,9 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.service.AttrezzaturaService;
-import it.arsinfo.ga.ui.vaadin.entity.Editor;
+import it.arsinfo.ga.ui.vaadin.entity.OperabileEditor;
 
-public class AttrezzaturaEditor extends Editor<Attrezzatura> {
+public class AttrezzaturaEditor extends OperabileEditor<Attrezzatura> {
 
     private final ComboBox<ModelloAttrezzatura> modello = new ComboBox<ModelloAttrezzatura>("Modello");
     private final ComboBox<StatoOperabile> stato = new ComboBox<StatoOperabile>("Stato",
@@ -28,10 +28,10 @@ public class AttrezzaturaEditor extends Editor<Attrezzatura> {
 
         HorizontalLayout intestazioni = new HorizontalLayout(identificativo,stato);
         intestazioni.addComponentsAndExpand(modello);
-        							
         
         HorizontalLayout importi = new HorizontalLayout(speseManutenzione,speseRiparazione);
-        setComponents(getActions(), intestazioni,importi,getQrCodeImage(),getBarCodeImage());
+        HorizontalLayout code = new HorizontalLayout(getQrCodeImage(),getBarCodeImage());							
+        setComponents(getActions(), intestazioni,importi,code);
 
 
         getBinder().forField(identificativo).asRequired();
