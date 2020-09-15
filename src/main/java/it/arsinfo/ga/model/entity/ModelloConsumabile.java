@@ -89,7 +89,7 @@ public class ModelloConsumabile implements Modello {
 	@Override
     @Transient
     public String getHeader() {
-        return String.format("%s:%s:%s", nome,fornitore,annoProduzione.getAnnoAsString());
+        return String.format("%s:%s:%s", nome,marca,tipo);
     }
 
 	public MarcaConsumabile getMarca() {

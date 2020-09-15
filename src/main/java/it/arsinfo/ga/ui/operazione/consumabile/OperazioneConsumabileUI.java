@@ -14,8 +14,9 @@ import it.arsinfo.ga.model.entity.Consumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.model.entity.OperazioneConsumabile;
 import it.arsinfo.ga.service.OperazioneService;
-import it.arsinfo.ga.ui.vaadin.operazione.Add;
-import it.arsinfo.ga.ui.vaadin.operazione.Editor;
+import it.arsinfo.ga.ui.vaadin.operazione.OperazioneAdd;
+import it.arsinfo.ga.ui.vaadin.operazione.OperazioneEditor;
+import it.arsinfo.ga.ui.vaadin.operazione.OperazioneSearch;
 import it.arsinfo.ga.ui.vaadin.operazione.OperazioneUI;
 
 @SpringUI(path = OperazioneUI.URL_OPERAZIONE_CONSUMABILE)
@@ -27,7 +28,7 @@ public class OperazioneConsumabileUI extends OperazioneUI<ModelloConsumabile, Co
 	 */
 	private static final long serialVersionUID = -5114046312816971846L;
 
-	private final class OperazioneConsumabileEditor extends Editor<ModelloConsumabile,Consumabile,OperazioneConsumabile> {
+	private final class OperazioneConsumabileEditor extends OperazioneEditor<ModelloConsumabile,Consumabile,OperazioneConsumabile> {
 
 	    private final TextField numero = new TextField("Qu.ta");
 
@@ -52,8 +53,8 @@ public class OperazioneConsumabileUI extends OperazioneUI<ModelloConsumabile, Co
 	
 	@Override
 	protected void init(VaadinRequest request) {
-		Add<ModelloConsumabile,Consumabile,OperazioneConsumabile> add = 
-					new Add<ModelloConsumabile,Consumabile,OperazioneConsumabile>("Aggiungi") {
+		OperazioneAdd<ModelloConsumabile,Consumabile,OperazioneConsumabile> add = 
+					new OperazioneAdd<ModelloConsumabile,Consumabile,OperazioneConsumabile>("Aggiungi") {
 
 			@Override
 			public OperazioneConsumabile generate() {
@@ -63,10 +64,14 @@ public class OperazioneConsumabileUI extends OperazioneUI<ModelloConsumabile, Co
 		
 		OperazioneConsumabileEditor editor = new OperazioneConsumabileEditor(service);
 		
-		super.init(request,add,editor,"Operazione Consumabile");
-		addComponents(add,editor);
+		OperazioneSearch<ModelloConsumabile,Consumabile,OperazioneConsumabile> search = new OperazioneSearch<ModelloConsumabile,Consumabile,OperazioneConsumabile>(service) {
+		};
+		OperazioneConsumabileGrid grid = new OperazioneConsumabileGrid("Operazioni/Consumabile");
+		super.init(request,add,search,editor,grid,"Operazione Consumabile");
+		addComponents(add,search,grid,editor);
 
         editor.setVisible(false);
+        grid.populate(service.findAll());
 
 	}
 

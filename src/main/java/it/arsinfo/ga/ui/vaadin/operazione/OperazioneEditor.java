@@ -21,7 +21,7 @@ import it.arsinfo.ga.model.entity.Operazione;
 import it.arsinfo.ga.service.OperazioneService;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
-public abstract class Editor<K extends Modello,T extends Operabile<K>, S extends Operazione<K, T>>  extends UIChangeHandler {
+public abstract class OperazioneEditor<K extends Modello,T extends Operabile<K>, S extends Operazione<K, T>>  extends UIChangeHandler {
 
 	private HorizontalLayout actions = new HorizontalLayout();
 	
@@ -38,9 +38,9 @@ public abstract class Editor<K extends Modello,T extends Operabile<K>, S extends
     private final Binder<S> binder;
 
 
-    private static final Logger log = LoggerFactory.getLogger(Editor.class);
+    private static final Logger log = LoggerFactory.getLogger(OperazioneEditor.class);
 
-    public Editor(OperazioneService<K,T,S> service, Binder<S> binder) {
+    public OperazioneEditor(OperazioneService<K,T,S> service, Binder<S> binder) {
 
         this.service = service;
         this.binder=binder;
@@ -92,6 +92,11 @@ public abstract class Editor<K extends Modello,T extends Operabile<K>, S extends
         }
         operazione = c;
         binder.setBean(operazione);
+        if (c.getId() != null) {
+        	esegui.setEnabled(false);
+        } else {
+        	esegui.setEnabled(true);
+        }
 
         focus();
         setVisible(true);

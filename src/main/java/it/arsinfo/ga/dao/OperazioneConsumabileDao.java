@@ -17,5 +17,7 @@ public interface OperazioneConsumabileDao extends JpaRepository<OperazioneConsum
     List<OperazioneConsumabile> findByCantiereAndOperabile(Cantiere cantiere, Consumabile attrazzatura);
     List<OperazioneConsumabile> findByCantiereAndTipoOperazione(Cantiere cantiere, TipoOperazione tipo);
     List<OperazioneConsumabile> findByOperabileAndTipoOperazione(Consumabile attrazzatura,TipoOperazione tipo);
+	List<OperazioneConsumabile> findByCantiereAndOperabileAndTipoOperazione(Cantiere cantiere, Consumabile operabile,
+			TipoOperazione t);
        
 }

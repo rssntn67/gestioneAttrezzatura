@@ -1,6 +1,10 @@
 package it.arsinfo.ga.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,15 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.arsinfo.ga.dao.PersonaleDao;
 import it.arsinfo.ga.dao.CantiereDao;
 import it.arsinfo.ga.dao.OperazionePersonaleDao;
+import it.arsinfo.ga.dao.PersonaleDao;
 import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.data.StatoOperabile;
-import it.arsinfo.ga.model.entity.Personale;
+import it.arsinfo.ga.model.data.TipoOperazione;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.model.entity.OperazionePersonale;
+import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.OperazioneService;
 
 @Service
@@ -89,4 +94,41 @@ public class OperazionePersonaleService implements OperazioneService<ModelloPers
 	public List<Personale> getOperabili() {
 		return operabileDao.findByStato(StatoOperabile.Disponibile);
 	}
+	
+	@Override
+	public List<OperazionePersonale> findAll() {
+		return populate(operazioneDao.findAll());
+	}
+
+	@Override
+	public List<OperazionePersonale> searchBy(Cantiere cantiere, Personale operabile, TipoOperazione t) {
+		if (cantiere == null && operabile == null && t == null)
+			return populate(operazioneDao.findAll());
+		if (cantiere == null && operabile == null)
+			return populate(operazioneDao.findByTipoOperazione(t));
+		if (cantiere == null && t == null)
+			return populate(operazioneDao.findByOperabile(operabile));
+		if (operabile == null && t == null)
+			return populate(operazioneDao.findByCantiere(cantiere));
+		if (cantiere == null) 
+			return populate(operazioneDao.findByOperabileAndTipoOperazione(operabile, t));
+		if (operabile == null)
+			return populate(operazioneDao.findByCantiereAndTipoOperazione(cantiere, t));
+		if (t == null)
+			return populate(operazioneDao.findByCantiereAndOperabile(cantiere, operabile));
+		return populate(operazioneDao.findByCantiereAndOperabileAndTipoOperazione(cantiere, operabile, t));
+	}
+	
+	private List<OperazionePersonale> populate(List<OperazionePersonale> operazioni) {
+		Map<Long,Cantiere> cmap = cantiereDao.findAll().stream().collect(Collectors.toMap(Cantiere::getId, Function.identity()));
+		Map<Long,Personale> omap = operabileDao.findAll().stream().collect(Collectors.toMap(Personale::getId, Function.identity()));
+		List<OperazionePersonale> list = new ArrayList<OperazionePersonale>();
+		for (OperazionePersonale o: operazioni) {
+			o.setCantiere(cmap.get(o.getCantiere().getId()));
+			o.setOperabile(omap.get(o.getOperabile().getId()));
+			list.add(o);
+		}
+		return list;
+	}
+
 }

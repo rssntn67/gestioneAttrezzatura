@@ -8,11 +8,11 @@ import it.arsinfo.ga.model.entity.Operabile;
 import it.arsinfo.ga.model.entity.Operazione;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
-public abstract class Add<K extends Modello,T extends Operabile<K>, S extends Operazione<K, T>> extends UIChangeHandler {
+public abstract class OperazioneAdd<K extends Modello,T extends Operabile<K>, S extends Operazione<K, T>> extends UIChangeHandler {
 
     private final Button button;
 
-    public Add(String caption) {
+    public OperazioneAdd(String caption) {
         button = new Button(caption, VaadinIcons.PLUS);
         button.addClickListener(e -> onChange());
         setComponents(button);

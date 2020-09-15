@@ -88,7 +88,7 @@ public class ModelloAttrezzatura implements Modello {
 	@Override
     @Transient
     public String getHeader() {
-        return String.format("%s:%s:%s:%s", nome,fornitore,tipo,marca);
+        return String.format("%s:%s:%s", nome,marca,tipo);
     }
 
 	public MarcaAttrezzatura getMarca() {

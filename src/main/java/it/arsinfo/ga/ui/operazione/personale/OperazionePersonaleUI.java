@@ -10,12 +10,13 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.model.entity.OperazionePersonale;
+import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.OperazioneService;
-import it.arsinfo.ga.ui.vaadin.operazione.Add;
-import it.arsinfo.ga.ui.vaadin.operazione.Editor;
+import it.arsinfo.ga.ui.vaadin.operazione.OperazioneAdd;
+import it.arsinfo.ga.ui.vaadin.operazione.OperazioneEditor;
+import it.arsinfo.ga.ui.vaadin.operazione.OperazioneSearch;
 import it.arsinfo.ga.ui.vaadin.operazione.OperazioneUI;
 
 @SpringUI(path = OperazioneUI.URL_OPERAZIONE_PERSONALE)
@@ -27,7 +28,7 @@ public class OperazionePersonaleUI extends OperazioneUI<ModelloPersonale, Person
 	 */
 	private static final long serialVersionUID = -5114046312816971846L;
 
-	private final class OperazionePersonaleEditor extends Editor<ModelloPersonale,Personale,OperazionePersonale> {
+	private final class OperazionePersonaleEditor extends OperazioneEditor<ModelloPersonale,Personale,OperazionePersonale> {
 
 	    private final TextField numero = new TextField("Qu.ta");
 
@@ -52,8 +53,8 @@ public class OperazionePersonaleUI extends OperazioneUI<ModelloPersonale, Person
 	
 	@Override
 	protected void init(VaadinRequest request) {
-		Add<ModelloPersonale,Personale,OperazionePersonale> add = 
-					new Add<ModelloPersonale,Personale,OperazionePersonale>("Aggiungi") {
+		OperazioneAdd<ModelloPersonale,Personale,OperazionePersonale> add = 
+					new OperazioneAdd<ModelloPersonale,Personale,OperazionePersonale>("Aggiungi") {
 
 			@Override
 			public OperazionePersonale generate() {
@@ -63,10 +64,14 @@ public class OperazionePersonaleUI extends OperazioneUI<ModelloPersonale, Person
 		
 		OperazionePersonaleEditor editor = new OperazionePersonaleEditor(service);
 		
-		super.init(request,add,editor,"Operazione Personale");
-		addComponents(add,editor);
+		OperazioneSearch<ModelloPersonale,Personale,OperazionePersonale> search = new OperazioneSearch<ModelloPersonale,Personale,OperazionePersonale>(service) {
+		};
+		OperazionePersonaleGrid grid = new OperazionePersonaleGrid("Operazioni/Personale");
+		super.init(request,add,search,editor,grid,"Operazione Personale");
+		addComponents(add,search,grid,editor);
 
         editor.setVisible(false);
+        grid.populate(service.findAll());
 
 	}
 

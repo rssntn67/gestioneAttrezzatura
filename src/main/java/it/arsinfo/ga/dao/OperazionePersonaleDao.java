@@ -17,5 +17,7 @@ public interface OperazionePersonaleDao extends JpaRepository<OperazionePersonal
     List<OperazionePersonale> findByCantiereAndOperabile(Cantiere cantiere, Personale attrazzatura);
     List<OperazionePersonale> findByCantiereAndTipoOperazione(Cantiere cantiere, TipoOperazione tipo);
     List<OperazionePersonale> findByOperabileAndTipoOperazione(Personale attrazzatura,TipoOperazione tipo);
+	List<OperazionePersonale> findByCantiereAndOperabileAndTipoOperazione(Cantiere cantiere, Personale operabile,
+			TipoOperazione t);
        
 }

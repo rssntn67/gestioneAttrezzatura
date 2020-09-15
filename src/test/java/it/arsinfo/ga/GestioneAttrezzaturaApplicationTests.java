@@ -1,7 +1,6 @@
 package it.arsinfo.ga;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.After;
@@ -102,24 +101,6 @@ public class GestioneAttrezzaturaApplicationTests {
     	ModelloAttrezzatura mdaDb = modelloAttrezzaturaDao.findByNomeAndFornitoreAndAnnoProduzione("prova",Fornitore.NonDefinito,Anno.ANNOND).iterator().next();
     	assertNotNull(mdaDb);
     	
-    	ModelloAttrezzatura mda2 = new ModelloAttrezzatura();
-    	mda2.setNome("prova");
-    	try {
-    		modelloAttrezzaturaDao.save(mda2);
-    		assertTrue(false);
-    	} catch (Exception e) {
-    		log.info(e.getMessage());
-    		assertTrue(true);
-		}
-    	mda2.setAnnoProduzione(Anno.ANNOND);
-    	try {
-    		modelloAttrezzaturaDao.save(mda2);
-    		assertTrue(false);
-    	} catch (Exception e) {
-    		log.info(e.getMessage());
-    		assertTrue(true);
-		}
-
     	modelloAttrezzaturaDao.delete(mdaDb);
        	assertEquals(0, modelloAttrezzaturaDao.count());
             	
