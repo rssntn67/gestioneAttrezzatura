@@ -1,15 +1,19 @@
 package it.arsinfo.ga.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.arsinfo.ga.model.data.TipoOperazione;
+import it.arsinfo.ga.model.dto.CantiereDto;
+import it.arsinfo.ga.model.dto.OperabileDto;
+import it.arsinfo.ga.model.dto.OperazioneDto;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.Consumabile;
@@ -29,23 +33,7 @@ import it.arsinfo.ga.service.PersonaleService;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
- 
-	private class OperazioneTree {
-		private String cantiereId;
-		private String operabileId;
-		private TipoOperazione tipo;
-		
-		public String getCantiereId() {
-			return cantiereId;
-		}
-		public String getOperabileId() {
-			return operabileId;
-		}
-		public TipoOperazione getTipo() {
-			return tipo;
-		}		
-	}
-	
+ 	
 	@Autowired 
 	private AttrezzaturaService attrezzaturaService;
 	@Autowired 
@@ -61,28 +49,61 @@ public class ApiController {
 	@Autowired 
 	private OperazioneService<ModelloPersonale,Personale,OperazionePersonale> oppersonaleService;
 
+	@CrossOrigin(origins = "http://localhost:8100")
 	@GetMapping("/attrezzature") 
-	public List<Attrezzatura> findAttrezzature() {
-		return attrezzaturaService.findAll();
+	public List<OperabileDto> findAttrezzature() {
+		List<OperabileDto> list = new ArrayList<>();
+		for (Attrezzatura operabile: attrezzaturaService.findAll()) {
+			OperabileDto dto = new OperabileDto();
+			dto.setIdentificativo(operabile.getIdentificativo());
+			dto.setStato(operabile.getStato());
+			dto.setModello(operabile.getModello().getHeader());
+			list.add(dto);
+		}
+		return list;
 	}
 
 	@GetMapping("/consumabili") 
-	public List<Consumabile> findConsumabile() {
-		return consumabileService.findAll();
+	public List<OperabileDto> findConsumabile() {
+		List<OperabileDto> list = new ArrayList<>();
+		for (Consumabile operabile :consumabileService.findAll()) {
+			OperabileDto dto = new OperabileDto();
+			dto.setIdentificativo(operabile.getIdentificativo());
+			dto.setStato(operabile.getStato());
+			dto.setModello(operabile.getModello().getHeader());
+			list.add(dto);			
+		}
+		return list;
 	}
 
 	@GetMapping("/personale") 
-	public List<Personale> findPersonale() {
-		return personaleService.findAll();
+	public List<OperabileDto> findPersonale() {
+		List<OperabileDto> list = new ArrayList<>();
+		for (Personale operabile :personaleService.findAll()) {
+			OperabileDto dto = new OperabileDto();
+			dto.setIdentificativo(operabile.getIdentificativo());
+			dto.setStato(operabile.getStato());
+			dto.setModello(operabile.getModello().getHeader());
+			list.add(dto);			
+		}
+		return list;
 	}
 
 	@GetMapping("/cantieri") 
-	public List<Cantiere> findCantieri() {
-		return cantiereService.findAll();
+	public List<CantiereDto> findCantieri() {
+		List<CantiereDto> list = new ArrayList<>();
+		for (Cantiere cantiere: cantiereService.findAll() ) {
+			CantiereDto dto = new CantiereDto();
+			dto.setIdentificativo(cantiere.getIdentificativo());
+			dto.setStato(cantiere.getStato());
+			dto.setTipo(cantiere.getTipo());
+			dto.setSitoIn(cantiere.getSitoIn());
+		}
+		return list;
 	}
 
 	@PostMapping("/operazione/attrezzatura") 
-	public boolean addOperazioneAttrezzatura(@RequestBody OperazioneTree tree) {
+	public boolean addOperazioneAttrezzatura(@RequestBody OperazioneDto tree) {
 		if (!check(tree))
 			return false;
 		Cantiere cantiere = cantiereService.findByIdentificativo(tree.getCantiereId());
@@ -104,14 +125,14 @@ public class ApiController {
 		return true;
 	}
 	
-	private boolean check(OperazioneTree tree) {
+	private boolean check(OperazioneDto tree) {
 		if (tree.getCantiereId() == null || tree.getOperabileId() == null || tree.getTipo() == null)
 			return false;
 		return true;
 	}
 
 	@PostMapping("/operazione/consumabile") 
-	public boolean addOperazioneConsumabile(@RequestBody OperazioneTree tree) {
+	public boolean addOperazioneConsumabile(@RequestBody OperazioneDto tree) {
 		if (!check(tree))
 			return false;
 		Cantiere cantiere = cantiereService.findByIdentificativo(tree.getCantiereId());
@@ -134,7 +155,7 @@ public class ApiController {
 	}
 	
 	@PostMapping("/operazione/personale") 
-	public boolean addOperazionePersonale(@RequestBody OperazioneTree tree) {
+	public boolean addOperazionePersonale(@RequestBody OperazioneDto tree) {
 		if (!check(tree))
 			return false;
 		Cantiere cantiere = cantiereService.findByIdentificativo(tree.getCantiereId());
