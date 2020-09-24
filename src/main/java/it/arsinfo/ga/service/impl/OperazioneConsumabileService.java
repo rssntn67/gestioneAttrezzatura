@@ -20,12 +20,11 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.data.TipoOperazione;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.Consumabile;
-import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.model.entity.OperazioneConsumabile;
 import it.arsinfo.ga.service.OperazioneService;
 
 @Service
-public class OperazioneConsumabileService implements OperazioneService<ModelloConsumabile, Consumabile, OperazioneConsumabile> {
+public class OperazioneConsumabileService implements OperazioneService<Consumabile, OperazioneConsumabile> {
 	
 	@Autowired
 	private ConsumabileDao operabileDao;
@@ -47,6 +46,8 @@ public class OperazioneConsumabileService implements OperazioneService<ModelloCo
 			throw new UnsupportedOperationException("Operabile non può essere null");
 		if (operazione.getCantiere() == null)
 			throw new UnsupportedOperationException("Cantiere non può essere null");
+		if (operazione.getNumero() == null)
+			throw new UnsupportedOperationException("Numero non può essere null");
 		Cantiere cantiere = cantiereDao.findById(operazione.getCantiere().getId()).get();
 		if (cantiere.getStato() != StatoCantiere.InOpera) {
 			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStato());			
@@ -123,6 +124,11 @@ public class OperazioneConsumabileService implements OperazioneService<ModelloCo
 			list.add(o);
 		}
 		return list;
+	}
+
+	@Override
+	public OperazioneConsumabile getLastOperation(Consumabile operabile) {
+		return operazioneDao.findFirstByOperabileOrderByIdDesc(operabile);
 	}
 
 }

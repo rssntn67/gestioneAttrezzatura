@@ -3,12 +3,10 @@ package it.arsinfo.ga.ui.vaadin.operazione;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 
-import it.arsinfo.ga.model.entity.Modello;
-import it.arsinfo.ga.model.entity.Operabile;
 import it.arsinfo.ga.model.entity.Operazione;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
-public abstract class OperazioneAdd<K extends Modello,T extends Operabile<K>, S extends Operazione<K, T>> extends UIChangeHandler {
+public abstract class OperazioneAdd<S extends Operazione<?>> extends UIChangeHandler {
 
     private final Button button;
 

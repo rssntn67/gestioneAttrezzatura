@@ -10,7 +10,6 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.model.entity.OperazionePersonale;
 import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.OperazioneService;
@@ -21,18 +20,18 @@ import it.arsinfo.ga.ui.vaadin.operazione.OperazioneUI;
 
 @SpringUI(path = OperazioneUI.URL_OPERAZIONE_PERSONALE)
 @Title(OperazioneUI.TITLE_OPERAZIONE_PERSONALE)
-public class OperazionePersonaleUI extends OperazioneUI<ModelloPersonale, Personale, OperazionePersonale> {
+public class OperazionePersonaleUI extends OperazioneUI<Personale, OperazionePersonale> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5114046312816971846L;
 
-	private final class OperazionePersonaleEditor extends OperazioneEditor<ModelloPersonale,Personale,OperazionePersonale> {
+	private final class OperazionePersonaleEditor extends OperazioneEditor<Personale,OperazionePersonale> {
 
 	    private final TextField numero = new TextField("Qu.ta");
 
-		public OperazionePersonaleEditor(OperazioneService<ModelloPersonale, Personale, OperazionePersonale> service) {
+		public OperazionePersonaleEditor(OperazioneService<Personale, OperazionePersonale> service) {
 			super(service, new Binder<>(OperazionePersonale.class));
 			setComponents(getActions(),new HorizontalLayout(getCantiere(),getOperabile(),getTipo(),numero));
 			
@@ -49,12 +48,12 @@ public class OperazionePersonaleUI extends OperazioneUI<ModelloPersonale, Person
 		}
 	}
 	@Autowired
-	private OperazioneService<ModelloPersonale, Personale, OperazionePersonale> service;
+	private OperazioneService<Personale, OperazionePersonale> service;
 	
 	@Override
 	protected void init(VaadinRequest request) {
-		OperazioneAdd<ModelloPersonale,Personale,OperazionePersonale> add = 
-					new OperazioneAdd<ModelloPersonale,Personale,OperazionePersonale>("Aggiungi") {
+		OperazioneAdd<OperazionePersonale> add = 
+					new OperazioneAdd<OperazionePersonale>("Aggiungi") {
 
 			@Override
 			public OperazionePersonale generate() {
@@ -64,7 +63,7 @@ public class OperazionePersonaleUI extends OperazioneUI<ModelloPersonale, Person
 		
 		OperazionePersonaleEditor editor = new OperazionePersonaleEditor(service);
 		
-		OperazioneSearch<ModelloPersonale,Personale,OperazionePersonale> search = new OperazioneSearch<ModelloPersonale,Personale,OperazionePersonale>(service) {
+		OperazioneSearch<Personale,OperazionePersonale> search = new OperazioneSearch<Personale,OperazionePersonale>(service) {
 		};
 		OperazionePersonaleGrid grid = new OperazionePersonaleGrid("Operazioni/Personale");
 		super.init(request,add,search,editor,grid,"Operazione Personale");

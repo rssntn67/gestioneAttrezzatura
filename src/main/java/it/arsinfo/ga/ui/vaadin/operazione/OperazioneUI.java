@@ -2,13 +2,12 @@ package it.arsinfo.ga.ui.vaadin.operazione;
 
 import com.vaadin.server.VaadinRequest;
 
-import it.arsinfo.ga.model.entity.Modello;
 import it.arsinfo.ga.model.entity.Operabile;
 import it.arsinfo.ga.model.entity.Operazione;
 import it.arsinfo.ga.ui.AbstractUI;
 import it.arsinfo.ga.ui.vaadin.entity.CustomGrid;
 
-public abstract class OperazioneUI<K extends Modello,T extends Operabile<K>, S extends Operazione<K, T>> extends AbstractUI {
+public abstract class OperazioneUI<T extends Operabile<?>, S extends Operazione<T>> extends AbstractUI {
 
     /**
      * 
@@ -16,9 +15,9 @@ public abstract class OperazioneUI<K extends Modello,T extends Operabile<K>, S e
     private static final long serialVersionUID = 7884064928998716106L;
     
     protected void init(VaadinRequest request,
-    		OperazioneAdd<K,T,S> add ,
-    		OperazioneSearch<K,T,S> search ,
-    		OperazioneEditor<K,T,S> editor,
+    		OperazioneAdd<S> add ,
+    		OperazioneSearch<T,S> search ,
+    		OperazioneEditor<T,S> editor,
     		CustomGrid<S> grid,
     		String header) {
         super.init(request, header);

@@ -15,17 +15,16 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import it.arsinfo.ga.model.data.TipoOperazione;
 import it.arsinfo.ga.model.entity.Cantiere;
-import it.arsinfo.ga.model.entity.Modello;
 import it.arsinfo.ga.model.entity.Operabile;
 import it.arsinfo.ga.model.entity.Operazione;
 import it.arsinfo.ga.service.OperazioneService;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
-public abstract class OperazioneEditor<K extends Modello,T extends Operabile<K>, S extends Operazione<K, T>>  extends UIChangeHandler {
+public abstract class OperazioneEditor<T extends Operabile<?>, S extends Operazione<T>>  extends UIChangeHandler {
 
 	private HorizontalLayout actions = new HorizontalLayout();
 	
-    private final OperazioneService<K,T,S> service;
+    private final OperazioneService<T,S> service;
     
     private final ComboBox<TipoOperazione> tipo = new ComboBox<TipoOperazione>("Tipo Operazione",EnumSet.allOf(TipoOperazione.class));
 
@@ -40,7 +39,7 @@ public abstract class OperazioneEditor<K extends Modello,T extends Operabile<K>,
 
     private static final Logger log = LoggerFactory.getLogger(OperazioneEditor.class);
 
-    public OperazioneEditor(OperazioneService<K,T,S> service, Binder<S> binder) {
+    public OperazioneEditor(OperazioneService<T,S> service, Binder<S> binder) {
 
         this.service = service;
         this.binder=binder;
@@ -53,9 +52,9 @@ public abstract class OperazioneEditor<K extends Modello,T extends Operabile<K>,
         actions.addComponent(esegui);
         actions.addComponent(back);
         
-        binder.forField(tipo).asRequired().bind(Operazione<K, T>::getTipoOperazione,Operazione<K, T>::setTipoOperazione);
-        binder.forField(cantiere).asRequired().bind(Operazione<K, T>::getCantiere,Operazione<K, T>::setCantiere);
-        binder.forField(operabile).asRequired().bind(Operazione<K, T>::getOperabile,Operazione<K, T>::setOperabile);
+        binder.forField(tipo).asRequired().bind(Operazione<T>::getTipoOperazione,Operazione<T>::setTipoOperazione);
+        binder.forField(cantiere).asRequired().bind(Operazione<T>::getCantiere,Operazione<T>::setCantiere);
+        binder.forField(operabile).asRequired().bind(Operazione<T>::getOperabile,Operazione<T>::setOperabile);
         
         tipo.setEmptySelectionAllowed(false);
         

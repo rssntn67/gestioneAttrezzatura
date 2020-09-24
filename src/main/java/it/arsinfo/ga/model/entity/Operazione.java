@@ -4,7 +4,7 @@ import java.util.Date;
 
 import it.arsinfo.ga.model.data.TipoOperazione;
 
-public interface Operazione<K extends Modello,T extends Operabile<K>> extends EntityBase {
+public interface Operazione<T extends Operabile<?>> extends EntityBase {
 
 	T getOperabile();
 	void setOperabile(T operabile);

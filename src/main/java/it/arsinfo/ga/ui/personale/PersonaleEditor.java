@@ -10,11 +10,12 @@ import com.vaadin.ui.TextField;
 
 import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.model.entity.OperazionePersonale;
 import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.PersonaleService;
 import it.arsinfo.ga.ui.vaadin.entity.OperabileEditor;
 
-public class PersonaleEditor extends OperabileEditor<Personale> {
+public class PersonaleEditor extends OperabileEditor<ModelloPersonale,Personale,OperazionePersonale> {
 
     private final ComboBox<ModelloPersonale> modello = new ComboBox<ModelloPersonale>("Modello");
     private final ComboBox<StatoOperabile> stato = new ComboBox<StatoOperabile>("Stato",

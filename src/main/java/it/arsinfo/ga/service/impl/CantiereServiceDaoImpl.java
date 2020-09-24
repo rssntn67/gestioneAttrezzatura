@@ -12,9 +12,6 @@ import it.arsinfo.ga.model.data.TipoCantiere;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.Consumabile;
-import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
-import it.arsinfo.ga.model.entity.ModelloConsumabile;
-import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.model.entity.OperazioneConsumabile;
 import it.arsinfo.ga.model.entity.OperazionePersonale;
@@ -29,13 +26,13 @@ public class CantiereServiceDaoImpl implements CantiereService {
     private CantiereDao repository;
     
     @Autowired
-    private OperazioneService<ModelloAttrezzatura, Attrezzatura, OperazioneAttrezzatura> operAttrService;
+    private OperazioneService<Attrezzatura, OperazioneAttrezzatura> operAttrService;
     
     @Autowired 
-    private OperazioneService<ModelloConsumabile,Consumabile,OperazioneConsumabile> operConsService;
+    private OperazioneService<Consumabile,OperazioneConsumabile> operConsService;
     
     @Autowired
-    private OperazioneService<ModelloPersonale, Personale, OperazionePersonale> operPersService;
+    private OperazioneService<Personale, OperazionePersonale> operPersService;
 
 	@Override
 	public Cantiere save(Cantiere entity) throws Exception {

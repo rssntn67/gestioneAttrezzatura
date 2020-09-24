@@ -11,10 +11,11 @@ import com.vaadin.ui.TextField;
 import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.service.AttrezzaturaService;
 import it.arsinfo.ga.ui.vaadin.entity.OperabileEditor;
 
-public class AttrezzaturaEditor extends OperabileEditor<Attrezzatura> {
+public class AttrezzaturaEditor extends OperabileEditor<ModelloAttrezzatura, Attrezzatura,OperazioneAttrezzatura> {
 
     private final ComboBox<ModelloAttrezzatura> modello = new ComboBox<ModelloAttrezzatura>("Modello");
     private final ComboBox<StatoOperabile> stato = new ComboBox<StatoOperabile>("Stato",

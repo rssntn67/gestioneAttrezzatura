@@ -6,13 +6,17 @@ import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 
+import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.model.entity.OperazionePersonale;
 import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.PersonaleService;
+import it.arsinfo.ga.ui.operazione.personale.OperazionePersonaleGrid;
 import it.arsinfo.ga.ui.vaadin.entity.EntityBaseUI;
+import it.arsinfo.ga.ui.vaadin.entity.OperabileUI;
 
 @SpringUI(path = EntityBaseUI.URL_PERSONALE)
 @Title(EntityBaseUI.TITLE_PERSONALE)
-public class PersonaleUI extends EntityBaseUI<Personale> {
+public class PersonaleUI extends OperabileUI<ModelloPersonale,Personale,OperazionePersonale> {
 
     /**
      * 
@@ -28,9 +32,12 @@ public class PersonaleUI extends EntityBaseUI<Personale> {
         PersonaleSearch search = new PersonaleSearch(serviceDao);
         PersonaleGrid grid = new PersonaleGrid("Consumabili");
         PersonaleEditor editor = new PersonaleEditor(serviceDao);
-        super.init(request,add,search,editor,grid, "Personale");        
+        OperazionePersonaleGrid opPeGrid = new OperazionePersonaleGrid("Operazioni/Personale");
+
+        super.init(request,add,search,editor,grid, opPeGrid,"Personale");        
         
-        addComponents(editor, 
+        addComponents(editor,
+        		opPeGrid,
                 add,
                 search, 
                 grid);

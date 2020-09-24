@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -16,12 +17,14 @@ import com.vaadin.server.StreamResource;
 import com.vaadin.server.StreamResource.StreamSource;
 import com.vaadin.ui.Image;
 
+import it.arsinfo.ga.model.entity.Modello;
 import it.arsinfo.ga.model.entity.Operabile;
+import it.arsinfo.ga.model.entity.Operazione;
 import it.arsinfo.ga.qrcode.BarcodeGenerator;
-import it.arsinfo.ga.service.EntityBaseService;
+import it.arsinfo.ga.service.OperabileService;
 import it.arsinfo.ga.ui.vaadin.NoQRCodeImageSource;
 
-public abstract class OperabileEditor<T extends Operabile<?>>
+public abstract class OperabileEditor<M extends Modello, T extends Operabile<M>, S extends Operazione<T>>
         extends Editor<T> {
 
     private static StreamResource noqrcoderesource = new StreamResource(new NoQRCodeImageSource(),"noqrcode.png");
@@ -30,10 +33,15 @@ public abstract class OperabileEditor<T extends Operabile<?>>
 
     private static final Logger log = LoggerFactory.getLogger(OperabileEditor.class);
 
-    public OperabileEditor(EntityBaseService<T> repositoryDao, Binder<T> binder) {
-    	super(repositoryDao, binder);
+    private final OperabileService<M, T, S> service;
+    public OperabileEditor(OperabileService<M,T,S> service, Binder<T> binder) {
+    	super(service, binder);
+    	this.service=service;
     }
 
+    public List<S> findOperazioni() {
+    	return service.findOperazioni(get());
+    }
 
     public void edit(T c) {
     	super.edit(c);

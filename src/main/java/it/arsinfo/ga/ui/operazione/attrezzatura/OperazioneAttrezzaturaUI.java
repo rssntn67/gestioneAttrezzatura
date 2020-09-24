@@ -9,7 +9,6 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.HorizontalLayout;
 
 import it.arsinfo.ga.model.entity.Attrezzatura;
-import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.service.OperazioneService;
 import it.arsinfo.ga.ui.vaadin.operazione.OperazioneAdd;
@@ -19,16 +18,16 @@ import it.arsinfo.ga.ui.vaadin.operazione.OperazioneUI;
 
 @SpringUI(path = OperazioneUI.URL_OPERAZIONE_ATTREZZATURA)
 @Title(OperazioneUI.TITLE_OPERAZIONE_ATTREZZATURA)
-public class OperazioneAttrezzaturaUI extends OperazioneUI<ModelloAttrezzatura, Attrezzatura, OperazioneAttrezzatura> {
+public class OperazioneAttrezzaturaUI extends OperazioneUI<Attrezzatura, OperazioneAttrezzatura> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5114046312816971846L;
 
-	private final class OperazioneAttrezzaturaEditor extends OperazioneEditor<ModelloAttrezzatura,Attrezzatura,OperazioneAttrezzatura> {
+	private final class OperazioneAttrezzaturaEditor extends OperazioneEditor<Attrezzatura,OperazioneAttrezzatura> {
 		
-		public OperazioneAttrezzaturaEditor(OperazioneService<ModelloAttrezzatura, Attrezzatura, OperazioneAttrezzatura> service) {
+		public OperazioneAttrezzaturaEditor(OperazioneService<Attrezzatura, OperazioneAttrezzatura> service) {
 			super(service, new Binder<>(OperazioneAttrezzatura.class));
 			setComponents(getActions(),new HorizontalLayout(getCantiere(),getOperabile(),getTipo()));
 		}
@@ -38,12 +37,12 @@ public class OperazioneAttrezzaturaUI extends OperazioneUI<ModelloAttrezzatura, 
 		}
 	}
 	@Autowired
-	private OperazioneService<ModelloAttrezzatura, Attrezzatura, OperazioneAttrezzatura> service;
+	private OperazioneService<Attrezzatura, OperazioneAttrezzatura> service;
 	
 	@Override
 	protected void init(VaadinRequest request) {
-		OperazioneAdd<ModelloAttrezzatura,Attrezzatura,OperazioneAttrezzatura> add = 
-					new OperazioneAdd<ModelloAttrezzatura,Attrezzatura,OperazioneAttrezzatura>("Aggiungi") {
+		OperazioneAdd<OperazioneAttrezzatura> add = 
+					new OperazioneAdd<OperazioneAttrezzatura>("Aggiungi") {
 
 			@Override
 			public OperazioneAttrezzatura generate() {
@@ -53,7 +52,7 @@ public class OperazioneAttrezzaturaUI extends OperazioneUI<ModelloAttrezzatura, 
 				
 		OperazioneAttrezzaturaEditor editor = new OperazioneAttrezzaturaEditor(service);
 		
-		OperazioneSearch<ModelloAttrezzatura,Attrezzatura,OperazioneAttrezzatura> search = new OperazioneSearch<ModelloAttrezzatura,Attrezzatura,OperazioneAttrezzatura>(service) {
+		OperazioneSearch<Attrezzatura,OperazioneAttrezzatura> search = new OperazioneSearch<Attrezzatura,OperazioneAttrezzatura>(service) {
 		};
 		OperazioneAttrezzaturaGrid grid = new OperazioneAttrezzaturaGrid("Operazioni/Attrezzatura");
 		super.init(request,add,search,editor,grid,"Operazione Attrezzatura");

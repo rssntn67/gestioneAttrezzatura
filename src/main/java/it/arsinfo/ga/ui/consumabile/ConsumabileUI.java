@@ -7,12 +7,16 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.model.entity.Consumabile;
+import it.arsinfo.ga.model.entity.ModelloConsumabile;
+import it.arsinfo.ga.model.entity.OperazioneConsumabile;
 import it.arsinfo.ga.service.ConsumabileService;
+import it.arsinfo.ga.ui.operazione.consumabile.OperazioneConsumabileGrid;
 import it.arsinfo.ga.ui.vaadin.entity.EntityBaseUI;
+import it.arsinfo.ga.ui.vaadin.entity.OperabileUI;
 
 @SpringUI(path = EntityBaseUI.URL_CONSUMABILE)
 @Title(EntityBaseUI.TITLE_CONSUMABILE)
-public class ConsumabileUI extends EntityBaseUI<Consumabile> {
+public class ConsumabileUI extends OperabileUI<ModelloConsumabile,Consumabile,OperazioneConsumabile> {
 
     /**
      * 
@@ -28,9 +32,12 @@ public class ConsumabileUI extends EntityBaseUI<Consumabile> {
         ConsumabileSearch search = new ConsumabileSearch(serviceDao);
         ConsumabileGrid grid = new ConsumabileGrid("Consumabili");
         ConsumabileEditor editor = new ConsumabileEditor(serviceDao);
-        super.init(request,add,search,editor,grid, "Consumabile");        
+        OperazioneConsumabileGrid opCoGrid = new OperazioneConsumabileGrid("Operazioni/Consumabile");
+
+        super.init(request,add,search,editor,grid,opCoGrid,"Consumabile");        
         
         addComponents(editor, 
+        		opCoGrid,
                 add,
                 search, 
                 grid);

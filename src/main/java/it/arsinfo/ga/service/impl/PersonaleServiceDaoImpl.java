@@ -10,6 +10,7 @@ import it.arsinfo.ga.dao.ModelloPersonaleDao;
 import it.arsinfo.ga.dao.PersonaleDao;
 import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.model.entity.OperazionePersonale;
 import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.PersonaleService;
 
@@ -22,6 +23,9 @@ public class PersonaleServiceDaoImpl implements PersonaleService {
     @Autowired
     private ModelloPersonaleDao modelliDao;
 
+    @Autowired
+    private OperazionePersonaleService service;
+    
 	@Override
 	public Personale save(Personale entity) throws Exception {
 		return repository.save(entity);
@@ -81,6 +85,11 @@ public class PersonaleServiceDaoImpl implements PersonaleService {
 	@Override
 	public Personale findByIdentificativo(String identificatico) {
 		return repository.findByIdentificativo(identificatico);
+	}
+
+	@Override
+	public List<OperazionePersonale> findOperazioni(Personale t) {
+		return service.searchBy(null, t, null);
 	}
 
 	

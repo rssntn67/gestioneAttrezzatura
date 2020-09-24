@@ -19,13 +19,12 @@ import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.data.TipoOperazione;
 import it.arsinfo.ga.model.entity.Cantiere;
-import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.model.entity.OperazionePersonale;
 import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.OperazioneService;
 
 @Service
-public class OperazionePersonaleService implements OperazioneService<ModelloPersonale, Personale, OperazionePersonale> {
+public class OperazionePersonaleService implements OperazioneService<Personale, OperazionePersonale> {
 	
 	@Autowired
 	private PersonaleDao operabileDao;
@@ -47,6 +46,8 @@ public class OperazionePersonaleService implements OperazioneService<ModelloPers
 			throw new UnsupportedOperationException("Operabile non può essere null");
 		if (operazione.getCantiere() == null)
 			throw new UnsupportedOperationException("Cantiere non può essere null");
+		if (operazione.getNumero() == null)
+			throw new UnsupportedOperationException("Numero non può essere null");
 		Cantiere cantiere = cantiereDao.findById(operazione.getCantiere().getId()).get();
 		if (cantiere.getStato() != StatoCantiere.InOpera) {
 			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStato());			
@@ -130,6 +131,11 @@ public class OperazionePersonaleService implements OperazioneService<ModelloPers
 			list.add(o);
 		}
 		return list;
+	}
+
+	@Override
+	public OperazionePersonale getLastOperation(Personale operabile) {
+		return operazioneDao.findFirstByOperabileOrderByIdDesc(operabile);
 	}
 
 }

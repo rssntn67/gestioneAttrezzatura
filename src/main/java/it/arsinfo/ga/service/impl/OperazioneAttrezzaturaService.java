@@ -20,12 +20,11 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.data.TipoOperazione;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.Cantiere;
-import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.service.OperazioneService;
 
 @Service
-public class OperazioneAttrezzaturaService implements OperazioneService<ModelloAttrezzatura, Attrezzatura, OperazioneAttrezzatura> {
+public class OperazioneAttrezzaturaService implements OperazioneService<Attrezzatura, OperazioneAttrezzatura> {
 	
 	@Autowired
 	private AttrezzaturaDao operabileDao;
@@ -45,14 +44,14 @@ public class OperazioneAttrezzaturaService implements OperazioneService<ModelloA
 			throw new UnsupportedOperationException("TipoOperazione non può essere null");
 		if (operazione.getOperabile() == null)
 			throw new UnsupportedOperationException("Operabile non può essere null");
-		if (operazione.getCantiere() == null)
+		if (operazione.getCantiere() == null )
 			throw new UnsupportedOperationException("Cantiere non può essere null");
+		Attrezzatura operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
 		Cantiere cantiere = cantiereDao.findById(operazione.getCantiere().getId()).get();
-		if (cantiere.getStato() != StatoCantiere.InOpera) {
+		if (cantiere == null || cantiere.getStato() != StatoCantiere.InOpera) {
 			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStato());			
 		}
-		Attrezzatura operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
-		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),cantiere,operabile);
+
 		switch (operazione.getTipoOperazione()) {
 			case Carico:
 				operabile.setStato(StatoOperabile.Occupato);
@@ -69,10 +68,10 @@ public class OperazioneAttrezzaturaService implements OperazioneService<ModelloA
 			case Smarrimento:
 				operabile.setStato(StatoOperabile.Dismesso);
 				break;
-	
 			default:
 				break;
-		}		
+		}
+		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),cantiere,operabile);
 		operabileDao.save(operabile);
 		operazioneDao.save(operazione);						
 	}
@@ -122,5 +121,10 @@ public class OperazioneAttrezzaturaService implements OperazioneService<ModelloA
 			list.add(o);
 		}
 		return list;
+	}
+
+	@Override
+	public OperazioneAttrezzatura getLastOperation(Attrezzatura operabile) {
+		return operazioneDao.findFirstByOperabileOrderByIdDesc(operabile);
 	}
 }

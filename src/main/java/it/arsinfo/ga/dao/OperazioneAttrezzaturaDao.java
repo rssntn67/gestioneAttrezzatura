@@ -18,5 +18,6 @@ public interface OperazioneAttrezzaturaDao extends JpaRepository<OperazioneAttre
     List<OperazioneAttrezzatura> findByCantiereAndTipoOperazione(Cantiere cantiere, TipoOperazione tipo);
     List<OperazioneAttrezzatura> findByOperabileAndTipoOperazione(Attrezzatura attrazzatura,TipoOperazione tipo);
     List<OperazioneAttrezzatura> findByCantiereAndOperabileAndTipoOperazione(Cantiere cantiere, Attrezzatura attrazzatura, TipoOperazione tipo);
+    OperazioneAttrezzatura findFirstByOperabileOrderByIdDesc(Attrezzatura attrezzatura);
        
 }

@@ -4,8 +4,9 @@ import java.util.List;
 
 import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.model.entity.OperazionePersonale;
 import it.arsinfo.ga.model.entity.Personale;
 
-public interface PersonaleService extends OperabileService<ModelloPersonale,Personale>{
+public interface PersonaleService extends OperabileService<ModelloPersonale,Personale,OperazionePersonale>{
 	List<Personale> searchBy(StatoOperabile searchStatoPersonale, String searchIdentificativo, ModelloPersonale searchModello);
 }

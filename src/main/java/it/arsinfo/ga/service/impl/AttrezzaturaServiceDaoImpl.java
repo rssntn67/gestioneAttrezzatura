@@ -11,6 +11,7 @@ import it.arsinfo.ga.dao.ModelloAttrezzaturaDao;
 import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.service.AttrezzaturaService;
 
 @Service
@@ -22,6 +23,8 @@ public class AttrezzaturaServiceDaoImpl implements AttrezzaturaService {
     @Autowired
     private ModelloAttrezzaturaDao modelliDao;
 
+    @Autowired
+    private OperazioneAttrezzaturaService service;
 	@Override
 	public Attrezzatura save(Attrezzatura entity) throws Exception {
 		return repository.save(entity);
@@ -81,6 +84,11 @@ public class AttrezzaturaServiceDaoImpl implements AttrezzaturaService {
 	@Override
 	public Attrezzatura findByIdentificativo(String identificatico) {
 		return repository.findByIdentificativo(identificatico);
+	}
+
+	@Override
+	public List<OperazioneAttrezzatura> findOperazioni(Attrezzatura t) {
+		return service.searchBy(null, t,null);
 	}
 
 	

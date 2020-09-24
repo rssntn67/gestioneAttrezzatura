@@ -11,7 +11,6 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
 import it.arsinfo.ga.model.entity.Consumabile;
-import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.model.entity.OperazioneConsumabile;
 import it.arsinfo.ga.service.OperazioneService;
 import it.arsinfo.ga.ui.vaadin.operazione.OperazioneAdd;
@@ -21,18 +20,18 @@ import it.arsinfo.ga.ui.vaadin.operazione.OperazioneUI;
 
 @SpringUI(path = OperazioneUI.URL_OPERAZIONE_CONSUMABILE)
 @Title(OperazioneUI.TITLE_OPERAZIONE_CONSUMABILE)
-public class OperazioneConsumabileUI extends OperazioneUI<ModelloConsumabile, Consumabile, OperazioneConsumabile> {
+public class OperazioneConsumabileUI extends OperazioneUI<Consumabile, OperazioneConsumabile> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5114046312816971846L;
 
-	private final class OperazioneConsumabileEditor extends OperazioneEditor<ModelloConsumabile,Consumabile,OperazioneConsumabile> {
+	private final class OperazioneConsumabileEditor extends OperazioneEditor<Consumabile,OperazioneConsumabile> {
 
 	    private final TextField numero = new TextField("Qu.ta");
 
-		public OperazioneConsumabileEditor(OperazioneService<ModelloConsumabile, Consumabile, OperazioneConsumabile> service) {
+		public OperazioneConsumabileEditor(OperazioneService<Consumabile, OperazioneConsumabile> service) {
 			super(service, new Binder<>(OperazioneConsumabile.class));
 			setComponents(getActions(),new HorizontalLayout(getCantiere(),getOperabile(),getTipo(),numero));
 			
@@ -49,12 +48,12 @@ public class OperazioneConsumabileUI extends OperazioneUI<ModelloConsumabile, Co
 		}
 	}
 	@Autowired
-	private OperazioneService<ModelloConsumabile, Consumabile, OperazioneConsumabile> service;
+	private OperazioneService<Consumabile, OperazioneConsumabile> service;
 	
 	@Override
 	protected void init(VaadinRequest request) {
-		OperazioneAdd<ModelloConsumabile,Consumabile,OperazioneConsumabile> add = 
-					new OperazioneAdd<ModelloConsumabile,Consumabile,OperazioneConsumabile>("Aggiungi") {
+		OperazioneAdd<OperazioneConsumabile> add = 
+					new OperazioneAdd<OperazioneConsumabile>("Aggiungi") {
 
 			@Override
 			public OperazioneConsumabile generate() {
@@ -64,7 +63,7 @@ public class OperazioneConsumabileUI extends OperazioneUI<ModelloConsumabile, Co
 		
 		OperazioneConsumabileEditor editor = new OperazioneConsumabileEditor(service);
 		
-		OperazioneSearch<ModelloConsumabile,Consumabile,OperazioneConsumabile> search = new OperazioneSearch<ModelloConsumabile,Consumabile,OperazioneConsumabile>(service) {
+		OperazioneSearch<Consumabile,OperazioneConsumabile> search = new OperazioneSearch<Consumabile,OperazioneConsumabile>(service) {
 		};
 		OperazioneConsumabileGrid grid = new OperazioneConsumabileGrid("Operazioni/Consumabile");
 		super.init(request,add,search,editor,grid,"Operazione Consumabile");

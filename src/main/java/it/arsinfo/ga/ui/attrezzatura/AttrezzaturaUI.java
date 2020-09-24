@@ -7,12 +7,16 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 
 import it.arsinfo.ga.model.entity.Attrezzatura;
+import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.service.AttrezzaturaService;
+import it.arsinfo.ga.ui.operazione.attrezzatura.OperazioneAttrezzaturaGrid;
 import it.arsinfo.ga.ui.vaadin.entity.EntityBaseUI;
+import it.arsinfo.ga.ui.vaadin.entity.OperabileUI;
 
 @SpringUI(path = EntityBaseUI.URL_ATTREZZATURA)
 @Title(EntityBaseUI.TITLE_ATTREZZATURA)
-public class AttrezzaturaUI extends EntityBaseUI<Attrezzatura> {
+public class AttrezzaturaUI extends OperabileUI<ModelloAttrezzatura, Attrezzatura,OperazioneAttrezzatura> {
 
     /**
      * 
@@ -28,9 +32,12 @@ public class AttrezzaturaUI extends EntityBaseUI<Attrezzatura> {
         AttrezzaturaSearch search = new AttrezzaturaSearch(serviceDao);
         AttrezzaturaGrid grid = new AttrezzaturaGrid("Attrezzature");
         AttrezzaturaEditor editor = new AttrezzaturaEditor(serviceDao);
-        super.init(request,add,search,editor,grid, "Attrezzatura");        
+        OperazioneAttrezzaturaGrid opAtGrid = new OperazioneAttrezzaturaGrid("Operazioni/Attrezzatura");
+
+        super.init(request,add,search,editor,grid, opAtGrid,"Attrezzatura");        
         
-        addComponents(editor, 
+        addComponents(editor,
+        		opAtGrid,
                 add,
                 search, 
                 grid);

@@ -9,22 +9,21 @@ import com.vaadin.ui.HorizontalLayout;
 
 import it.arsinfo.ga.model.data.TipoOperazione;
 import it.arsinfo.ga.model.entity.Cantiere;
-import it.arsinfo.ga.model.entity.Modello;
 import it.arsinfo.ga.model.entity.Operabile;
 import it.arsinfo.ga.model.entity.Operazione;
 import it.arsinfo.ga.service.OperazioneService;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
-public abstract class OperazioneSearch<K extends Modello,T extends Operabile<K>, S extends Operazione<K, T>>
+public abstract class OperazioneSearch<T extends Operabile<?>, S extends Operazione<T>>
         extends UIChangeHandler {
 
-    private final OperazioneService<K,T,S> service;
+    private final OperazioneService<T,S> service;
     private final ComboBox<TipoOperazione> ftipo = new ComboBox<TipoOperazione>("Tipo Operazione",EnumSet.allOf(TipoOperazione.class));
 
     private final ComboBox<Cantiere> fcantiere = new ComboBox<Cantiere>("Cantiere");
     private final ComboBox<T> foperabile = new ComboBox<T>("Operabile");
         
-    public OperazioneSearch(OperazioneService<K,T,S> service) {
+    public OperazioneSearch(OperazioneService<T,S> service) {
         this.service=service;
         
         fcantiere.setItemCaptionGenerator(Cantiere::getHeader);

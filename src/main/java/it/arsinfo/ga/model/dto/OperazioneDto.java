@@ -6,6 +6,7 @@ public class OperazioneDto {
 		private String cantiereId;
 		private String operabileId;
 		private TipoOperazione tipo;
+		private Integer numero;
 		
 		public String getCantiereId() {
 			return cantiereId;
@@ -15,5 +16,8 @@ public class OperazioneDto {
 		}
 		public TipoOperazione getTipo() {
 			return tipo;
+		}
+		public Integer getNumero() {
+			return numero;
 		}
 }

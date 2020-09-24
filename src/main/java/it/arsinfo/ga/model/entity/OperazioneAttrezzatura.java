@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 import it.arsinfo.ga.model.data.TipoOperazione;
 
 @Entity
-public class OperazioneAttrezzatura implements Operazione<ModelloAttrezzatura,Attrezzatura> {
+public class OperazioneAttrezzatura implements Operazione<Attrezzatura> {
     
     @ManyToOne(fetch=FetchType.LAZY)
     private Attrezzatura operabile;
