@@ -11,7 +11,7 @@ import com.vaadin.ui.Label;
 import it.arsinfo.ga.ui.AbstractUI;
 
 @SpringUI(path=AbstractUI.HOME)
-@Title("Gestione Abbonamenti ADP")
+@Title("Gestione Attrezzature")
 public class HomeUI extends AbstractUI {
 
     /**
