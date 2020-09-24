@@ -12,76 +12,66 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.arsinfo.ga.dao.AttrezzaturaDao;
 import it.arsinfo.ga.dao.CantiereDao;
-import it.arsinfo.ga.dao.OperazionePersonaleDao;
-import it.arsinfo.ga.dao.PersonaleDao;
+import it.arsinfo.ga.dao.OperazioneAttrezzaturaDao;
 import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.data.TipoOperazione;
+import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.Cantiere;
-import it.arsinfo.ga.model.entity.OperazionePersonale;
-import it.arsinfo.ga.model.entity.Personale;
+import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.service.OperazioneService;
 
 @Service
-public class OperazionePersonaleService implements OperazioneService<Personale, OperazionePersonale> {
+public class OperazioneAttrezzaturaServiceDaoImpl implements OperazioneService<Attrezzatura, OperazioneAttrezzatura> {
 	
 	@Autowired
-	private PersonaleDao operabileDao;
+	private AttrezzaturaDao operabileDao;
 
 	@Autowired
 	private CantiereDao cantiereDao;
 
 	@Autowired
-	private OperazionePersonaleDao operazioneDao;
+	private OperazioneAttrezzaturaDao operazioneDao;
 	
-    private static final Logger log = LoggerFactory.getLogger(OperazionePersonaleService.class);
+    private static final Logger log = LoggerFactory.getLogger(OperazioneAttrezzaturaServiceDaoImpl.class);
 
 	@Override
 	@Transactional
-	public void esegui(OperazionePersonale operazione) throws Exception {
+	public void esegui(OperazioneAttrezzatura operazione) throws Exception {
 		if (operazione.getTipoOperazione() == null)
 			throw new UnsupportedOperationException("TipoOperazione non può essere null");
 		if (operazione.getOperabile() == null)
 			throw new UnsupportedOperationException("Operabile non può essere null");
-		if (operazione.getCantiere() == null)
+		if (operazione.getCantiere() == null )
 			throw new UnsupportedOperationException("Cantiere non può essere null");
-		if (operazione.getNumero() == null)
-			throw new UnsupportedOperationException("Numero non può essere null");
+		Attrezzatura operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
 		Cantiere cantiere = cantiereDao.findById(operazione.getCantiere().getId()).get();
-		if (cantiere.getStato() != StatoCantiere.InOpera) {
+		if (cantiere == null || cantiere.getStato() != StatoCantiere.InOpera) {
 			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStato());			
 		}
-		Personale operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
-		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),cantiere,operabile);
+
 		switch (operazione.getTipoOperazione()) {
 			case Carico:
-				if (operazione.getNumero() > operabile.getDisponibili()) {
-					throw new UnsupportedOperationException("Numero operabile minore disponibile");
-				}
-				operabile.setUtilizzati(operabile.getUtilizzati()+operazione.getNumero());
-				if (operabile.getDisponibili() == 0) {
-					operabile.setStato(StatoOperabile.Occupato);
-				}
+				operabile.setStato(StatoOperabile.Occupato);
 				break;
 			case Scarico:
-				if (operazione.getNumero() > operabile.getUtilizzati()) {
-					throw new UnsupportedOperationException("Numero operabile maggiore utilizzati");
-				}
-				operabile.setUtilizzati(operabile.getUtilizzati()-operazione.getNumero());
-				if (operabile.getDisponibili() > 0) {
-					operabile.setStato(StatoOperabile.Disponibile);
-				}
+				operabile.setStato(StatoOperabile.Disponibile);
 				break;
 			case Furto:
-				throw new UnsupportedOperationException("Operazione Scarico non disponibile");
+				operabile.setStato(StatoOperabile.Dismesso);
+				break;
 			case Rottura:
-				throw new UnsupportedOperationException("Operazione Scarico non disponibile");
+				operabile.setStato(StatoOperabile.Dismesso);
+				break;
 			case Smarrimento:
-				throw new UnsupportedOperationException("Operazione Scarico non disponibile");
+				operabile.setStato(StatoOperabile.Dismesso);
+				break;
 			default:
 				break;
-		}		
+		}
+		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),cantiere,operabile);
 		operabileDao.save(operabile);
 		operazioneDao.save(operazione);						
 	}
@@ -92,17 +82,17 @@ public class OperazionePersonaleService implements OperazioneService<Personale, 
 	}
 
 	@Override
-	public List<Personale> getOperabili() {
-		return operabileDao.findByStato(StatoOperabile.Disponibile);
+	public List<Attrezzatura> getOperabili() {
+		return operabileDao.findByStatoNotOrStatoNot(StatoOperabile.Dismesso,StatoOperabile.InRiparazione);
 	}
-	
+
 	@Override
-	public List<OperazionePersonale> findAll() {
+	public List<OperazioneAttrezzatura> findAll() {
 		return populate(operazioneDao.findAll());
 	}
 
 	@Override
-	public List<OperazionePersonale> searchBy(Cantiere cantiere, Personale operabile, TipoOperazione t) {
+	public List<OperazioneAttrezzatura> searchBy(Cantiere cantiere, Attrezzatura operabile, TipoOperazione t) {
 		if (cantiere == null && operabile == null && t == null)
 			return populate(operazioneDao.findAll());
 		if (cantiere == null && operabile == null)
@@ -121,11 +111,11 @@ public class OperazionePersonaleService implements OperazioneService<Personale, 
 	}
 	
 	@Override
-	public List<OperazionePersonale> populate(List<OperazionePersonale> operazioni) {
+	public List<OperazioneAttrezzatura> populate(List<OperazioneAttrezzatura> operazioni) {
 		Map<Long,Cantiere> cmap = cantiereDao.findAll().stream().collect(Collectors.toMap(Cantiere::getId, Function.identity()));
-		Map<Long,Personale> omap = operabileDao.findAll().stream().collect(Collectors.toMap(Personale::getId, Function.identity()));
-		List<OperazionePersonale> list = new ArrayList<OperazionePersonale>();
-		for (OperazionePersonale o: operazioni) {
+		Map<Long,Attrezzatura> omap = operabileDao.findAll().stream().collect(Collectors.toMap(Attrezzatura::getId, Function.identity()));
+		List<OperazioneAttrezzatura> list = new ArrayList<OperazioneAttrezzatura>();
+		for (OperazioneAttrezzatura o: operazioni) {
 			o.setCantiere(cmap.get(o.getCantiere().getId()));
 			o.setOperabile(omap.get(o.getOperabile().getId()));
 			list.add(o);
@@ -134,8 +124,7 @@ public class OperazionePersonaleService implements OperazioneService<Personale, 
 	}
 
 	@Override
-	public OperazionePersonale getLastOperation(Personale operabile) {
-		return operazioneDao.findFirstByOperabileOrderByIdDesc(operabile);
+	public OperazioneAttrezzatura getLastOperation(Attrezzatura operabile) {
+		return operazioneDao.findTopByOperabileOrderByIdDesc(operabile);
 	}
-
 }

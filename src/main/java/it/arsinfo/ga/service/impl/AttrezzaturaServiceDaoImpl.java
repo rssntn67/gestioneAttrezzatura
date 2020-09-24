@@ -24,7 +24,7 @@ public class AttrezzaturaServiceDaoImpl implements AttrezzaturaService {
     private ModelloAttrezzaturaDao modelliDao;
 
     @Autowired
-    private OperazioneAttrezzaturaService service;
+    private OperazioneAttrezzaturaServiceDaoImpl service;
 	@Override
 	public Attrezzatura save(Attrezzatura entity) throws Exception {
 		return repository.save(entity);

@@ -24,7 +24,7 @@ public class ConsumabileServiceDaoImpl implements ConsumabileService {
     private ModelloConsumabileDao modelliDao;
 
     @Autowired
-    private OperazioneConsumabileService service;
+    private OperazioneConsumabileServiceDaoImpl service;
     
 	@Override
 	public Consumabile save(Consumabile entity) throws Exception {

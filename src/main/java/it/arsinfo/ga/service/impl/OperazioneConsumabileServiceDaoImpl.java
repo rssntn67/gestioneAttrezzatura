@@ -24,7 +24,7 @@ import it.arsinfo.ga.model.entity.OperazioneConsumabile;
 import it.arsinfo.ga.service.OperazioneService;
 
 @Service
-public class OperazioneConsumabileService implements OperazioneService<Consumabile, OperazioneConsumabile> {
+public class OperazioneConsumabileServiceDaoImpl implements OperazioneService<Consumabile, OperazioneConsumabile> {
 	
 	@Autowired
 	private ConsumabileDao operabileDao;
@@ -35,7 +35,7 @@ public class OperazioneConsumabileService implements OperazioneService<Consumabi
 	@Autowired
 	private OperazioneConsumabileDao operazioneDao;
 	
-    private static final Logger log = LoggerFactory.getLogger(OperazioneConsumabileService.class);
+    private static final Logger log = LoggerFactory.getLogger(OperazioneConsumabileServiceDaoImpl.class);
 
 	@Override
 	@Transactional
@@ -128,7 +128,7 @@ public class OperazioneConsumabileService implements OperazioneService<Consumabi
 
 	@Override
 	public OperazioneConsumabile getLastOperation(Consumabile operabile) {
-		return operazioneDao.findFirstByOperabileOrderByIdDesc(operabile);
+		return operazioneDao.findTopByOperabileOrderByIdDesc(operabile);
 	}
 
 }

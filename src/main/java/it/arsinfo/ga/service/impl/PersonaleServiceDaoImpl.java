@@ -24,7 +24,7 @@ public class PersonaleServiceDaoImpl implements PersonaleService {
     private ModelloPersonaleDao modelliDao;
 
     @Autowired
-    private OperazionePersonaleService service;
+    private OperazionePersonaleServiceDaoImpl service;
     
 	@Override
 	public Personale save(Personale entity) throws Exception {
