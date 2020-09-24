@@ -33,6 +33,7 @@ import it.arsinfo.ga.service.PersonaleService;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class ApiController {
  	
 	@Autowired 
@@ -50,7 +51,6 @@ public class ApiController {
 	@Autowired 
 	private OperazioneService<ModelloPersonale,Personale,OperazionePersonale> oppersonaleService;
 
-	@CrossOrigin(origins = "http://localhost:8100")
 	@GetMapping("/attrezzature") 
 	public List<OperabileDto> findAttrezzature() {
 		List<OperabileDto> list = new ArrayList<>();
@@ -64,7 +64,6 @@ public class ApiController {
 		return list;
 	}
 
-	@CrossOrigin(origins = "http://localhost:8100")
 	@GetMapping("/attrezzature/{identificativo}") 
 	public OperabileDto getAttrezzatura(@PathVariable String identificativo) {
 		Attrezzatura operabile = attrezzaturaService.findByIdentificativo(identificativo);
@@ -104,7 +103,6 @@ public class ApiController {
 		return list;
 	}
 
-	@CrossOrigin(origins = "http://localhost:8100")
 	@GetMapping("/cantieri") 
 	public List<CantiereDto> findCantieri() {
 		List<CantiereDto> list = new ArrayList<>();
@@ -119,7 +117,6 @@ public class ApiController {
 		return list;
 	}
 
-	@CrossOrigin(origins = "http://localhost:8100")
 	@PostMapping("/operazione/attrezzatura") 
 	public boolean addOperazioneAttrezzatura(@RequestBody OperazioneDto tree) {
 		if (!check(tree))
