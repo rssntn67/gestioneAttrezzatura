@@ -33,7 +33,7 @@ public class ModelloAttrezzaturaEditor extends Editor<ModelloAttrezzatura> {
     public ModelloAttrezzaturaEditor(ModelloAttrezzaturaService dao) {
         super(dao, new Binder<>(ModelloAttrezzatura.class));
 
-        HorizontalLayout intestazioni = new HorizontalLayout(nome,fornitore,tipo,marca);
+        HorizontalLayout intestazioni = new HorizontalLayout(nome,fornitore,tipo,marca,annoProduzione);
 
         HorizontalLayout residenza = new HorizontalLayout(costo,tipo,marca);
         residenza.addComponentsAndExpand(descrizione);
