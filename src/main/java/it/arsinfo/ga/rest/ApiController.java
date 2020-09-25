@@ -3,6 +3,8 @@ package it.arsinfo.ga.rest;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +38,8 @@ import it.arsinfo.ga.service.PersonaleService;
 @CrossOrigin
 public class ApiController {
  	
+    private static final Logger log = LoggerFactory.getLogger(ApiController.class);
+
 	@Autowired 
 	private AttrezzaturaService attrezzaturaService;
 	@Autowired 
@@ -125,9 +129,11 @@ public class ApiController {
 			return false;
 		Attrezzatura operabile = attrezzaturaService.findByIdentificativo(tree.getOperabileId());
 		if (operabile == null) {
+			log.warn("add: Not Processing Dto: Operabile does not exist for: {}, Tipo: {}, ApiKey: {}, Cantiere: {}", tree.getOperabileId(),tree.getTipo(),tree.getApikey(),tree.getCantiereId());
 			return false;
 		}
 		if (tree.getCantiereId() == null && tree.getTipo() == TipoOperazione.Carico) {
+			log.warn("add: Not Processing Dto: Cantiere Null and Tipo Carico: Operabile: {}, Tipo: {} ApiKey: {}", tree.getOperabileId(),tree.getTipo(),tree.getApikey());
 			return false;
 		}
 		Cantiere cantiere = null;
@@ -136,16 +142,19 @@ public class ApiController {
 		} else {
 			OperazioneAttrezzatura latest = operazioneAttrezzaturaService.getLastOperation(operabile);
 			if (latest == null) {
+				log.warn("add: Not Processing Dto: Cantiere Null not found last operation: Operabile: {}, Tipo: {} ApiKey: {}", tree.getOperabileId(),tree.getTipo(),tree.getApikey());
 				return false;
 			}
 			cantiere = cantiereService.findById(latest.getCantiere().getId());
 		}
 		if (cantiere == null) {
+			log.warn("add: Not Processing Dto: Cantiere does not exists: Operabile: {}, Tipo: {} ApiKey: {}", tree.getOperabileId(),tree.getTipo(),tree.getApikey());
 			return false;
 		}
 		
-		Operatore operatore = operatoreService.findByApikey(tree.getApiKey());
+		Operatore operatore = operatoreService.findByApikey(tree.getApikey());
 		if (operatore == null) {
+			log.warn("add: Not Processing Dto: Api Key does not exists: Operabile: {}, Tipo: {} ApiKey: {}", tree.getOperabileId(),tree.getTipo(),tree.getApikey());
 			return false;
 		}
 		
@@ -163,8 +172,10 @@ public class ApiController {
 	}
 	
 	private boolean check(OperazioneDto tree) {
-		if (tree.getOperabileId() == null || tree.getTipo() == null || tree.getApiKey() == null)
-			return false;
+		if (tree.getOperabileId() == null || tree.getTipo() == null || tree.getApikey() == null) {
+			log.warn("add: Not Processing Dto: Operabile: {}, Tipo: {}, ApiKey: {}, Cantiere: {} ", tree.getOperabileId(),tree.getTipo(),tree.getApikey(),tree.getCantiereId());
+			return false;			
+		}
 		return true;
 	}
 
