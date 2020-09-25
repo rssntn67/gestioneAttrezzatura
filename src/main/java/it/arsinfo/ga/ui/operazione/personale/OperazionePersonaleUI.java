@@ -67,10 +67,8 @@ public class OperazionePersonaleUI extends OperazioneUI<Personale, OperazionePer
 		};
 		OperazionePersonaleGrid grid = new OperazionePersonaleGrid("Operazioni/Personale");
 		super.init(request,add,search,editor,grid,"Operazione Personale");
-		addComponents(add,search,grid,editor);
 
-        editor.setVisible(false);
-        grid.populate(service.findAll());
+		grid.populate(service.findAll());
 
 	}
 

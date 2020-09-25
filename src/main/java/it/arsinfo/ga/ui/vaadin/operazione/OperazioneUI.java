@@ -47,5 +47,9 @@ public abstract class OperazioneUI<T extends Operabile<?>, S extends Operazione<
             grid.populate(search.find());
         });
 
+		addComponents(add,search,grid,editor);
+
+        editor.setVisible(false);
+
     }    
 }

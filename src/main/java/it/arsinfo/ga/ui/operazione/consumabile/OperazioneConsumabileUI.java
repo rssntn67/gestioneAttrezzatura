@@ -67,9 +67,6 @@ public class OperazioneConsumabileUI extends OperazioneUI<Consumabile, Operazion
 		};
 		OperazioneConsumabileGrid grid = new OperazioneConsumabileGrid("Operazioni/Consumabile");
 		super.init(request,add,search,editor,grid,"Operazione Consumabile");
-		addComponents(add,search,grid,editor);
-
-        editor.setVisible(false);
         grid.populate(service.findAll());
 
 	}

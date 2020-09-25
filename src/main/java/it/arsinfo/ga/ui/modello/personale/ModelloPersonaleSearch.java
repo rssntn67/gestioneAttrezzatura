@@ -62,8 +62,6 @@ public class ModelloPersonaleSearch extends Search<ModelloPersonale> {
         filterAnno.setEmptySelectionAllowed(true);
         filterAnno.setItemCaptionGenerator(Anno::getAnnoAsString);
         filterAnno.setPlaceholder("Seleziona Anno Produzione");
-
-        
         filterAnno.addSelectionListener(e -> {
             if (e.getValue() == null) {
                 searchAnnoProduzione = null;
@@ -73,6 +71,7 @@ public class ModelloPersonaleSearch extends Search<ModelloPersonale> {
             onChange();
         });
 
+        filterTipo.setPlaceholder("Seleziona Tipo");
         filterTipo.addSelectionListener(e -> {
             if (e.getValue() == null) {
             	searchTipo = null;

@@ -68,8 +68,6 @@ public class ModelloConsumabileSearch extends Search<ModelloConsumabile> {
         filterAnno.setEmptySelectionAllowed(true);
         filterAnno.setItemCaptionGenerator(Anno::getAnnoAsString);
         filterAnno.setPlaceholder("Seleziona Anno Produzione");
-
-        
         filterAnno.addSelectionListener(e -> {
             if (e.getValue() == null) {
                 searchAnnoProduzione = null;
@@ -79,6 +77,7 @@ public class ModelloConsumabileSearch extends Search<ModelloConsumabile> {
             onChange();
         });
 
+        filterTipo.setPlaceholder("Seleziona Tipo");
         filterTipo.addSelectionListener(e -> {
             if (e.getValue() == null) {
             	searchTipo = null;
@@ -88,6 +87,7 @@ public class ModelloConsumabileSearch extends Search<ModelloConsumabile> {
             onChange();
         });
 
+        filterMarca.setPlaceholder("Seleziona Marca");
         filterMarca.addSelectionListener(e -> {
             if (e.getValue() == null) {
             	searchMarca = null;

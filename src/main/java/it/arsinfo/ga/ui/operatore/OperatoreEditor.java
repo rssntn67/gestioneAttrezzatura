@@ -3,6 +3,8 @@ package it.arsinfo.ga.ui.operatore;
 import java.util.EnumSet;
 
 import com.vaadin.data.Binder;
+import com.vaadin.data.validator.EmailValidator;
+import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
@@ -31,9 +33,15 @@ public class OperatoreEditor extends Editor<Operatore> {
         		);
 
 
-        getBinder().forField(apikey).asRequired();
-        getBinder().forField(identificativo).asRequired();
-        getBinder().forField(stato).asRequired();
+        getBinder().forField(apikey).asRequired().bind(Operatore::getApikey,Operatore::setApikey);
+        getBinder().forField(identificativo).asRequired().bind(Operatore::getIdentificativo,Operatore::setIdentificativo);
+        getBinder().forField(stato).asRequired().bind(Operatore::getStato,Operatore::setStato);
+        getBinder().forField(email)
+        	.withValidator(new EmailValidator("email non valida"))
+        	.bind(Operatore::getEmail,Operatore::setEmail);
+        getBinder().forField(telefono)
+    	.withValidator(new RegexpValidator("telefono non valido", "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"))
+    	.bind(Operatore::getTelefono,Operatore::setTelefono);
 
         getBinder().bindInstanceFields(this);
 
@@ -57,4 +65,5 @@ public class OperatoreEditor extends Editor<Operatore> {
         	identificativo.focus();
         }
     }
+    
 }

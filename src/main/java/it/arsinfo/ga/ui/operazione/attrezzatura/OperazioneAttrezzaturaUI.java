@@ -56,10 +56,8 @@ public class OperazioneAttrezzaturaUI extends OperazioneUI<Attrezzatura, Operazi
 		};
 		OperazioneAttrezzaturaGrid grid = new OperazioneAttrezzaturaGrid("Operazioni/Attrezzatura");
 		super.init(request,add,search,editor,grid,"Operazione Attrezzatura");
-		addComponents(add,search,grid,editor);
 
-        editor.setVisible(false);
-        grid.populate(service.findAll());
+		grid.populate(service.findAll());
 
 	}
 

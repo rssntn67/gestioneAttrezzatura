@@ -19,19 +19,17 @@ public abstract class OperazioneSearch<T extends Operabile<?>, S extends Operazi
         extends UIChangeHandler {
 
     private final OperazioneService<T,S> service;
-    private final ComboBox<TipoOperazione> ftipo = new ComboBox<TipoOperazione>("Tipo Operazione",EnumSet.allOf(TipoOperazione.class));
+    private final ComboBox<TipoOperazione> ftipo = new ComboBox<TipoOperazione>("Cerca per Tipo",EnumSet.allOf(TipoOperazione.class));
 
-    private final ComboBox<Cantiere> fcantiere = new ComboBox<Cantiere>("Cantiere");
-    private final ComboBox<T> foperabile = new ComboBox<T>("Operabile");
-    private final ComboBox<Operatore> foperatore = new ComboBox<Operatore>("Operabile");
+    private final ComboBox<Cantiere> fcantiere = new ComboBox<Cantiere>("Cerca per Cantiere");
+    private final ComboBox<T> foperabile = new ComboBox<T>("Cerca per Operabile");
+    private final ComboBox<Operatore> foperatore = new ComboBox<Operatore>("Cerca per Operatore");
         
     public OperazioneSearch(OperazioneService<T,S> service) {
         this.service=service;
         
-        fcantiere.setItemCaptionGenerator(Cantiere::getHeader);
-        fcantiere.setItems(service.getCantieri());
         ftipo.setEmptySelectionAllowed(true);
-        ftipo.setPlaceholder("Seleziona Tipo Operazione");
+        ftipo.setPlaceholder("Seleziona Tipo");
         ftipo.addSelectionListener(e -> {
              onChange();
          });
@@ -46,6 +44,14 @@ public abstract class OperazioneSearch<T extends Operabile<?>, S extends Operazi
 
         foperatore.setItemCaptionGenerator(Operatore::getHeader);
         foperatore.setItems(service.getOperatori());
+        foperatore.setEmptySelectionAllowed(true);
+        foperatore.setPlaceholder("Seleziona Operatore");
+        foperatore.addSelectionListener(e -> {
+             onChange();
+         });
+       
+        fcantiere.setItemCaptionGenerator(Cantiere::getHeader);
+        fcantiere.setItems(service.getCantieri());
         fcantiere.setEmptySelectionAllowed(true);
         fcantiere.setPlaceholder("Seleziona Cantiere");
         fcantiere.addSelectionListener(e -> {
