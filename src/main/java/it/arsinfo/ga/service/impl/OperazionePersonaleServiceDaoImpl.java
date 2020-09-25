@@ -6,12 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.arsinfo.ga.dao.CantiereDao;
 import it.arsinfo.ga.dao.OperazionePersonaleDao;
 import it.arsinfo.ga.dao.PersonaleDao;
-import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.data.StatoOperabile;
-import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.model.entity.OperazionePersonale;
 import it.arsinfo.ga.model.entity.Personale;
@@ -24,9 +21,6 @@ public class OperazionePersonaleServiceDaoImpl extends OperazioneServiceDaoImpl<
 	private PersonaleDao operabileDao;
 
 	@Autowired
-	private CantiereDao cantiereDao;
-
-	@Autowired
 	private OperazionePersonaleDao operazioneDao;
 	
     private static final Logger log = LoggerFactory.getLogger(OperazionePersonaleServiceDaoImpl.class);
@@ -34,23 +28,11 @@ public class OperazionePersonaleServiceDaoImpl extends OperazioneServiceDaoImpl<
 	@Override
 	@Transactional
 	public void esegui(OperazionePersonale operazione) throws Exception {
-		if (operazione.getTipoOperazione() == null)
-			throw new UnsupportedOperationException("TipoOperazione non può essere null");
-		if (operazione.getOperabile() == null)
-			throw new UnsupportedOperationException("Operabile non può essere null");
-		if (operazione.getCantiere() == null)
-			throw new UnsupportedOperationException("Cantiere non può essere null");
-		if (operazione.getNumero() == null)
-			throw new UnsupportedOperationException("Numero non può essere null");
-		Cantiere cantiere = cantiereDao.findById(operazione.getCantiere().getId()).get();
-		if (cantiere.getStato() != StatoCantiere.InOpera) {
-			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStato());			
-		}
-		Personale operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
-		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),cantiere,operabile);
+		Personale operabile = check(operazione);
 		switch (operazione.getTipoOperazione()) {
 			case Carico:
 				if (operazione.getNumero() > operabile.getDisponibili()) {
+					log.error("esegui: Q.tà operazione {} minore Q.tà disponibile {}, {}", operazione.getNumero(), operabile.getNumero(),operabile.getIdentificativo());
 					throw new UnsupportedOperationException("Numero operabile minore disponibile");
 				}
 				operabile.setUtilizzati(operabile.getUtilizzati()+operazione.getNumero());
@@ -60,6 +42,7 @@ public class OperazionePersonaleServiceDaoImpl extends OperazioneServiceDaoImpl<
 				break;
 			case Scarico:
 				if (operazione.getNumero() > operabile.getUtilizzati()) {
+					log.error("esegui: Q.tà operazione {} maggiore Q.tà utilizzati {}, {}", operazione.getNumero(), operabile.getUtilizzati(),operabile.getIdentificativo());
 					throw new UnsupportedOperationException("Numero operabile maggiore utilizzati");
 				}
 				operabile.setUtilizzati(operabile.getUtilizzati()-operazione.getNumero());
@@ -76,6 +59,7 @@ public class OperazionePersonaleServiceDaoImpl extends OperazioneServiceDaoImpl<
 			default:
 				break;
 		}		
+		log.info("esegui: {}, {}, {}, {}, {}",operazione.getTipoOperazione(),operazione.getCantiere().getIdentificativo(),operabile.getIdentificativo(),operazione.getOperatore().getIdentificativo(),operazione.getNumero());
 		operabileDao.save(operabile);
 		operazioneDao.save(operazione);						
 	}

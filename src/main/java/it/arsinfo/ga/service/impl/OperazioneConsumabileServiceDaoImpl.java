@@ -6,12 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.arsinfo.ga.dao.CantiereDao;
 import it.arsinfo.ga.dao.ConsumabileDao;
 import it.arsinfo.ga.dao.OperazioneConsumabileDao;
-import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.data.StatoOperabile;
-import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.Consumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
 import it.arsinfo.ga.model.entity.OperazioneConsumabile;
@@ -24,9 +21,6 @@ public class OperazioneConsumabileServiceDaoImpl extends OperazioneServiceDaoImp
 	private ConsumabileDao operabileDao;
 
 	@Autowired
-	private CantiereDao cantiereDao;
-
-	@Autowired
 	private OperazioneConsumabileDao operazioneDao;
 	
     private static final Logger log = LoggerFactory.getLogger(OperazioneConsumabileServiceDaoImpl.class);
@@ -34,29 +28,13 @@ public class OperazioneConsumabileServiceDaoImpl extends OperazioneServiceDaoImp
 	@Override
 	@Transactional
 	public void esegui(OperazioneConsumabile operazione) throws Exception {
-		if (operazione.getTipoOperazione() == null)
-			throw new UnsupportedOperationException("TipoOperazione non può essere null");
-		if (operazione.getOperabile() == null)
-			throw new UnsupportedOperationException("Operabile non può essere null");
-		if (operazione.getCantiere() == null)
-			throw new UnsupportedOperationException("Cantiere non può essere null");
-		if (operazione.getNumero() == null)
-			throw new UnsupportedOperationException("Numero non può essere null");
-		Cantiere cantiere = cantiereDao.findById(operazione.getCantiere().getId()).get();
-		if (cantiere.getStato() != StatoCantiere.InOpera) {
-			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStato());			
-		}
-		Consumabile operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
-		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),cantiere,operabile);
+		Consumabile operabile = check(operazione);
 		if (operazione.getNumero() > operabile.getDisponibili()) {
+			log.error("esegui: Q.tà operazione {} minore Q.tà disponibile {}, {}", operazione.getNumero(), operabile.getNumero(),operabile.getIdentificativo());
 			throw new UnsupportedOperationException("Numero operabile minore disponibile");
 		}
 		switch (operazione.getTipoOperazione()) {
 			case Carico:
-				operabile.setUtilizzati(operabile.getUtilizzati()+operazione.getNumero());
-				if (operabile.getDisponibili() == 0) {
-					operabile.setStato(StatoOperabile.Occupato);
-				}
 				break;
 			case Scarico:
 				throw new UnsupportedOperationException("Operazione Scarico non disponibile");
@@ -69,6 +47,11 @@ public class OperazioneConsumabileServiceDaoImpl extends OperazioneServiceDaoImp
 			default:
 				break;
 		}		
+		operabile.setUtilizzati(operabile.getUtilizzati()+operazione.getNumero());
+		if (operabile.getDisponibili() == 0) {
+			operabile.setStato(StatoOperabile.Occupato);
+		}
+		log.info("esegui: {}, {}, {}, {}, {}",operazione.getTipoOperazione(),operazione.getCantiere().getIdentificativo(),operabile.getIdentificativo(),operazione.getOperatore().getIdentificativo(),operazione.getNumero());
 		operabileDao.save(operabile);
 		operazioneDao.save(operazione);						
 	}

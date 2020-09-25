@@ -7,12 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.arsinfo.ga.dao.AttrezzaturaDao;
-import it.arsinfo.ga.dao.CantiereDao;
 import it.arsinfo.ga.dao.OperazioneAttrezzaturaDao;
-import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Attrezzatura;
-import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.service.OperazioneService;
@@ -22,9 +19,6 @@ public class OperazioneAttrezzaturaServiceDaoImpl extends OperazioneServiceDaoIm
 	
 	@Autowired
 	private AttrezzaturaDao operabileDao;
-
-	@Autowired
-	private CantiereDao cantiereDao;
 	
 	@Autowired
 	private OperazioneAttrezzaturaDao operazioneDao;
@@ -34,17 +28,7 @@ public class OperazioneAttrezzaturaServiceDaoImpl extends OperazioneServiceDaoIm
 	@Override
 	@Transactional
 	public void esegui(OperazioneAttrezzatura operazione) throws Exception {
-		if (operazione.getTipoOperazione() == null)
-			throw new UnsupportedOperationException("TipoOperazione non può essere null");
-		if (operazione.getOperabile() == null)
-			throw new UnsupportedOperationException("Operabile non può essere null");
-		if (operazione.getCantiere() == null )
-			throw new UnsupportedOperationException("Cantiere non può essere null");
-		Attrezzatura operabile = operabileDao.findById(operazione.getOperabile().getId()).get();
-		Cantiere cantiere = cantiereDao.findById(operazione.getCantiere().getId()).get();
-		if (cantiere == null || cantiere.getStato() != StatoCantiere.InOpera) {
-			throw new UnsupportedOperationException("Stato Cantiere non operabile: " + cantiere.getStato());			
-		}
+		Attrezzatura operabile = check(operazione);
 
 		switch (operazione.getTipoOperazione()) {
 			case Carico:
@@ -65,7 +49,7 @@ public class OperazioneAttrezzaturaServiceDaoImpl extends OperazioneServiceDaoIm
 			default:
 				break;
 		}
-		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),cantiere,operabile);
+		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),operazione.getCantiere().getIdentificativo(),operabile.getIdentificativo(),operazione.getOperatore().getIdentificativo());
 		operabileDao.save(operabile);
 		operazioneDao.save(operazione);						
 	}

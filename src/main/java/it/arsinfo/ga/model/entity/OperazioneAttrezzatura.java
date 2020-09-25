@@ -91,18 +91,22 @@ public class OperazioneAttrezzatura implements Operazione<Attrezzatura> {
 		this.operabile = attrezzatura;
 	}
 
-	@Override
-	public String toString() {
-		return "OperazioneAttrezzatura [attrezzatura=" + operabile + ", id=" + id + ", cantiere=" + cantiere
-				+ ", tipoOperazione=" + tipoOperazione + ", dataOperazione=" + dataOperazione + "]";
-	}
-
-	public Operatore getOperatore() {
+    @Override
+    public Operatore getOperatore() {
 		return operatore;
 	}
 
+    @Override
 	public void setOperatore(Operatore operatore) {
 		this.operatore = operatore;
 	}
+
+	@Override
+	public String toString() {
+		return "Operazione [id=" + id + ", operabile=" + operabile + ", operatore=" + operatore
+				+ ", cantiere=" + cantiere + ", tipoOperazione=" + tipoOperazione + ", dataOperazione=" + dataOperazione
+				+ "]";
+	}
+    
 
 }

@@ -102,17 +102,20 @@ public class OperazioneConsumabile implements Operazione<Consumabile> {
 	}
 
 	@Override
-	public String toString() {
-		return "OperazioneConsumabile [consumabile=" + operabile + ", numero=" + numero + ", id=" + id + ", cantiere="
-				+ cantiere + ", tipoOperazione=" + tipoOperazione + ", dataOperazione=" + dataOperazione + "]";
-	}
-
 	public Operatore getOperatore() {
 		return operatore;
 	}
 
+	@Override
 	public void setOperatore(Operatore operatore) {
 		this.operatore = operatore;
+	}
+
+	@Override
+	public String toString() {
+		return "Operazione [id=" + id + ", operabile=" + operabile + ", operatore=" + operatore
+				+ ", cantiere=" + cantiere + ", tipoOperazione=" + tipoOperazione + ", numero=" + numero
+				+ ", dataOperazione=" + dataOperazione + "]";
 	}
 
 }
