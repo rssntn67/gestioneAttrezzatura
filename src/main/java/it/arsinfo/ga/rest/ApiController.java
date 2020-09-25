@@ -19,6 +19,7 @@ import it.arsinfo.ga.model.dto.OperazioneDto;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.Consumabile;
+import it.arsinfo.ga.model.entity.Operatore;
 import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.model.entity.OperazioneConsumabile;
 import it.arsinfo.ga.model.entity.OperazionePersonale;
@@ -26,6 +27,7 @@ import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.service.AttrezzaturaService;
 import it.arsinfo.ga.service.CantiereService;
 import it.arsinfo.ga.service.ConsumabileService;
+import it.arsinfo.ga.service.OperatoreService;
 import it.arsinfo.ga.service.OperazioneService;
 import it.arsinfo.ga.service.PersonaleService;
 
@@ -43,11 +45,13 @@ public class ApiController {
 	@Autowired 
 	private CantiereService cantiereService;
 	@Autowired 
-	private OperazioneService<Attrezzatura, OperazioneAttrezzatura> opattrezzaturaService;
+	private OperatoreService operatoreService;
 	@Autowired 
-	private OperazioneService<Consumabile, OperazioneConsumabile>  opconsumabileService;
+	private OperazioneService<Attrezzatura, OperazioneAttrezzatura> operazioneAttrezzaturaService;
 	@Autowired 
-	private OperazioneService<Personale,OperazionePersonale> oppersonaleService;
+	private OperazioneService<Consumabile, OperazioneConsumabile>  operazioneConsumabileService;
+	@Autowired 
+	private OperazioneService<Personale,OperazionePersonale> operazionePersonaleService;
 
 	@GetMapping("/attrezzature") 
 	public List<OperabileDto> findAttrezzature() {
@@ -130,7 +134,7 @@ public class ApiController {
 		if (tree.getCantiereId() != null) {
 			cantiere = cantiereService.findByIdentificativo(tree.getCantiereId());
 		} else {
-			OperazioneAttrezzatura latest = opattrezzaturaService.getLastOperation(operabile);
+			OperazioneAttrezzatura latest = operazioneAttrezzaturaService.getLastOperation(operabile);
 			if (latest == null) {
 				return false;
 			}
@@ -139,13 +143,19 @@ public class ApiController {
 		if (cantiere == null) {
 			return false;
 		}
-
+		
+		Operatore operatore = operatoreService.findByApikey(tree.getApiKey());
+		if (operatore == null) {
+			return false;
+		}
+		
 		OperazioneAttrezzatura operazione = new OperazioneAttrezzatura();
 		operazione.setCantiere(cantiere);
 		operazione.setOperabile(operabile);
+		operazione.setOperatore(operatore);
 		operazione.setTipoOperazione(tree.getTipo());
 		try {
-			opattrezzaturaService.esegui(operazione);
+			operazioneAttrezzaturaService.esegui(operazione);
 		} catch (Exception e) {
 			return false;
 		}
@@ -153,7 +163,7 @@ public class ApiController {
 	}
 	
 	private boolean check(OperazioneDto tree) {
-		if (tree.getOperabileId() == null || tree.getTipo() == null)
+		if (tree.getOperabileId() == null || tree.getTipo() == null || tree.getApiKey() == null)
 			return false;
 		return true;
 	}
@@ -173,7 +183,7 @@ public class ApiController {
 		if (tree.getCantiereId() != null) {
 			cantiere = cantiereService.findByIdentificativo(tree.getCantiereId());
 		} else {
-			OperazioneConsumabile latest = opconsumabileService.getLastOperation(operabile);
+			OperazioneConsumabile latest = operazioneConsumabileService.getLastOperation(operabile);
 			if (latest == null) {
 				return false;
 			}
@@ -189,7 +199,7 @@ public class ApiController {
 		operazione.setTipoOperazione(tree.getTipo());
 		operazione.setNumero(tree.getNumero());
 		try {
-			opconsumabileService.esegui(operazione);
+			operazioneConsumabileService.esegui(operazione);
 		} catch (Exception e) {
 			return false;
 		}
@@ -211,7 +221,7 @@ public class ApiController {
 		if (tree.getCantiereId() != null) {
 			cantiere = cantiereService.findByIdentificativo(tree.getCantiereId());
 		} else {
-			OperazionePersonale latest = oppersonaleService.getLastOperation(operabile);
+			OperazionePersonale latest = operazionePersonaleService.getLastOperation(operabile);
 			if (latest == null) {
 				return false;
 			}
@@ -228,7 +238,7 @@ public class ApiController {
 		operazione.setNumero(tree.getNumero());
 
 		try {
-			oppersonaleService.esegui(operazione);
+			operazionePersonaleService.esegui(operazione);
 		} catch (Exception e) {
 			return false;
 		}

@@ -9,5 +9,6 @@ public interface OperatoreService extends EntityBaseService<Operatore>{
 
 	List<Operatore> searchBy(String searchIdentificativo, StatoOperatore stato);
 	Operatore findByIdentificativo(String identificatico);
+	Operatore findByApikey(String apikey);
 
 }

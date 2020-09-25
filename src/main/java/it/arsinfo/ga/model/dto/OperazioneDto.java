@@ -3,6 +3,7 @@ package it.arsinfo.ga.model.dto;
 import it.arsinfo.ga.model.data.TipoOperazione;
 
 public class OperazioneDto {
+		private String apiKey;
 		private String cantiereId;
 		private String operabileId;
 		private TipoOperazione tipo;
@@ -19,5 +20,8 @@ public class OperazioneDto {
 		}
 		public Integer getNumero() {
 			return numero;
+		}
+		public String getApiKey() {
+			return apiKey;
 		}
 }

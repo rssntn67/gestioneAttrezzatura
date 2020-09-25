@@ -55,5 +55,10 @@ public class OperatoreServiceDaoImpl implements OperatoreService {
 	@Override
 	public Operatore findByIdentificativo(String identificatico) {
 		return repository.findByIdentificativo(identificatico);
+	}
+
+	@Override
+	public Operatore findByApikey(String apikey) {
+		return repository.findByApikey(apikey);
 	}	
 }
