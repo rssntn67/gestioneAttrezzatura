@@ -2,30 +2,19 @@ package it.arsinfo.ga.dao;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import it.arsinfo.ga.model.data.Anno;
 import it.arsinfo.ga.model.data.Fornitore;
 import it.arsinfo.ga.model.data.TipoPersonale;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
 
-public interface ModelloPersonaleDao extends JpaRepository<ModelloPersonale, Long> {
+public interface ModelloPersonaleDao extends ModelloDao<ModelloPersonale> {
 
-	List<ModelloPersonale> findByNomeAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore,Anno anno);
-
-	List<ModelloPersonale> findByNomeContainingIgnoreCase(String nome);
-    List<ModelloPersonale> findByAnnoProduzione(Anno anno);
-    List<ModelloPersonale> findByFornitore(Fornitore fornitore);
     List<ModelloPersonale> findByTipo(TipoPersonale tipo);
     
-    List<ModelloPersonale> findByNomeContainingIgnoreCaseAndAnnoProduzione(String nome, Anno anno);
-    List<ModelloPersonale> findByNomeContainingIgnoreCaseAndFornitore(String nome, Fornitore fornitore);
     List<ModelloPersonale> findByNomeContainingIgnoreCaseAndTipo(String nome, TipoPersonale tipo);
-    List<ModelloPersonale> findByFornitoreAndAnnoProduzione(Fornitore fornitore, Anno anno);
     List<ModelloPersonale> findByFornitoreAndTipo(Fornitore fornitore, TipoPersonale tipo);
     List<ModelloPersonale> findByAnnoProduzioneAndTipo(Anno anno, TipoPersonale tipo);
 
-    List<ModelloPersonale> findByNomeContainingIgnoreCaseAndFornitoreAndAnnoProduzione(String nome, Fornitore fornitore,Anno anno);
     List<ModelloPersonale> findByNomeContainingIgnoreCaseAndFornitoreAndTipo(String nome, Fornitore fornitore, TipoPersonale tipo);
     List<ModelloPersonale> findByNomeContainingIgnoreCaseAndAnnoProduzioneAndTipo(String nome, Anno anno, TipoPersonale tipo);
     List<ModelloPersonale> findByFornitoreAndAnnoProduzioneAndTipo(Fornitore fornitore,Anno anno, TipoPersonale tipo);

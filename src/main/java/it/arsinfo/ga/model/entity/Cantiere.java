@@ -2,6 +2,7 @@ package it.arsinfo.ga.model.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -52,6 +53,8 @@ public class Cantiere implements EntityBase {
     private Date chiusuraCantiere = new Date();
 	
     Integer distanzaChilometrica=0;
+
+    @Column(nullable = false)
     public String getIdentificativo() {
 		return identificativo;
 	}

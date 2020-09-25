@@ -89,7 +89,7 @@ public class PersonaleServiceDaoImpl implements PersonaleService {
 
 	@Override
 	public List<OperazionePersonale> findOperazioni(Personale t) {
-		return service.searchBy(null, t, null);
+		return service.searchBy(null, t, null,null);
 	}
 
 	

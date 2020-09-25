@@ -20,12 +20,15 @@ import it.arsinfo.ga.model.data.TipoOperazione;
 @Entity
 public class OperazioneAttrezzatura implements Operazione<Attrezzatura> {
     
-    @ManyToOne(fetch=FetchType.LAZY)
-    private Attrezzatura operabile;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Attrezzatura operabile;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Operatore operatore;
     
     @ManyToOne(fetch=FetchType.LAZY)
     private Cantiere cantiere;
@@ -92,6 +95,14 @@ public class OperazioneAttrezzatura implements Operazione<Attrezzatura> {
 	public String toString() {
 		return "OperazioneAttrezzatura [attrezzatura=" + operabile + ", id=" + id + ", cantiere=" + cantiere
 				+ ", tipoOperazione=" + tipoOperazione + ", dataOperazione=" + dataOperazione + "]";
+	}
+
+	public Operatore getOperatore() {
+		return operatore;
+	}
+
+	public void setOperatore(Operatore operatore) {
+		this.operatore = operatore;
 	}
 
 }

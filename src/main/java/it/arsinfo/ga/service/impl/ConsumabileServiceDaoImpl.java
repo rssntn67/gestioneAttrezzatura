@@ -89,7 +89,7 @@ public class ConsumabileServiceDaoImpl implements ConsumabileService {
 
 	@Override
 	public List<OperazioneConsumabile> findOperazioni(Consumabile t) {
-		return service.searchBy(null, t,null);
+		return service.searchBy(null, t,null,null);
 	}
 
 	

@@ -88,7 +88,7 @@ public class AttrezzaturaServiceDaoImpl implements AttrezzaturaService {
 
 	@Override
 	public List<OperazioneAttrezzatura> findOperazioni(Attrezzatura t) {
-		return service.searchBy(null, t,null);
+		return service.searchBy(null, t,null,null);
 	}
 
 	

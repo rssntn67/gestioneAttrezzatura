@@ -46,6 +46,7 @@ public class Attrezzatura implements Operabile<ModelloAttrezzatura> {
     private StatoOperabile stato=StatoOperabile.Disponibile;
 
     @Override
+    @Column(nullable = false)
 	public String getIdentificativo() {
 		return identificativo;
 	}

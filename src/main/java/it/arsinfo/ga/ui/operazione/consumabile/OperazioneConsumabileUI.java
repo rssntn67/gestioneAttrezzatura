@@ -33,7 +33,7 @@ public class OperazioneConsumabileUI extends OperazioneUI<Consumabile, Operazion
 
 		public OperazioneConsumabileEditor(OperazioneService<Consumabile, OperazioneConsumabile> service) {
 			super(service, new Binder<>(OperazioneConsumabile.class));
-			setComponents(getActions(),new HorizontalLayout(getCantiere(),getOperabile(),getTipo(),numero));
+			setComponents(getActions(),new HorizontalLayout(getCantiereBox(),getOperabileBox(),getOperatoreBox(),getTipoBox(),numero));
 			
 	        getBinder()
 	        .forField(numero)

@@ -44,6 +44,7 @@ public class Personale implements Operabile<ModelloPersonale> {
     private StatoOperabile stato=StatoOperabile.Disponibile;
 
     @Override
+    @Column(nullable = false)
 	public String getIdentificativo() {
 		return identificativo;
 	}

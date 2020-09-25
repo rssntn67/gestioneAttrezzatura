@@ -20,14 +20,15 @@ import it.arsinfo.ga.model.data.TipoOperazione;
 @Entity
 public class OperazioneConsumabile implements Operazione<Consumabile> {
     
-    @ManyToOne(fetch=FetchType.LAZY)
-    private Consumabile operabile;
-
-    private Integer numero = 0;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Consumabile operabile;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Operatore operatore;
     
     @ManyToOne(fetch=FetchType.LAZY)
     private Cantiere cantiere;
@@ -36,6 +37,8 @@ public class OperazioneConsumabile implements Operazione<Consumabile> {
     @Column(nullable = false)
     private TipoOperazione tipoOperazione=TipoOperazione.Carico;
     
+    private Integer numero = 0;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataOperazione = new Date();
 
@@ -102,6 +105,14 @@ public class OperazioneConsumabile implements Operazione<Consumabile> {
 	public String toString() {
 		return "OperazioneConsumabile [consumabile=" + operabile + ", numero=" + numero + ", id=" + id + ", cantiere="
 				+ cantiere + ", tipoOperazione=" + tipoOperazione + ", dataOperazione=" + dataOperazione + "]";
+	}
+
+	public Operatore getOperatore() {
+		return operatore;
+	}
+
+	public void setOperatore(Operatore operatore) {
+		this.operatore = operatore;
 	}
 
 }

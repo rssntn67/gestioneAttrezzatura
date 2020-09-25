@@ -6,6 +6,8 @@ import it.arsinfo.ga.model.data.TipoOperazione;
 
 public interface Operazione<T extends Operabile<?>> extends EntityBase {
 
+	Operatore getOperatore();
+	void setOperatore(Operatore operatore);
 	T getOperabile();
 	void setOperabile(T operabile);
 	Cantiere getCantiere();

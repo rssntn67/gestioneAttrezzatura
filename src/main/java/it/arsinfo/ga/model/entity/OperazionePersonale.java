@@ -20,21 +20,24 @@ import it.arsinfo.ga.model.data.TipoOperazione;
 @Entity
 public class OperazionePersonale implements Operazione<Personale> {
     
-    @ManyToOne(fetch=FetchType.LAZY)
-    private Personale operabile;
-
-    private Integer numero = 0;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Personale operabile;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Operatore operatore;
+
     @ManyToOne(fetch=FetchType.LAZY)
     private Cantiere cantiere;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoOperazione tipoOperazione=TipoOperazione.Carico;
+    
+    private Integer numero = 0;
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataOperazione = new Date();
@@ -102,6 +105,14 @@ public class OperazionePersonale implements Operazione<Personale> {
 	public String toString() {
 		return "OperazionePersonale [personale=" + operabile + ", numero=" + numero + ", id=" + id + ", cantiere="
 				+ cantiere + ", tipoOperazione=" + tipoOperazione + ", dataOperazione=" + dataOperazione + "]";
+	}
+
+	public Operatore getOperatore() {
+		return operatore;
+	}
+
+	public void setOperatore(Operatore operatore) {
+		this.operatore = operatore;
 	}
 
 }

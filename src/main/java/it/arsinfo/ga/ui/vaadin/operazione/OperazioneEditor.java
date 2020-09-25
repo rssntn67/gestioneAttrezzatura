@@ -16,6 +16,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import it.arsinfo.ga.model.data.TipoOperazione;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.Operabile;
+import it.arsinfo.ga.model.entity.Operatore;
 import it.arsinfo.ga.model.entity.Operazione;
 import it.arsinfo.ga.service.OperazioneService;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
@@ -29,6 +30,7 @@ public abstract class OperazioneEditor<T extends Operabile<?>, S extends Operazi
     private final ComboBox<TipoOperazione> tipo = new ComboBox<TipoOperazione>("Tipo Operazione",EnumSet.allOf(TipoOperazione.class));
 
     private final ComboBox<Cantiere> cantiere = new ComboBox<Cantiere>("Cantiere");
+    private final ComboBox<Operatore> operatore = new ComboBox<Operatore>("Operatore");
     private final ComboBox<T> operabile = new ComboBox<T>("Operabile");
     private Button esegui = new Button("Esegui Operazione", VaadinIcons.CHECK);
     private Button back = new Button("Indietro");
@@ -55,7 +57,8 @@ public abstract class OperazioneEditor<T extends Operabile<?>, S extends Operazi
         binder.forField(tipo).asRequired().bind(Operazione<T>::getTipoOperazione,Operazione<T>::setTipoOperazione);
         binder.forField(cantiere).asRequired().bind(Operazione<T>::getCantiere,Operazione<T>::setCantiere);
         binder.forField(operabile).asRequired().bind(Operazione<T>::getOperabile,Operazione<T>::setOperabile);
-        
+        binder.forField(operatore).asRequired().bind(Operazione<T>::getOperatore,Operazione<T>::setOperatore);
+               
         tipo.setEmptySelectionAllowed(false);
         
         cantiere.setItemCaptionGenerator(Cantiere::getHeader);
@@ -66,6 +69,10 @@ public abstract class OperazioneEditor<T extends Operabile<?>, S extends Operazi
         operabile.setEmptySelectionAllowed(false);
         operabile.setItems(service.getOperabili());
         
+        operatore.setItemCaptionGenerator(Operatore::getHeader);
+        operatore.setEmptySelectionAllowed(false);
+        operatore.setItems(service.getOperatori());
+
 
    }
 
@@ -122,15 +129,19 @@ public abstract class OperazioneEditor<T extends Operabile<?>, S extends Operazi
 	}
 
 
-	public ComboBox<TipoOperazione> getTipo() {
+	public ComboBox<TipoOperazione> getTipoBox() {
 		return tipo;
 	}
 
-	public ComboBox<Cantiere> getCantiere() {
+	public ComboBox<Cantiere> getCantiereBox() {
 		return cantiere;
 	}
 
-	public ComboBox<T> getOperabile() {
+	public ComboBox<Operatore> getOperatoreBox() {
+		return operatore;
+	}
+
+	public ComboBox<T> getOperabileBox() {
 		return operabile;
 	}
 

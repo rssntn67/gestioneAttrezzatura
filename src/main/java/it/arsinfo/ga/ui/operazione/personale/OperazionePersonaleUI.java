@@ -33,7 +33,7 @@ public class OperazionePersonaleUI extends OperazioneUI<Personale, OperazionePer
 
 		public OperazionePersonaleEditor(OperazioneService<Personale, OperazionePersonale> service) {
 			super(service, new Binder<>(OperazionePersonale.class));
-			setComponents(getActions(),new HorizontalLayout(getCantiere(),getOperabile(),getTipo(),numero));
+			setComponents(getActions(),new HorizontalLayout(getCantiereBox(),getOperabileBox(),getOperatoreBox(),getTipoBox(),numero));
 			
 	        getBinder()
 	        .forField(numero)

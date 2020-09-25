@@ -44,6 +44,7 @@ public class Consumabile implements Operabile<ModelloConsumabile> {
     private StatoOperabile stato=StatoOperabile.Disponibile;
 
     @Override
+    @Column(nullable = false)
 	public String getIdentificativo() {
 		return identificativo;
 	}

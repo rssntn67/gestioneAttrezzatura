@@ -84,17 +84,17 @@ public class CantiereServiceDaoImpl implements CantiereService {
 
 	@Override
 	public List<OperazioneAttrezzatura> findOperazioneAttrezzatura(Cantiere cantiere) {
-		return operAttrService.searchBy(cantiere, null, null);
+		return operAttrService.searchBy(cantiere, null, null,null);
 	}
 
 	@Override
 	public List<OperazioneConsumabile> findOperazioneConsumabile(Cantiere cantiere) {
-		return operConsService.searchBy(cantiere, null, null);
+		return operConsService.searchBy(cantiere, null, null,null);
 	}
 
 	@Override
 	public List<OperazionePersonale> findOperazionePersonale(Cantiere cantiere) {
-		return operPersService.searchBy(cantiere, null, null);
+		return operPersService.searchBy(cantiere, null, null,null);
 	}
 
 	

@@ -27,21 +27,22 @@ public abstract class AbstractUI extends UI {
     public final static String URL_LOGIN_FAILURE = "/login.html?error";
     public final static String URL_LOGOUT = "/logout";
     
+    public final static String URL_MODELLO_ATTREZZATURA = "/modello/attrezzatura";
     public final static String URL_ATTREZZATURA = "/attrezzatura";
     public final static String URL_OPERAZIONE_ATTREZZATURA = "/operazione/attrezzatura";
-    public final static String URL_MODELLO_ATTREZZATURA = "/modello/attrezzatura";
 
+    public final static String URL_MODELLO_CONSUMABILE = "/modello/consumabile";
     public final static String URL_CONSUMABILE = "/consumabile";
     public final static String URL_OPERAZIONE_CONSUMABILE = "/operazione/consumabile";
-    public final static String URL_MODELLO_CONSUMABILE = "/modello/consumabile";
     
+    public final static String URL_MODELLO_PERSONALE = "/modello/personale";
     public final static String URL_PERSONALE = "/personale";
     public final static String URL_OPERAZIONE_PERSONALE = "/operazione/personale";
-    public final static String URL_MODELLO_PERSONALE = "/modello/personale";
 
     public final static String URL_CANTIERE = "/cantiere";
 
-
+    public final static String URL_OPERATORE = "/operatore";
+    
     public static final String TITLE_HOME = "Home";
     public final static String TITLE_OPERAZIONE_ATTREZZATURA = "Operazione Attrezzatura";
     public final static String TITLE_OPERAZIONE_CONSUMABILE = "Operazione Consumabile";
@@ -53,6 +54,7 @@ public abstract class AbstractUI extends UI {
     public final static String TITLE_CONSUMABILE = "Consumabile";
     public final static String TITLE_PERSONALE = "Personale";
     public final static String TITLE_CANTIERE = "Cantiere";
+    public final static String TITLE_OPERATORE = "Operatore";
 
     protected void init(VaadinRequest request, String head) {
 
@@ -128,7 +130,18 @@ public abstract class AbstractUI extends UI {
             }
         });
 
-        cantiere.addItem(TITLE_OPERAZIONE_ATTREZZATURA,new MenuBar.Command() {
+        MenuItem operatore = menu.addItem("Gestione Operatore",null);
+        operatore.addItem(TITLE_OPERATORE,new MenuBar.Command() {
+            private static final long serialVersionUID = 1L;
+            
+            public void menuSelected(MenuItem selectedItem) {
+                getUI().getPage().setLocation(URL_OPERATORE);
+            }
+        });
+
+        MenuItem operazioni = menu.addItem("Gestione Operazioni",null);
+
+        operazioni.addItem(TITLE_OPERAZIONE_ATTREZZATURA,new MenuBar.Command() {
             private static final long serialVersionUID = 1L;
             
             public void menuSelected(MenuItem selectedItem) {
@@ -136,14 +149,14 @@ public abstract class AbstractUI extends UI {
             }
         });
 
-        cantiere.addItem(TITLE_OPERAZIONE_CONSUMABILE,new MenuBar.Command() {
+        operazioni.addItem(TITLE_OPERAZIONE_CONSUMABILE,new MenuBar.Command() {
             private static final long serialVersionUID = 1L;
             
             public void menuSelected(MenuItem selectedItem) {
                 getUI().getPage().setLocation(URL_OPERAZIONE_CONSUMABILE);
             }
         });
-        cantiere.addItem(TITLE_OPERAZIONE_PERSONALE,new MenuBar.Command() {
+        operazioni.addItem(TITLE_OPERAZIONE_PERSONALE,new MenuBar.Command() {
             private static final long serialVersionUID = 1L;
             
             public void menuSelected(MenuItem selectedItem) {
