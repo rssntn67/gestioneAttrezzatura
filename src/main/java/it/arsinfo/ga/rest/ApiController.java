@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.arsinfo.ga.model.data.TipoOperazione;
@@ -58,7 +59,10 @@ public class ApiController {
 	private OperazioneService<Personale,OperazionePersonale> operazionePersonaleService;
 
 	@GetMapping("/attrezzature") 
-	public List<OperabileDto> findAttrezzature() {
+	public List<OperabileDto> findAttrezzature(@RequestParam(value = "apikey", required = true) String apikey) {
+		if (!check(apikey)) {
+			throw new RuntimeException("error in apikey");
+		}
 		List<OperabileDto> list = new ArrayList<>();
 		for (Attrezzatura operabile: attrezzaturaService.findAll()) {
 			OperabileDto dto = new OperabileDto();
@@ -71,7 +75,10 @@ public class ApiController {
 	}
 
 	@GetMapping("/attrezzature/{identificativo}") 
-	public OperabileDto getAttrezzatura(@PathVariable String identificativo) {
+	public OperabileDto getAttrezzatura(@PathVariable String identificativo,@RequestParam(value = "apikey", required = true) String apikey) {
+		if (!check(apikey)) {
+			throw new RuntimeException("error in apikey");
+		}
 		Attrezzatura operabile = attrezzaturaService.findByIdentificativo(identificativo);
 		if (operabile == null) {
 			throw new RuntimeException("Could not find attrezzatura with " + identificativo);
@@ -84,7 +91,10 @@ public class ApiController {
 	}
 
 	@GetMapping("/consumabili") 
-	public List<OperabileDto> findConsumabile() {
+	public List<OperabileDto> findConsumabile(@RequestParam(value = "apikey", required = true) String apikey) {
+		if (!check(apikey)) {
+			throw new RuntimeException("error in apikey");
+		}
 		List<OperabileDto> list = new ArrayList<>();
 		for (Consumabile operabile :consumabileService.findAll()) {
 			OperabileDto dto = new OperabileDto();
@@ -97,7 +107,10 @@ public class ApiController {
 	}
 
 	@GetMapping("/personale") 
-	public List<OperabileDto> findPersonale() {
+	public List<OperabileDto> findPersonale(@RequestParam(value = "apikey", required = true) String apikey) {
+		if (!check(apikey)) {
+			throw new RuntimeException("error in apikey");
+		}
 		List<OperabileDto> list = new ArrayList<>();
 		for (Personale operabile :personaleService.findAll()) {
 			OperabileDto dto = new OperabileDto();
@@ -110,7 +123,10 @@ public class ApiController {
 	}
 
 	@GetMapping("/cantieri") 
-	public List<CantiereDto> findCantieri() {
+	public List<CantiereDto> findCantieri(@RequestParam(value = "apikey", required = true) String apikey) {
+		if (!check(apikey)) {
+			throw new RuntimeException("error in apikey");
+		}
 		List<CantiereDto> list = new ArrayList<>();
 		for (Cantiere cantiere: cantiereService.findAll() ) {
 			CantiereDto dto = new CantiereDto();
@@ -125,8 +141,10 @@ public class ApiController {
 
 	@PostMapping("/operazione/attrezzatura") 
 	public boolean addOperazioneAttrezzatura(@RequestBody OperazioneDto tree) {
-		if (!check(tree))
-			return false;
+		Operatore operatore = check(tree);
+		if (operatore == null) {
+			throw new RuntimeException("error in apikey");
+		}			
 		Attrezzatura operabile = attrezzaturaService.findByIdentificativo(tree.getOperabileId());
 		if (operabile == null) {
 			log.warn("add: Not Processing Dto: Operabile does not exist for: {}, Tipo: {}, ApiKey: {}, Cantiere: {}", tree.getOperabileId(),tree.getTipo(),tree.getApikey(),tree.getCantiereId());
@@ -151,13 +169,7 @@ public class ApiController {
 			log.warn("add: Not Processing Dto: Cantiere does not exists: Operabile: {}, Tipo: {} ApiKey: {}", tree.getOperabileId(),tree.getTipo(),tree.getApikey());
 			return false;
 		}
-		
-		Operatore operatore = operatoreService.findByApikey(tree.getApikey());
-		if (operatore == null) {
-			log.warn("add: Not Processing Dto: Api Key does not exists: Operabile: {}, Tipo: {} ApiKey: {}", tree.getOperabileId(),tree.getTipo(),tree.getApikey());
-			return false;
-		}
-		
+				
 		OperazioneAttrezzatura operazione = new OperazioneAttrezzatura();
 		operazione.setCantiere(cantiere);
 		operazione.setOperabile(operabile);
@@ -171,18 +183,35 @@ public class ApiController {
 		return true;
 	}
 	
-	private boolean check(OperazioneDto tree) {
+	private Operatore check(OperazioneDto tree) {
 		if (tree.getOperabileId() == null || tree.getTipo() == null || tree.getApikey() == null) {
 			log.warn("add: Not Processing Dto: Operabile: {}, Tipo: {}, ApiKey: {}, Cantiere: {} ", tree.getOperabileId(),tree.getTipo(),tree.getApikey(),tree.getCantiereId());
-			return false;			
+			return null;
 		}
+		Operatore operatore = operatoreService.findByApikey(tree.getApikey());
+		if (operatore == null)
+			log.warn("add: Not Processing Dto: Api Key does not exists: Operabile: {}, Tipo: {} ApiKey: {}", tree.getOperabileId(),tree.getTipo(),tree.getApikey());
+		return operatore;
+	}
+
+	private boolean check(String apikey) {
+		if (apikey == null) {
+			log.warn("get: Not Processing ApiKey: null");
+			return false;
+		}
+		Operatore operatore = operatoreService.findByApikey(apikey);
+		if (operatore == null) {
+			log.warn("get: Not Processing Api Key does not exists: ApiKey: {}", apikey);
+			return false;
+		}	
 		return true;
 	}
 
 	@PostMapping("/operazione/consumabile") 
 	public boolean addOperazioneConsumabile(@RequestBody OperazioneDto tree) {
-		if (!check(tree))
-			return false;
+		Operatore operatore = check(tree);
+		if (operatore == null )
+			throw new RuntimeException("error in apikey");
 		Consumabile operabile = consumabileService.findByIdentificativo(tree.getOperabileId());
 		if (operabile == null) {
 			return false;
@@ -219,8 +248,9 @@ public class ApiController {
 	
 	@PostMapping("/operazione/personale") 
 	public boolean addOperazionePersonale(@RequestBody OperazioneDto tree) {
-		if (!check(tree))
-			return false;
+		Operatore operatore = check(tree);
+		if (operatore == null )
+			throw new RuntimeException("error in apikey");
 		Personale operabile = personaleService.findByIdentificativo(tree.getOperabileId());
 		if (operabile == null) {
 			return false;

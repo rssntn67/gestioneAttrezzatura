@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests();
 
 		reg = reg.antMatchers("/api/**").permitAll();
-		reg = reg.antMatchers("/adp.png").permitAll();
+		reg = reg.antMatchers("/gardenia.png").permitAll();
 		reg = reg.antMatchers("/favicon.ico").permitAll();
 		reg = reg.antMatchers("/VAADIN/**").permitAll();
 		
