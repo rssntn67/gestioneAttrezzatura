@@ -1,2 +1,2 @@
-# gestioneAttrezzatura
-Un applicativo che consente la gestione completa delle attrezzature
+# GestioneAttrezzatura
+Dashboard gestione delle attrezzature
