@@ -3,6 +3,7 @@
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.annotations.Push;
+import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
@@ -18,6 +19,7 @@ import it.arsinfo.ga.ui.security.SecurityUtils;
 import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
 @Push
+@Theme("mytheme")
 public abstract class AbstractUI extends UI {
 
 	@Autowired
