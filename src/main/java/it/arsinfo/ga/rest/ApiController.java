@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.arsinfo.ga.model.data.StatoOperatore;
 import it.arsinfo.ga.model.data.TipoOperazione;
 import it.arsinfo.ga.model.dto.CantiereDto;
 import it.arsinfo.ga.model.dto.OperabileDto;
@@ -204,6 +205,10 @@ public class ApiController {
 			log.warn("get: Not Processing Api Key does not exists: ApiKey: {}", apikey);
 			return false;
 		}	
+                if (operatore.getStato() != StatoOperatore.Attivo ) {
+                    log.warn("get: Not Processing StatoOperatore {} not valid: ApiKey: {}", operatore.getStato(),apikey);
+                    return false;
+            }       
 		return true;
 	}
 
