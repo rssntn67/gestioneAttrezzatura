@@ -9,7 +9,7 @@ public class OperazioneAttrezzaturaGrid extends CustomGrid<OperazioneAttrezzatur
 
     public OperazioneAttrezzaturaGrid(String gridName) {
         super(new Grid<>(OperazioneAttrezzatura.class),gridName);
-        setColumns("dataOperazione","operatore.indentificativo","cantiere.header","operabile.header","tipoOperazione");
+        setColumns("dataOperazione","operatore.identificativo","cantiere.header","operabile.header","tipoOperazione");
         setColumnCaption("cantiere.header", "Cantiere");
         setColumnCaption("operatore.identificativo", "Operatore");
         setColumnCaption("operabile.header", "Attrezzatura");
