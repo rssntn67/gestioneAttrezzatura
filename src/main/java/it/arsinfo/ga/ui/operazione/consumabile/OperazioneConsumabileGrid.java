@@ -9,9 +9,10 @@ public class OperazioneConsumabileGrid extends CustomGrid<OperazioneConsumabile>
 
     public OperazioneConsumabileGrid(String gridName) {
         super(new Grid<>(OperazioneConsumabile.class),gridName);
-        setColumns("dataOperazione","cantiere.header","operabile.code","tipoOperazione","numero");
+        setColumns("dataOperazione","cantiere.header","operatore.identificativo","operabile.header","tipoOperazione","numero");
         setColumnCaption("cantiere.header", "Cantiere");
-        setColumnCaption("operabile.code", "Consumabile");
+        setColumnCaption("operabile.headers", "Consumabile");
+        setColumnCaption("operatore.identificativo", "Operatore");
         setColumnCaption("numero", "qu.tà");
     }
 
