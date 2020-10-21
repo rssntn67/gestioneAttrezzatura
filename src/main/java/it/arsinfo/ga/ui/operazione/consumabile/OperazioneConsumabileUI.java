@@ -31,22 +31,27 @@ public class OperazioneConsumabileUI extends OperazioneUI<Consumabile, Operazion
 
 	    private final TextField numero = new TextField("Qu.ta");
 
-		public OperazioneConsumabileEditor(OperazioneService<Consumabile, OperazioneConsumabile> service) {
-			super(service, new Binder<>(OperazioneConsumabile.class));
-			setComponents(getActions(),new HorizontalLayout(getCantiereBox(),getOperabileBox(),getOperatoreBox(),getTipoBox(),numero));
-			
-	        getBinder()
-	        .forField(numero)
-	        .withConverter(new StringToIntegerConverter("Deve essere un numero"))
-	        .withValidator(num -> num != null && num > 0,"deve essere maggiore di 0")
-	        .bind(OperazioneConsumabile::getNumero, OperazioneConsumabile::setNumero);
+	    public OperazioneConsumabileEditor(OperazioneService<Consumabile, OperazioneConsumabile> service) {
+	        super(service, new Binder<>(OperazioneConsumabile.class));
+                HorizontalLayout cantieriHzL = new HorizontalLayout();
+                cantieriHzL.addComponentsAndExpand(getCantiereBox());
+                HorizontalLayout operabileHzL = new HorizontalLayout();
+                operabileHzL.addComponentsAndExpand(getOperabileBox());
+                HorizontalLayout operatoreHzL = new HorizontalLayout();
+                operatoreHzL.addComponentsAndExpand(getOperatoreBox());
+                setComponents(new HorizontalLayout(getTipoBox(), numero),
+                          operabileHzL, cantieriHzL, operatoreHzL,
+                          getActions());
 
-		}
+                getBinder().forField(numero).withConverter(new StringToIntegerConverter("Deve essere un numero")).withValidator(num -> num != null
+                    && num > 0, "deve essere maggiore di 0").bind(OperazioneConsumabile::getNumero,
+                                                                  OperazioneConsumabile::setNumero);
+	    }
 
-		@Override
-		public void focus() {
-		}
+	    @Override
+	    public void focus() {}
 	}
+
 	@Autowired
 	private OperazioneService<Consumabile, OperazioneConsumabile> service;
 	

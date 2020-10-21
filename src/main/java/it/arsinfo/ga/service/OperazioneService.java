@@ -13,6 +13,8 @@ public interface OperazioneService<T extends Operabile<?>, S extends Operazione<
 	void esegui(S operazione) throws Exception;
 	List<Cantiere> getCantieri();
 	List<Operatore> getOperatori();
+        List<Cantiere> getCantieriInOpera();
+        List<Operatore> getOperatoriAttivi();
 	List<T> getOperabili();
 	List<S> findAll();	
 	List<S> searchBy(Cantiere cantiere, T operabile, TipoOperazione t, Operatore operatore);

@@ -28,6 +28,7 @@ public abstract class OperazioneUI<T extends Operabile<?>, S extends Operazione<
             hideMenu();
             add.setVisible(false);
             search.setVisible(false);
+            grid.setVisible(false);
             editor.edit(add.generate());
         });
         

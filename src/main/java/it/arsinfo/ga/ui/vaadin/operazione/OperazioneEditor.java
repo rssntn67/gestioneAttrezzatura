@@ -23,7 +23,7 @@ import it.arsinfo.ga.ui.vaadin.UIChangeHandler;
 
 public abstract class OperazioneEditor<T extends Operabile<?>, S extends Operazione<T>>  extends UIChangeHandler {
 
-	private HorizontalLayout actions = new HorizontalLayout();
+    private HorizontalLayout actions = new HorizontalLayout();
 	
     private final OperazioneService<T,S> service;
     
@@ -63,7 +63,7 @@ public abstract class OperazioneEditor<T extends Operabile<?>, S extends Operazi
         
         cantiere.setItemCaptionGenerator(Cantiere::getHeader);
         cantiere.setEmptySelectionAllowed(false);
-        cantiere.setItems(service.getCantieri());
+        cantiere.setItems(service.getCantieriInOpera());
         
         operabile.setItemCaptionGenerator(Operabile::getHeader);
         operabile.setEmptySelectionAllowed(false);
@@ -71,7 +71,7 @@ public abstract class OperazioneEditor<T extends Operabile<?>, S extends Operazi
         
         operatore.setItemCaptionGenerator(Operatore::getHeader);
         operatore.setEmptySelectionAllowed(false);
-        operatore.setItems(service.getOperatori());
+        operatore.setItems(service.getOperatoriAttivi());
 
 
    }

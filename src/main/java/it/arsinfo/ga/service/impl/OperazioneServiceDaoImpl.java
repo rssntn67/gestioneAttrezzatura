@@ -15,7 +15,6 @@ import it.arsinfo.ga.dao.OperabileDao;
 import it.arsinfo.ga.dao.OperatoreDao;
 import it.arsinfo.ga.dao.OperazioneDao;
 import it.arsinfo.ga.model.data.StatoCantiere;
-import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.data.StatoOperatore;
 import it.arsinfo.ga.model.data.TipoOperazione;
 import it.arsinfo.ga.model.entity.Cantiere;
@@ -44,18 +43,28 @@ implements OperazioneService<T,S>{
 	private OperazioneDao<T, S> operazioneDao;
 	
 	@Override
-	public List<Cantiere> getCantieri() {
+	public List<Cantiere> getCantieriInOpera() {
 		return cantiereDao.findByStato(StatoCantiere.InOpera);
 	}
 
+       @Override
+       public List<Cantiere> getCantieri() {
+           return cantiereDao.findAll();
+       }
+
 	@Override
 	public List<Operatore> getOperatori() {
-		return operatoreDao.findByStato(StatoOperatore.Attivo);
+		return operatoreDao.findAll();
 	}
-	
+
+	@Override
+	public List<Operatore> getOperatoriAttivi() {
+	    return operatoreDao.findByStato(StatoOperatore.Attivo);
+	}
+
 	@Override
 	public List<T> getOperabili() {
-		return operabileDao.findByStato(StatoOperabile.Disponibile);
+		return operabileDao.findAll();
 	}
 
 	@Override

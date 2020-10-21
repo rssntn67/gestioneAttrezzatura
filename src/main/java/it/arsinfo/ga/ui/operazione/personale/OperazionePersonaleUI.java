@@ -31,10 +31,18 @@ public class OperazionePersonaleUI extends OperazioneUI<Personale, OperazionePer
 
 	    private final TextField numero = new TextField("Qu.ta");
 
-		public OperazionePersonaleEditor(OperazioneService<Personale, OperazionePersonale> service) {
-			super(service, new Binder<>(OperazionePersonale.class));
-			setComponents(getActions(),new HorizontalLayout(getCantiereBox(),getOperabileBox(),getOperatoreBox(),getTipoBox(),numero));
-			
+	    public OperazionePersonaleEditor(OperazioneService<Personale, OperazionePersonale> service) {
+		super(service, new Binder<>(OperazionePersonale.class));
+                HorizontalLayout cantieriHzL = new HorizontalLayout();
+                cantieriHzL.addComponentsAndExpand(getCantiereBox());
+                HorizontalLayout operabileHzL = new HorizontalLayout();
+                operabileHzL.addComponentsAndExpand(getOperabileBox());
+                HorizontalLayout operatoreHzL = new HorizontalLayout();
+                operatoreHzL.addComponentsAndExpand(getOperatoreBox());
+                setComponents(new HorizontalLayout(getTipoBox(), numero),
+                          operabileHzL, cantieriHzL, operatoreHzL,
+                          getActions());
+		
 	        getBinder()
 	        .forField(numero)
 	        .withConverter(new StringToIntegerConverter("Deve essere un numero"))

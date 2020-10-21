@@ -29,7 +29,13 @@ public class OperazioneAttrezzaturaUI extends OperazioneUI<Attrezzatura, Operazi
 		
 		public OperazioneAttrezzaturaEditor(OperazioneService<Attrezzatura, OperazioneAttrezzatura> service) {
 			super(service, new Binder<>(OperazioneAttrezzatura.class));
-			setComponents(getActions(),new HorizontalLayout(getCantiereBox(),getOperabileBox(),getOperatoreBox(),getTipoBox()));
+			HorizontalLayout cantieriHzL=new HorizontalLayout();
+			cantieriHzL.addComponentsAndExpand(getCantiereBox());
+                        HorizontalLayout operabileHzL=new HorizontalLayout();
+                        operabileHzL.addComponentsAndExpand(getOperabileBox());
+                        HorizontalLayout operatoreHzL=new HorizontalLayout();
+                        operatoreHzL.addComponentsAndExpand(getOperatoreBox());
+			setComponents(new HorizontalLayout(getTipoBox()),operabileHzL,cantieriHzL,operatoreHzL,getActions());
 		}
 
 		@Override
