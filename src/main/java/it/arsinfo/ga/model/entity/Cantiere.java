@@ -28,100 +28,109 @@ public class Cantiere implements EntityBase {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-	@Override
-	public Long getId() {
-		return id;
-	}
+    @Override
+    public Long getId() {
+        return id;
+    }
 
-	@Override
+    @Override
     @Transient
     public String getHeader() {
         return identificativo;
     }
 
+    @Column(nullable = false)
     private String identificativo;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoCantiere tipo=TipoCantiere.Spazzamento;
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private StatoCantiere stato=StatoCantiere.InOpera;
 
+    @Column(nullable = false)
     private String sitoIn;
+    
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date aperturaCantiere = new Date();
+    
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date chiusuraCantiere = new Date();
 	
+    @Column(nullable = false)
     Integer distanzaChilometrica=0;
 
-    @Column(nullable = false)
     public String getIdentificativo() {
-		return identificativo;
-	}
+        return identificativo;
+    }
 
-	public void setIdentificativo(String identificativo) {
-		this.identificativo = identificativo;
-	}
+    public void setIdentificativo(String identificativo) {
+        this.identificativo = identificativo;
+    }
 
-	public StatoCantiere getStato() {
-		return stato;
-	}
+    public StatoCantiere getStato() {
+        return stato;
+    }
 
-	public void setStato(StatoCantiere statoCantiere) {
-		this.stato = statoCantiere;
-	}
+    public void setStato(StatoCantiere statoCantiere) {
+        this.stato = statoCantiere;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getSitoIn() {
-		return sitoIn;
-	}
+    public String getSitoIn() {
+        return sitoIn;
+    }
 
-	public void setSitoIn(String sitoIn) {
-		this.sitoIn = sitoIn;
-	}
+    public void setSitoIn(String sitoIn) {
+        this.sitoIn = sitoIn;
+    }
 
-	public Date getAperturaCantiere() {
-		return aperturaCantiere;
-	}
+    public Date getAperturaCantiere() {
+        return aperturaCantiere;
+    }
 
-	public void setAperturaCantiere(Date aperturaCantiere) {
-		this.aperturaCantiere = aperturaCantiere;
-	}
+    public void setAperturaCantiere(Date aperturaCantiere) {
+        this.aperturaCantiere = aperturaCantiere;
+    }
 
-	public Date getChiusuraCantiere() {
-		return chiusuraCantiere;
-	}
+    public Date getChiusuraCantiere() {
+        return chiusuraCantiere;
+    }
 
-	public void setChiusuraCantiere(Date chiusuraCantiere) {
-		this.chiusuraCantiere = chiusuraCantiere;
-	}
+    public void setChiusuraCantiere(Date chiusuraCantiere) {
+        this.chiusuraCantiere = chiusuraCantiere;
+    }
 
-	public Integer getDistanzaChilometrica() {
-		return distanzaChilometrica;
-	}
+    public Integer getDistanzaChilometrica() {
+        return distanzaChilometrica;
+    }
 
-	public void setDistanzaChilometrica(Integer distanzaChilometrica) {
-		this.distanzaChilometrica = distanzaChilometrica;
-	}
+    public void setDistanzaChilometrica(Integer distanzaChilometrica) {
+        this.distanzaChilometrica = distanzaChilometrica;
+    }
 
-	public TipoCantiere getTipo() {
-		return tipo;
-	}
+    public TipoCantiere getTipo() {
+        return tipo;
+    }
 
-	public void setTipo(TipoCantiere tipo) {
-		this.tipo = tipo;
-	}
+    public void setTipo(TipoCantiere tipo) {
+        this.tipo = tipo;
+    }
 
-	@Override
-	public String toString() {
-		return "Cantiere [id=" + id + ", identificativo=" + identificativo + ", tipo=" + tipo + ", statoCantiere="
-				+ stato + ", sitoIn=" + sitoIn + ", aperturaCantiere=" + aperturaCantiere
-				+ ", chiusuraCantiere=" + chiusuraCantiere + ", distanzaChilometrica=" + distanzaChilometrica + "]";
-	}
-    
-    
+    @Override
+    public String toString() {
+        return "Cantiere [id=" + id + ", identificativo=" + identificativo
+                + ", tipo=" + tipo + ", statoCantiere=" + stato + ", sitoIn="
+                + sitoIn + ", aperturaCantiere=" + aperturaCantiere
+                + ", chiusuraCantiere=" + chiusuraCantiere
+                + ", distanzaChilometrica=" + distanzaChilometrica + "]";
+    }
     
 }

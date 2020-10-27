@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import it.arsinfo.ga.model.data.StatoOperabile;
 
@@ -22,94 +23,98 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 public class Consumabile implements Operabile<ModelloConsumabile> {
 
     @ManyToOne(fetch=FetchType.EAGER)
+    @NotNull
     private ModelloConsumabile modello;
-    
-    
+        
+    @Column(nullable = false)
     private Integer numero=0;
+    
+    @Column(nullable = false)
     private Integer utilizzati=0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String identificativo;
-        
-	@Override
-	public Long getId() {
-		return id;
-	}
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatoOperabile stato=StatoOperabile.Disponibile;
 
     @Override
-    @Column(nullable = false)
-	public String getIdentificativo() {
-		return identificativo;
-	}
+    public Long getId() {
+        return id;
+    }
+
 
     @Override
-	public void setIdentificativo(String identificativo) {
-		this.identificativo = identificativo;
-	}
+    public String getIdentificativo() {
+	return identificativo;
+    }
 
-	public StatoOperabile getStato() {
-		return stato;
-	}
+    @Override
+    public void setIdentificativo(String identificativo) {
+        this.identificativo = identificativo;
+    }
 
-	public void setStato(StatoOperabile stato) {
-		this.stato = stato;
-	}
+    public StatoOperabile getStato() {
+        return stato;
+    }
 
-	@Override
+    public void setStato(StatoOperabile stato) {
+        this.stato = stato;
+    }
+
+    @Override
     @Transient
     public String getHeader() {
         return String.format("%s:%s:%s", identificativo,getModello().getHeader(),stato);
     }
 
-	@Override
+    @Override
     @Transient
     public String getCode() {
         return identificativo;
     }
 
     @Override
-	public ModelloConsumabile getModello() {
-		return modello;
-	}
+    public ModelloConsumabile getModello() {
+	return modello;
+    }
 
     @Override
-	public void setModello(ModelloConsumabile modelloConsumabile) {
-		this.modello = modelloConsumabile;
-	}
+    public void setModello(ModelloConsumabile modelloConsumabile) {
+        this.modello = modelloConsumabile;
+    }
 
+    public Integer getNumero() {
+        return numero;
+    }
 
-	public Integer getNumero() {
-		return numero;
-	}
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
+    public Integer getDisponibili() {
+	return numero-utilizzati;
+    }
 
-	public Integer getDisponibili() {
-		return numero-utilizzati;
-	}
+    public Integer getUtilizzati() {
+        return utilizzati;
+    }
 
+    public void setUtilizzati(Integer utilizzati) {
+        this.utilizzati = utilizzati;
+    }
 
-	@Override
-	public String toString() {
-		return "Consumabile [modelloConsumabile=" + modello + ", numero=" + numero + ", utilizzati="
-				+ utilizzati + ", id=" + id + ", identificativo=" + identificativo + ", stato=" + stato + "]";
-	}
-
-	public Integer getUtilizzati() {
-		return utilizzati;
-	}
-
-	public void setUtilizzati(Integer utilizzati) {
-		this.utilizzati = utilizzati;
-	}
+    @Override
+    public String toString() {
+        return "Consumabile [modelloConsumabile=" + modello + ", numero="
+                + numero + ", utilizzati=" + utilizzati + ", id=" + id
+                + ", identificativo=" + identificativo + ", stato=" + stato
+                + "]";
+    }
 
 }

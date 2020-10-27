@@ -32,15 +32,18 @@ public class UserInfo implements EntityBase {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable=false)
     private String passwordHash;
 
-    @Column(unique=true)
+    @Column(unique=true, nullable=false)
     private String username;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable=false)
     private Role role;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable=false)
     private Date data = new Date();
 
     public UserInfo() {

@@ -12,60 +12,64 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import it.arsinfo.ga.model.data.StatoOperabile;
 
 @Entity
-@Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"identificativo"})
-        })
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "identificativo" }) })
 public class Personale implements Operabile<ModelloPersonale> {
 
-
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @NotNull
     private ModelloPersonale modello;
 
-    private Integer numero=0;
-    private Integer utilizzati=0;
+    @Column(nullable = false)
+    private Integer numero = 0;
+
+    @Column(nullable = false)
+    private Integer utilizzati = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String identificativo;
-        
-	@Override
-	public Long getId() {
-		return id;
-	}
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatoOperabile stato=StatoOperabile.Disponibile;
+    private StatoOperabile stato = StatoOperabile.Disponibile;
 
     @Override
-    @Column(nullable = false)
-	public String getIdentificativo() {
-		return identificativo;
-	}
+    public Long getId() {
+        return id;
+    }
 
     @Override
-	public void setIdentificativo(String identificativo) {
-		this.identificativo = identificativo;
-	}
+    public String getIdentificativo() {
+        return identificativo;
+    }
 
-	public StatoOperabile getStato() {
-		return stato;
-	}
+    @Override
+    public void setIdentificativo(String identificativo) {
+        this.identificativo = identificativo;
+    }
 
-	public void setStato(StatoOperabile stato) {
-		this.stato = stato;
-	}
+    public StatoOperabile getStato() {
+        return stato;
+    }
 
-	@Override
+    public void setStato(StatoOperabile stato) {
+        this.stato = stato;
+    }
+
+    @Override
     @Transient
     public String getHeader() {
-        return String.format("%s:%s:%s", identificativo,getModello().getHeader(),stato);
+        return String.format("%s:%s:%s", identificativo,
+                             getModello().getHeader(), stato);
     }
 
     @Transient
@@ -74,40 +78,42 @@ public class Personale implements Operabile<ModelloPersonale> {
     }
 
     @Override
-	public ModelloPersonale getModello() {
-		return modello;
-	}
+    public ModelloPersonale getModello() {
+        return modello;
+    }
 
     @Override
-	public void setModello(ModelloPersonale modelloPersonale) {
-		this.modello = modelloPersonale;
-	}
+    public void setModello(ModelloPersonale modelloPersonale) {
+        this.modello = modelloPersonale;
+    }
 
-	public Integer getNumero() {
-		return numero;
-	}
+    public Integer getNumero() {
+        return numero;
+    }
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
 
-	public Integer getUtilizzati() {
-		return utilizzati;
-	}
+    public Integer getUtilizzati() {
+        return utilizzati;
+    }
 
-	public void setUtilizzati(Integer utilizzati) {
-		this.utilizzati = utilizzati;
-	}
+    public void setUtilizzati(Integer utilizzati) {
+        this.utilizzati = utilizzati;
+    }
 
-	@Transient
-	public Integer getDisponibili() {
-		return numero-utilizzati;
-	}
+    @Transient
+    public Integer getDisponibili() {
+        return numero - utilizzati;
+    }
 
-	@Override
-	public String toString() {
-		return "Personale [modelloPersonale=" + modello + ", numero=" + numero + ", utilizzati=" + utilizzati
-				+ ", id=" + id + ", identificativo=" + identificativo + ", stato=" + stato + "]";
-	}
-	
+    @Override
+    public String toString() {
+        return "Personale [modelloPersonale=" + modello + ", numero=" + numero
+                + ", utilizzati=" + utilizzati + ", id=" + id
+                + ", identificativo=" + identificativo + ", stato=" + stato
+                + "]";
+    }
+
 }

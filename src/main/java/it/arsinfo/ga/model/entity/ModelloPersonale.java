@@ -18,22 +18,26 @@ import it.arsinfo.ga.model.data.Fornitore;
 import it.arsinfo.ga.model.data.TipoPersonale;
 
 @Entity
-@Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"nome","fornitore","tipo","annoProduzione"})
-})
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "nome",
+        "fornitore", "tipo", "annoProduzione" }) })
 public class ModelloPersonale implements Modello {
-    
-    private TipoPersonale tipo = TipoPersonale.Altri;    
 
-	private BigDecimal costo = BigDecimal.ZERO;
-	 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoPersonale tipo = TipoPersonale.Altri;
+
+    @Column(nullable = false)
+    private BigDecimal costo = BigDecimal.ZERO;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
+
     private String descrizione;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Fornitore fornitore = Fornitore.NonDefinito;
@@ -42,72 +46,71 @@ public class ModelloPersonale implements Modello {
     @Column(nullable = false)
     private Anno annoProduzione = Anno.ANNOND;
 
-
-	@Override
-	public Long getId() {
-		return id;
-	}
-	 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-
-	public Fornitore getFornitore() {
-		return fornitore;
-	}
-
-	public void setFornitore(Fornitore fornitore) {
-		this.fornitore = fornitore;
-	}
-
-	public Anno getAnnoProduzione() {
-		return annoProduzione;
-	}
-
-	public void setAnnoProduzione(Anno annoProduzione) {
-		this.annoProduzione = annoProduzione;
-	}
-
-	@Override
-    @Transient
-    public String getHeader() {
-        return String.format("%s:%s", nome,annoProduzione.getAnnoAsString());
+    @Override
+    public Long getId() {
+        return id;
     }
 
-	public TipoPersonale getTipo() {
-		return tipo;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setTipo(TipoPersonale tipoModello) {
-		this.tipo = tipoModello;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public BigDecimal getCosto() {
-		return costo;
-	}
+    public String getDescrizione() {
+        return descrizione;
+    }
 
-	public void setCosto(BigDecimal costo) {
-		this.costo = costo;
-	}
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
 
-	@Override
-	public String toString() {
-		return "ModelloPersonale [tipo=" + tipo + ", costo=" + costo + ", id=" + id + ", nome=" + nome
-				+ ", descrizione=" + descrizione + ", fornitore=" + fornitore + ", annoProduzione=" + annoProduzione
-				+ "]";
-	}
+    public Fornitore getFornitore() {
+        return fornitore;
+    }
 
-	
+    public void setFornitore(Fornitore fornitore) {
+        this.fornitore = fornitore;
+    }
+
+    public Anno getAnnoProduzione() {
+        return annoProduzione;
+    }
+
+    public void setAnnoProduzione(Anno annoProduzione) {
+        this.annoProduzione = annoProduzione;
+    }
+
+    @Override
+    @Transient
+    public String getHeader() {
+        return String.format("%s:%s", nome, annoProduzione.getAnnoAsString());
+    }
+
+    public TipoPersonale getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoPersonale tipoModello) {
+        this.tipo = tipoModello;
+    }
+
+    public BigDecimal getCosto() {
+        return costo;
+    }
+
+    public void setCosto(BigDecimal costo) {
+        this.costo = costo;
+    }
+
+    @Override
+    public String toString() {
+        return "ModelloPersonale [tipo=" + tipo + ", costo=" + costo + ", id="
+                + id + ", nome=" + nome + ", descrizione=" + descrizione
+                + ", fornitore=" + fornitore + ", annoProduzione="
+                + annoProduzione + "]";
+    }
+
 }

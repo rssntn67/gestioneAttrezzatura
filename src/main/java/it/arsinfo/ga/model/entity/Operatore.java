@@ -1,6 +1,9 @@
 package it.arsinfo.ga.model.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,68 +25,78 @@ public class Operatore implements EntityBase {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @Column(nullable = false)
     private String apikey;
+    
+    @Column(nullable = false)
     private String email;
+    
+    @Column(nullable = false)
     private String identificativo;
+    
+    @Column(nullable = false)
     private String telefono;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private StatoOperatore stato = StatoOperatore.Attivo;
     
-    
-	@Override
-	public Long getId() {
-		return id;
-	}
+    @Override
+    public Long getId() {
+        return id;
+    }
 
-	@Override
+    @Override
     @Transient
     public String getHeader() {
         return String.format("%s", identificativo);
     }
 
-	public String getApikey() {
-		return apikey;
-	}
+    public String getApikey() {
+        return apikey;
+    }
 
-	public void setApikey(String apiKey) {
-		this.apikey = apiKey;
-	}
+    public void setApikey(String apiKey) {
+        this.apikey = apiKey;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String eMail) {
-		this.email = eMail;
-	}
+    public void setEmail(String eMail) {
+        this.email = eMail;
+    }
 
-	public String getIdentificativo() {
-		return identificativo;
-	}
+    public String getIdentificativo() {
+        return identificativo;
+    }
 
-	public void setIdentificativo(String identificativo) {
-		this.identificativo = identificativo;
-	}
+    public void setIdentificativo(String identificativo) {
+        this.identificativo = identificativo;
+    }
 
-	public String getTelefono() {
-		return telefono;
-	}
+    public String getTelefono() {
+        return telefono;
+    }
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
-	public StatoOperatore getStato() {
-		return stato;
-	}
+    public StatoOperatore getStato() {
+        return stato;
+    }
 
-	public void setStato(StatoOperatore stato) {
-		this.stato = stato;
-	}
+    public void setStato(StatoOperatore stato) {
+        this.stato = stato;
+    }
 
-	@Override
-	public String toString() {
-		return "Operatore [id=" + id + ", apiKey=" + apikey + ", eMail=" + email + ", identificativo=" + identificativo
-				+ ", telefono=" + telefono + ", stato=" + stato + "]";
-	}
+    @Override
+    public String toString() {
+        return "Operatore [id=" + id + ", apiKey=" + apikey + ", eMail="
+                + email + ", identificativo=" + identificativo + ", telefono="
+                + telefono + ", stato=" + stato + "]";
+    }
 
 }

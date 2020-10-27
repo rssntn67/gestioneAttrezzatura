@@ -19,27 +19,30 @@ import it.arsinfo.ga.model.data.MarcaConsumabile;
 import it.arsinfo.ga.model.data.TipoConsumabile;
 
 @Entity
-@Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"nome","fornitore","marca","tipo","annoProduzione"})
-})
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "nome",
+        "fornitore", "marca", "tipo", "annoProduzione" }) })
 public class ModelloConsumabile implements Modello {
-    
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private MarcaConsumabile marca = MarcaConsumabile.NonDefinita;
+    
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TipoConsumabile tipo = TipoConsumabile.NonDisponibile;    
+    private TipoConsumabile tipo = TipoConsumabile.NonDisponibile;
 
-    private BigDecimal costo=BigDecimal.ZERO;
-	 
+    @Column(nullable = false)
+    private BigDecimal costo = BigDecimal.ZERO;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
+
     private String descrizione;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Fornitore fornitore = Fornitore.NonDefinito;
@@ -48,80 +51,79 @@ public class ModelloConsumabile implements Modello {
     @Column(nullable = false)
     private Anno annoProduzione = Anno.ANNOND;
 
-
-	@Override
-	public Long getId() {
-		return id;
-	}
-	 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-
-	public Fornitore getFornitore() {
-		return fornitore;
-	}
-
-	public void setFornitore(Fornitore fornitore) {
-		this.fornitore = fornitore;
-	}
-
-	public Anno getAnnoProduzione() {
-		return annoProduzione;
-	}
-
-	public void setAnnoProduzione(Anno annoProduzione) {
-		this.annoProduzione = annoProduzione;
-	}
-
-	@Override
-    @Transient
-    public String getHeader() {
-        return String.format("%s:%s:%s", nome,marca,tipo);
+    @Override
+    public Long getId() {
+        return id;
     }
 
-	public MarcaConsumabile getMarca() {
-		return marca;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public TipoConsumabile getTipo() {
-		return tipo;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setTipo(TipoConsumabile tipoModello) {
-		this.tipo = tipoModello;
-	}
+    public String getDescrizione() {
+        return descrizione;
+    }
 
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
 
-	public BigDecimal getCosto() {
-		return costo;
-	}
+    public Fornitore getFornitore() {
+        return fornitore;
+    }
 
-	public void setCosto(BigDecimal importo) {
-		this.costo = importo;
-	}
+    public void setFornitore(Fornitore fornitore) {
+        this.fornitore = fornitore;
+    }
 
-	public void setMarca(MarcaConsumabile marca) {
-		this.marca = marca;
-	}
+    public Anno getAnnoProduzione() {
+        return annoProduzione;
+    }
 
-	@Override
-	public String toString() {
-		return "ModelloConsumabile [marca=" + marca + ", tipo=" + tipo + ", importo=" + costo + ", id=" + id
-				+ ", nome=" + nome + ", descrizione=" + descrizione + ", fornitore=" + fornitore + ", annoProduzione="
-				+ annoProduzione + "]";
-	}
+    public void setAnnoProduzione(Anno annoProduzione) {
+        this.annoProduzione = annoProduzione;
+    }
+
+    @Override
+    @Transient
+    public String getHeader() {
+        return String.format("%s:%s:%s", nome, marca, tipo);
+    }
+
+    public MarcaConsumabile getMarca() {
+        return marca;
+    }
+
+    public TipoConsumabile getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoConsumabile tipoModello) {
+        this.tipo = tipoModello;
+    }
+
+    public BigDecimal getCosto() {
+        return costo;
+    }
+
+    public void setCosto(BigDecimal importo) {
+        this.costo = importo;
+    }
+
+    public void setMarca(MarcaConsumabile marca) {
+        this.marca = marca;
+    }
+
+    @Override
+    public String toString() {
+        return "ModelloConsumabile [marca=" + marca + ", tipo=" + tipo
+                + ", importo=" + costo + ", id=" + id + ", nome=" + nome
+                + ", descrizione=" + descrizione + ", fornitore=" + fornitore
+                + ", annoProduzione=" + annoProduzione + "]";
+    }
 
 }

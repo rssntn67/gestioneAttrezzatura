@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import it.arsinfo.ga.dao.AttrezzaturaDao;
 import it.arsinfo.ga.dao.CantiereDao;
 import it.arsinfo.ga.dao.ModelloAttrezzaturaDao;
+import it.arsinfo.ga.dao.OperatoreDao;
 import it.arsinfo.ga.dao.OperazioneAttrezzaturaDao;
 import it.arsinfo.ga.model.data.Anno;
 import it.arsinfo.ga.model.data.Fornitore;
@@ -26,23 +27,27 @@ import it.arsinfo.ga.model.data.TipoAttrezzatura;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.entity.Operatore;
 import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class GestioneAttrezzaturaApplicationTests {
     
-	@Autowired
-	private ModelloAttrezzaturaDao modelloAttrezzaturaDao;
+    @Autowired
+    private ModelloAttrezzaturaDao modelloAttrezzaturaDao;
 
-	@Autowired
-	private AttrezzaturaDao attrezzaturaDao;
+    @Autowired
+    private AttrezzaturaDao attrezzaturaDao;
 
-	@Autowired
-	private CantiereDao cantiereDao;
-	
-	@Autowired
-	private OperazioneAttrezzaturaDao operazioneDao;
+    @Autowired
+    private CantiereDao cantiereDao;
+
+    @Autowired
+    private OperatoreDao operatoreDao;
+
+    @Autowired
+    private OperazioneAttrezzaturaDao operazioneDao;
 	
     private static final Logger log = LoggerFactory.getLogger(GestioneAttrezzaturaApplicationTests.class);
 
@@ -60,7 +65,7 @@ public class GestioneAttrezzaturaApplicationTests {
     	assertEquals(0, cantiereDao.count());
     	Cantiere c = new Cantiere();
     	c.setIdentificativo("Autostrade-MI-NA-0006");
-    	
+    	c.setSitoIn("Bologna");
     	cantiereDao.save(c);
     	
     	assertEquals(1, cantiereDao.count());
@@ -158,10 +163,10 @@ public class GestioneAttrezzaturaApplicationTests {
     @Test
     public void testOperazioneCRUD() throws Exception {
 
-    	Cantiere c = new Cantiere();
-    	c.setIdentificativo("Autostrade-MI-NA-0006");
-    	
-    	cantiereDao.save(c);
+    	Cantiere cantiere = new Cantiere();
+    	cantiere.setIdentificativo("Autostrade-MI-NA-0006");
+    	cantiere.setSitoIn("Bologna");
+    	cantiereDao.save(cantiere);
     	
     	ModelloAttrezzatura mda1 = new ModelloAttrezzatura();
     	mda1.setNome("AAA1");
@@ -172,14 +177,22 @@ public class GestioneAttrezzaturaApplicationTests {
     	
     	modelloAttrezzaturaDao.save(mda1);
     	
-    	Attrezzatura a =  new Attrezzatura();
-    	a.setIdentificativo("xp37jkf");
-    	a.setModello(mda1);
-    	attrezzaturaDao.save(a);
+    	Attrezzatura attrezzatura =  new Attrezzatura();
+    	attrezzatura.setIdentificativo("xp37jkf");
+    	attrezzatura.setModello(mda1);
+    	attrezzaturaDao.save(attrezzatura);
     	
+    	Operatore operatore = new Operatore();
+    	operatore.setApikey("apikey");
+    	operatore.setEmail("rssntn67yahoo.it");
+    	operatore.setIdentificativo("rssntn67");
+    	operatore.setTelefono("+393483825976");
+    	operatoreDao.save(operatore);
+
     	OperazioneAttrezzatura o = new OperazioneAttrezzatura();
-    	o.setCantiere(c);
-    	o.setOperabile(a);
+    	o.setCantiere(cantiere);
+    	o.setOperabile(attrezzatura);
+    	o.setOperatore(operatore);
     	operazioneDao.save(o);
     	
     	log.info("{}",o);

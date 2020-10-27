@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import it.arsinfo.ga.model.data.TipoOperazione;
 
@@ -25,12 +26,15 @@ public class OperazioneAttrezzatura implements Operazione<Attrezzatura> {
     private Long id;
 
     @ManyToOne(fetch=FetchType.LAZY)
+    @NotNull
     private Attrezzatura operabile;
 
     @ManyToOne(fetch=FetchType.LAZY)
+    @NotNull
     private Operatore operatore;
     
     @ManyToOne(fetch=FetchType.LAZY)
+    @NotNull
     private Cantiere cantiere;
 
     @Enumerated(EnumType.STRING)
@@ -38,6 +42,7 @@ public class OperazioneAttrezzatura implements Operazione<Attrezzatura> {
     private TipoOperazione tipoOperazione=TipoOperazione.Carico;
     
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date dataOperazione = new Date();
 
 	@Override

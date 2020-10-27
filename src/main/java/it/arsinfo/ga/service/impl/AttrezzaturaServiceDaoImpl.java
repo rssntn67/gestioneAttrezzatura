@@ -25,71 +25,79 @@ public class AttrezzaturaServiceDaoImpl implements AttrezzaturaService {
 
     @Autowired
     private OperazioneAttrezzaturaServiceDaoImpl service;
-	@Override
-	public Attrezzatura save(Attrezzatura entity) throws Exception {
-		return repository.save(entity);
-	}
 
-	@Override
-	public void delete(Attrezzatura entity) throws Exception {
-		repository.delete(entity);
-	}
+    @Override
+    public Attrezzatura save(Attrezzatura entity) throws Exception {
+        return repository.save(entity);
+    }
 
-	@Override
-	public Attrezzatura findById(Long id) {
-		return repository.findById(id).get();
-	}
+    @Override
+    public void delete(Attrezzatura entity) throws Exception {
+        repository.delete(entity);
+    }
 
-	@Override
-	public List<Attrezzatura> findAll() {
-		return repository.findAll();
-	}
+    @Override
+    public Attrezzatura findById(Long id) {
+        return repository.findById(id).get();
+    }
 
-	public AttrezzaturaDao getRepository() {
-		return repository;
-	}
+    @Override
+    public List<Attrezzatura> findAll() {
+        return repository.findAll();
+    }
 
-	@Override
-	public List<Attrezzatura> searchBy(StatoOperabile searchStatoAttrezzatura, String searchIdentificativo,
-			ModelloAttrezzatura searchModello) {
-		if (StringUtils.isEmpty(searchIdentificativo) && searchStatoAttrezzatura == null && searchModello == null)
-			return repository.findAll();
+    public AttrezzaturaDao getRepository() {
+        return repository;
+    }
 
-		if (StringUtils.isEmpty(searchIdentificativo) && searchStatoAttrezzatura == null )
-			return repository.findByModello(searchModello);
+    @Override
+    public List<Attrezzatura> searchBy(StatoOperabile searchStatoAttrezzatura,
+            String searchIdentificativo, ModelloAttrezzatura searchModello) {
+        if (StringUtils.isEmpty(searchIdentificativo)
+                && searchStatoAttrezzatura == null && searchModello == null)
+            return repository.findAll();
 
-		if (StringUtils.isEmpty(searchIdentificativo) && searchModello == null)
-			return repository.findByStato(searchStatoAttrezzatura);
+        if (StringUtils.isEmpty(searchIdentificativo)
+                && searchStatoAttrezzatura == null)
+            return repository.findByModello(searchModello);
 
-		if (searchStatoAttrezzatura == null && searchModello == null)
-			return repository.findByIdentificativoContainingIgnoreCase(searchIdentificativo);
+        if (StringUtils.isEmpty(searchIdentificativo)
+                && searchModello == null)
+            return repository.findByStato(searchStatoAttrezzatura);
 
-		if ( searchModello == null)
-			return repository.findByIdentificativoContainingIgnoreCaseAndStato(searchIdentificativo, searchStatoAttrezzatura);
+        if (searchStatoAttrezzatura == null && searchModello == null)
+            return repository.findByIdentificativoContainingIgnoreCase(searchIdentificativo);
 
-		if (searchStatoAttrezzatura == null )
-			return repository.findByIdentificativoContainingIgnoreCaseAndModello(searchIdentificativo, searchModello);
+        if (searchModello == null)
+            return repository.findByIdentificativoContainingIgnoreCaseAndStato(searchIdentificativo,
+                                                                               searchStatoAttrezzatura);
 
-		if (StringUtils.isEmpty(searchIdentificativo))
-			return repository.findByStatoAndModello(searchStatoAttrezzatura, searchModello);
+        if (searchStatoAttrezzatura == null)
+            return repository.findByIdentificativoContainingIgnoreCaseAndModello(searchIdentificativo,
+                                                                                 searchModello);
 
-		return repository.findByIdentificativoContainingIgnoreCaseAndStatoAndModello(searchIdentificativo, searchStatoAttrezzatura, searchModello);
-	}
+        if (StringUtils.isEmpty(searchIdentificativo))
+            return repository.findByStatoAndModello(searchStatoAttrezzatura,
+                                                    searchModello);
 
-	@Override
-	public List<ModelloAttrezzatura> getModelli() {
-		return modelliDao.findAll();
-	}
+        return repository.findByIdentificativoContainingIgnoreCaseAndStatoAndModello(searchIdentificativo,
+                                                                                     searchStatoAttrezzatura,
+                                                                                     searchModello);
+    }
 
-	@Override
-	public Attrezzatura findByIdentificativo(String identificatico) {
-		return repository.findByIdentificativo(identificatico);
-	}
+    @Override
+    public List<ModelloAttrezzatura> getModelli() {
+        return modelliDao.findAll();
+    }
 
-	@Override
-	public List<OperazioneAttrezzatura> findOperazioni(Attrezzatura t) {
-		return service.searchBy(null, t,null,null);
-	}
+    @Override
+    public Attrezzatura findByIdentificativo(String identificatico) {
+        return repository.findByIdentificativo(identificatico);
+    }
 
+    @Override
+    public List<OperazioneAttrezzatura> findOperazioni(Attrezzatura t) {
+        return service.searchBy(null, t, null, null);
+    }
 	
 }
