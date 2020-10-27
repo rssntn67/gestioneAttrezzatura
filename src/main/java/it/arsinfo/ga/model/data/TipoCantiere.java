@@ -8,5 +8,7 @@ public enum TipoCantiere {
 	Autostrada,
 	Tangenziale,
 	Capodichino,
+	Facchinaggio,
+	CuraDelVerde,
 	Altro
 }
