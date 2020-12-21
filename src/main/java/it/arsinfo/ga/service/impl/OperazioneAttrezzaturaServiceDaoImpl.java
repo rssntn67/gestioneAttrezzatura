@@ -3,6 +3,7 @@ package it.arsinfo.ga.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +13,11 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Attrezzatura;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
 import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
+import it.arsinfo.ga.model.kafka.KafkaOperazione;
 import it.arsinfo.ga.service.OperazioneService;
 
 @Service
+@Configuration
 public class OperazioneAttrezzaturaServiceDaoImpl extends OperazioneServiceDaoImpl<ModelloAttrezzatura,Attrezzatura,OperazioneAttrezzatura>implements OperazioneService<Attrezzatura, OperazioneAttrezzatura> {
 	
 	@Autowired
@@ -22,7 +25,7 @@ public class OperazioneAttrezzaturaServiceDaoImpl extends OperazioneServiceDaoIm
 	
 	@Autowired
 	private OperazioneAttrezzaturaDao operazioneDao;
-	
+			
     private static final Logger log = LoggerFactory.getLogger(OperazioneAttrezzaturaServiceDaoImpl.class);
 
 	@Override
@@ -51,6 +54,7 @@ public class OperazioneAttrezzaturaServiceDaoImpl extends OperazioneServiceDaoIm
 		}
 		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),operazione.getCantiere().getIdentificativo(),operabile.getIdentificativo(),operazione.getOperatore().getIdentificativo());
 		operabileDao.save(operabile);
-		operazioneDao.save(operazione);						
+		operazioneDao.save(operazione);	
+		super.sendToKafka(new KafkaOperazione(operazione, operabile,operazione.getCantiere(), operazione.getOperatore()));
 	}
 }

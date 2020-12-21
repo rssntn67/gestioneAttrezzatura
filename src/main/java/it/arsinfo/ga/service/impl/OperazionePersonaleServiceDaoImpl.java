@@ -12,6 +12,7 @@ import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
 import it.arsinfo.ga.model.entity.OperazionePersonale;
 import it.arsinfo.ga.model.entity.Personale;
+import it.arsinfo.ga.model.kafka.KafkaOperazione;
 import it.arsinfo.ga.service.OperazioneService;
 
 @Service
@@ -61,6 +62,7 @@ public class OperazionePersonaleServiceDaoImpl extends OperazioneServiceDaoImpl<
 		}		
 		log.info("esegui: {}, {}, {}, {}, {}",operazione.getTipoOperazione(),operazione.getCantiere().getIdentificativo(),operabile.getIdentificativo(),operazione.getOperatore().getIdentificativo(),operazione.getNumero());
 		operabileDao.save(operabile);
-		operazioneDao.save(operazione);						
+		operazioneDao.save(operazione);
+		super.sendToKafka(new KafkaOperazione(operazione, operabile,operazione.getCantiere(), operazione.getOperatore()));
 	}
 }

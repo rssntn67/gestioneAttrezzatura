@@ -45,7 +45,7 @@ public class OperazioneAttrezzatura implements Operazione<Attrezzatura> {
     @Column(nullable = false)
     private Date dataOperazione = new Date();
 
-	@Override
+    @Override
 	public Long getId() {
 		return id;
 	}
@@ -112,6 +112,6 @@ public class OperazioneAttrezzatura implements Operazione<Attrezzatura> {
 				+ ", cantiere=" + cantiere + ", tipoOperazione=" + tipoOperazione + ", dataOperazione=" + dataOperazione
 				+ "]";
 	}
-    
 
+    
 }

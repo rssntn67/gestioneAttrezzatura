@@ -14,6 +14,7 @@ import it.arsinfo.ga.dao.CantiereDao;
 import it.arsinfo.ga.dao.OperabileDao;
 import it.arsinfo.ga.dao.OperatoreDao;
 import it.arsinfo.ga.dao.OperazioneDao;
+import it.arsinfo.ga.kafka.KafkaProducer;
 import it.arsinfo.ga.model.data.StatoCantiere;
 import it.arsinfo.ga.model.data.StatoOperatore;
 import it.arsinfo.ga.model.data.TipoOperazione;
@@ -22,6 +23,7 @@ import it.arsinfo.ga.model.entity.Modello;
 import it.arsinfo.ga.model.entity.Operabile;
 import it.arsinfo.ga.model.entity.Operatore;
 import it.arsinfo.ga.model.entity.Operazione;
+import it.arsinfo.ga.model.kafka.KafkaOperazione;
 import it.arsinfo.ga.service.OperazioneService;
 
 public abstract class OperazioneServiceDaoImpl<M extends Modello,T extends Operabile<M>,S extends Operazione<T>> 
@@ -41,6 +43,9 @@ implements OperazioneService<T,S>{
 	
 	@Autowired
 	private OperazioneDao<T, S> operazioneDao;
+	
+       @Autowired
+       private KafkaProducer producer;
 	
 	@Override
 	public List<Cantiere> getCantieriInOpera() {
@@ -143,5 +148,10 @@ implements OperazioneService<T,S>{
 	public S getLastOperation(T operabile) {
 		return operazioneDao.findTopByOperabileOrderByIdDesc(operabile);
 	}
+	
+	public void sendToKafka(KafkaOperazione k) {
+	    producer.send(k);
+	}
+	
 
 }
