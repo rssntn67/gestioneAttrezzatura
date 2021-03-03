@@ -61,12 +61,10 @@ public class AttrezzaturaEditor extends OperabileEditor<ModelloAttrezzatura, Att
         	stato.setVisible(true);
         	identificativo.setReadOnly(true);
         	stato.focus();
-        	modello.setReadOnly(true);
         } else {
         	stato.setVisible(false);        	
         	identificativo.setReadOnly(false);
         	identificativo.focus();
-        	modello.setReadOnly(false);
         }
     }
 }
