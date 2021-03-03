@@ -56,12 +56,10 @@ public class OperatoreEditor extends Editor<Operatore> {
         if (persisted) {
         	stato.setVisible(true);
         	apikey.setVisible(true);
-        	identificativo.setReadOnly(true);
         	stato.focus();
         } else {
         	stato.setVisible(false);        	
-            apikey.setVisible(false);
-        	identificativo.setReadOnly(false);
+        	apikey.setVisible(false);
         	identificativo.focus();
         }
     }
