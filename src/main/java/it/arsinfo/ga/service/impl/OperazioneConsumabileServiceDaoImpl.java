@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import it.arsinfo.ga.dao.ConsumabileDao;
 import it.arsinfo.ga.dao.OperazioneConsumabileDao;
 import it.arsinfo.ga.model.data.StatoOperabile;
+import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.Consumabile;
 import it.arsinfo.ga.model.entity.ModelloConsumabile;
+import it.arsinfo.ga.model.entity.Operatore;
 import it.arsinfo.ga.model.entity.OperazioneConsumabile;
 import it.arsinfo.ga.model.kafka.KafkaOperazione;
 import it.arsinfo.ga.service.OperazioneService;
@@ -29,7 +31,9 @@ public class OperazioneConsumabileServiceDaoImpl extends OperazioneServiceDaoImp
 	@Override
 	@Transactional
 	public void esegui(OperazioneConsumabile operazione) throws Exception {
-		Consumabile operabile = check(operazione);
+            Cantiere cantiere = getCantiere(operazione);
+            Operatore operatore = getOperatore(operazione);
+		Consumabile operabile = getOperabile(operazione);
 		if (operazione.getNumero() > operabile.getDisponibili()) {
 			log.error("esegui: Q.tà operazione {} minore Q.tà disponibile {}, {}", operazione.getNumero(), operabile.getNumero(),operabile.getIdentificativo());
 			throw new UnsupportedOperationException("Numero operabile minore disponibile");
@@ -55,7 +59,7 @@ public class OperazioneConsumabileServiceDaoImpl extends OperazioneServiceDaoImp
 		log.info("esegui: {}, {}, {}, {}, {}",operazione.getTipoOperazione(),operazione.getCantiere().getIdentificativo(),operabile.getIdentificativo(),operazione.getOperatore().getIdentificativo(),operazione.getNumero());
 		operabileDao.save(operabile);
 		operazioneDao.save(operazione);
-		super.sendToKafka(new KafkaOperazione(operazione, operabile,operazione.getCantiere(), operazione.getOperatore()));
+		super.sendToKafka(new KafkaOperazione(operazione, operabile,cantiere, operatore));
 
 	}
 	

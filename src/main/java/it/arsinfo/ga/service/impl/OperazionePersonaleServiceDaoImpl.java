@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import it.arsinfo.ga.dao.OperazionePersonaleDao;
 import it.arsinfo.ga.dao.PersonaleDao;
 import it.arsinfo.ga.model.data.StatoOperabile;
+import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.ModelloPersonale;
+import it.arsinfo.ga.model.entity.Operatore;
 import it.arsinfo.ga.model.entity.OperazionePersonale;
 import it.arsinfo.ga.model.entity.Personale;
 import it.arsinfo.ga.model.kafka.KafkaOperazione;
@@ -29,7 +31,9 @@ public class OperazionePersonaleServiceDaoImpl extends OperazioneServiceDaoImpl<
 	@Override
 	@Transactional
 	public void esegui(OperazionePersonale operazione) throws Exception {
-		Personale operabile = check(operazione);
+            Cantiere cantiere = getCantiere(operazione);
+            Operatore operatore = getOperatore(operazione);
+		Personale operabile = getOperabile(operazione);
 		switch (operazione.getTipoOperazione()) {
 			case Carico:
 				if (operazione.getNumero() > operabile.getDisponibili()) {
@@ -63,6 +67,6 @@ public class OperazionePersonaleServiceDaoImpl extends OperazioneServiceDaoImpl<
 		log.info("esegui: {}, {}, {}, {}, {}",operazione.getTipoOperazione(),operazione.getCantiere().getIdentificativo(),operabile.getIdentificativo(),operazione.getOperatore().getIdentificativo(),operazione.getNumero());
 		operabileDao.save(operabile);
 		operazioneDao.save(operazione);
-		super.sendToKafka(new KafkaOperazione(operazione, operabile,operazione.getCantiere(), operazione.getOperatore()));
+		super.sendToKafka(new KafkaOperazione(operazione, operabile,cantiere, operatore));
 	}
 }

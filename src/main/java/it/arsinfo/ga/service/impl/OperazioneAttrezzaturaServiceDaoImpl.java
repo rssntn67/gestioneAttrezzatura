@@ -11,7 +11,9 @@ import it.arsinfo.ga.dao.AttrezzaturaDao;
 import it.arsinfo.ga.dao.OperazioneAttrezzaturaDao;
 import it.arsinfo.ga.model.data.StatoOperabile;
 import it.arsinfo.ga.model.entity.Attrezzatura;
+import it.arsinfo.ga.model.entity.Cantiere;
 import it.arsinfo.ga.model.entity.ModelloAttrezzatura;
+import it.arsinfo.ga.model.entity.Operatore;
 import it.arsinfo.ga.model.entity.OperazioneAttrezzatura;
 import it.arsinfo.ga.model.kafka.KafkaOperazione;
 import it.arsinfo.ga.service.OperazioneService;
@@ -25,13 +27,15 @@ public class OperazioneAttrezzaturaServiceDaoImpl extends OperazioneServiceDaoIm
 	
 	@Autowired
 	private OperazioneAttrezzaturaDao operazioneDao;
-			
-    private static final Logger log = LoggerFactory.getLogger(OperazioneAttrezzaturaServiceDaoImpl.class);
+
+	private static final Logger log = LoggerFactory.getLogger(OperazioneAttrezzaturaServiceDaoImpl.class);
 
 	@Override
 	@Transactional
 	public void esegui(OperazioneAttrezzatura operazione) throws Exception {
-		Attrezzatura operabile = check(operazione);
+            Cantiere cantiere = getCantiere(operazione);
+            Operatore operatore = getOperatore(operazione);
+            Attrezzatura operabile = getOperabile(operazione);
 
 		switch (operazione.getTipoOperazione()) {
 			case Carico:
@@ -52,9 +56,9 @@ public class OperazioneAttrezzaturaServiceDaoImpl extends OperazioneServiceDaoIm
 			default:
 				break;
 		}
-		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),operazione.getCantiere().getIdentificativo(),operabile.getIdentificativo(),operazione.getOperatore().getIdentificativo());
+		log.info("esegui: {}, {}, {}",operazione.getTipoOperazione(),operazione.getCantiere().getId(),operabile.getId(),operazione.getOperatore().getId());
 		operabileDao.save(operabile);
 		operazioneDao.save(operazione);	
-		super.sendToKafka(new KafkaOperazione(operazione, operabile,operazione.getCantiere(), operazione.getOperatore()));
+		super.sendToKafka(new KafkaOperazione(operazione, operabile,cantiere, operatore));
 	}
 }

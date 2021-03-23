@@ -77,19 +77,6 @@ implements OperazioneService<T,S>{
 		return populate(operazioneDao.findAll());
 	}
 
-	protected T check(S s) throws Exception {
-		if (s.getCantiere().getStato() != StatoCantiere.InOpera) {
-			log.error("Stato Cantiere non In Opera: {}", s.getCantiere());
-			throw new UnsupportedOperationException("Stato Cantiere non InOpera: " + s.getCantiere().getStato());			
-		}
-		if (s.getOperatore().getStato() != StatoOperatore.Attivo) {
-			log.error("Stato Operatore non Attivo: {}", s.getOperatore());
-			throw new UnsupportedOperationException("Stato Operatore non Attivo: " + s.getOperatore().getStato());			
-			
-		}
-		return operabileDao.findById(s.getOperabile().getId()).get();
-
-	}
 	public List<S> populate(List<S> operazioni) {
 		Map<Long,Cantiere> cmap = cantiereDao.findAll().stream().collect(Collectors.toMap(Cantiere::getId, Function.identity()));
 		Map<Long,T> omap = operabileDao.findAll().stream().collect(Collectors.toMap(T::getId, Function.identity()));
@@ -153,5 +140,31 @@ implements OperazioneService<T,S>{
 	    producer.send(k);
 	}
 	
+    protected T getOperabile(S s) throws Exception {
+        return operabileDao.findById(s.getOperabile().getId()).get();
+
+    }
+
+    protected Cantiere getCantiere(S s) throws Exception {
+        Cantiere cantiere = cantiereDao.findById(s.getCantiere().getId()).get();
+        if (cantiere.getStato() != StatoCantiere.InOpera) {
+            log.error("Stato Cantiere non In Opera: {}", cantiere);
+            throw new UnsupportedOperationException("Stato Cantiere non InOpera: "
+                    + s.getCantiere().getStato());
+        }
+        return cantiere;
+    }
+    
+    protected Operatore getOperatore(S s) throws Exception {
+        Operatore operatore = operatoreDao.findById(s.getOperatore().getId()).get();
+        if (operatore.getStato() != StatoOperatore.Attivo) {
+            log.error("Stato Operatore non Attivo: {}", operatore);
+            throw new UnsupportedOperationException("Stato Operatore non Attivo: "
+                    + s.getOperatore().getStato());
+
+        }
+        return operatore;
+
+    }
 
 }
