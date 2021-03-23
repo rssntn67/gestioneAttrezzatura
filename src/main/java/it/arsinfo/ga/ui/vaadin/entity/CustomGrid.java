@@ -23,7 +23,7 @@ public abstract class CustomGrid<T>
     private final Grid<T> grid;
     private SingleSelect<T> selected;
     private final String gridName;
-    Label itemNumber = new Label();
+    private Label itemNumber = new Label();
     private Integer size = 0;
     public CustomGrid(Grid<T> grid, String gridName) {
 
@@ -63,7 +63,7 @@ public abstract class CustomGrid<T>
 
     public void setColumns(String...columnIds) {
         grid.setColumns(columnIds);
-        if (!StringUtils.isEmpty(gridName)) {
+        if (StringUtils.hasLength(gridName)) {
             grid.prependHeaderRow().join(columnIds).setText(gridName);            
         }
     }

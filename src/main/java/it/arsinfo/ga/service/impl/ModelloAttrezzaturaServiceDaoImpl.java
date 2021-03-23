@@ -47,18 +47,18 @@ public class ModelloAttrezzaturaServiceDaoImpl implements ModelloAttrezzaturaSer
 	@Override
 	public List<ModelloAttrezzatura> searchBy(Fornitore fornitore, Anno anno, String nome,
 			TipoAttrezzatura tipo, MarcaAttrezzatura marca) {
-		if (fornitore == null && anno == null && StringUtils.isEmpty(nome) && tipo == null && marca == null)
+		if (fornitore == null && anno == null && !StringUtils.hasLength(nome) && tipo == null && marca == null)
 			return repository.findAll();
 		
-		if (fornitore == null && StringUtils.isEmpty(nome) && tipo == null && marca == null)
+		if (fornitore == null && !StringUtils.hasLength(nome) && tipo == null && marca == null)
 			return repository.findByAnnoProduzione(anno);
 		if (fornitore == null && anno == null && tipo == null && marca == null)
 			return repository.findByNomeContainingIgnoreCase(nome);
-		if (fornitore == null && anno == null && StringUtils.isEmpty(nome) && marca == null)
+		if (fornitore == null && anno == null && !StringUtils.hasLength(nome) && marca == null)
 			return repository.findByTipo(tipo);
-		if (fornitore == null && anno == null && StringUtils.isEmpty(nome) && tipo == null)
+		if (fornitore == null && anno == null && !StringUtils.hasLength(nome) && tipo == null)
 			return repository.findByMarca(marca);
-		if (anno == null && StringUtils.isEmpty(nome) && tipo == null && marca == null)
+		if (anno == null && !StringUtils.hasLength(nome) && tipo == null && marca == null)
 			return repository.findByFornitore(fornitore);
 		
 		if (fornitore == null && tipo == null && marca == null)
@@ -67,19 +67,19 @@ public class ModelloAttrezzaturaServiceDaoImpl implements ModelloAttrezzaturaSer
 			return repository.findByNomeContainingIgnoreCaseAndTipo(nome, tipo);
 		if (fornitore == null && anno == null && tipo == null)
 			return repository.findByNomeContainingIgnoreCaseAndMarca(nome, marca);	
-		if (fornitore == null && StringUtils.isEmpty(nome) && marca == null)
+		if (fornitore == null && !StringUtils.hasLength(nome) && marca == null)
 			return repository.findByAnnoProduzioneAndTipo(anno,tipo);
-		if (fornitore == null && StringUtils.isEmpty(nome) && tipo == null)
+		if (fornitore == null && !StringUtils.hasLength(nome) && tipo == null)
 			return repository.findByAnnoProduzioneAndMarca(anno,marca);
-		if (fornitore == null && anno == null && StringUtils.isEmpty(nome))
+		if (fornitore == null && anno == null && !StringUtils.hasLength(nome))
 			return repository.findByMarcaAndTipo(marca, tipo);
-		if (StringUtils.isEmpty(nome) && tipo == null && marca == null)
+		if (!StringUtils.hasLength(nome) && tipo == null && marca == null)
 			return repository.findByFornitoreAndAnnoProduzione(fornitore,anno);
 		if (anno == null && tipo == null && marca == null)
 			return repository.findByNomeContainingIgnoreCaseAndFornitore(nome,fornitore);
-		if (anno == null && StringUtils.isEmpty(nome) && marca == null)
+		if (anno == null && !StringUtils.hasLength(nome) && marca == null)
 			return repository.findByFornitoreAndTipo(fornitore,tipo);
-		if (anno == null && StringUtils.isEmpty(nome) && tipo == null)
+		if (anno == null && !StringUtils.hasLength(nome) && tipo == null)
 			return repository.findByFornitoreAndMarca(fornitore,marca);
 		
 		if (tipo == null && marca == null)
@@ -88,11 +88,11 @@ public class ModelloAttrezzaturaServiceDaoImpl implements ModelloAttrezzaturaSer
 			return repository.findByNomeContainingIgnoreCaseAndFornitoreAndMarca(nome, fornitore,marca);
 		if (anno == null && marca == null)
 			return repository.findByNomeContainingIgnoreCaseAndFornitoreAndTipo(nome, fornitore,tipo);
-		if (StringUtils.isEmpty(nome) && marca == null)
+		if (!StringUtils.hasLength(nome) && marca == null)
 			return repository.findByFornitoreAndAnnoProduzioneAndTipo(fornitore,anno,tipo);
-		if (StringUtils.isEmpty(nome) && tipo == null)
+		if (!StringUtils.hasLength(nome) && tipo == null)
 			return repository.findByFornitoreAndAnnoProduzioneAndMarca(fornitore,anno,marca);
-		if (StringUtils.isEmpty(nome) && anno == null)
+		if (!StringUtils.hasLength(nome) && anno == null)
 			return repository.findByFornitoreAndTipoAndMarca(fornitore,tipo,marca);
 		if (fornitore == null && marca == null)
 			return repository.findByNomeContainingIgnoreCaseAndAnnoProduzioneAndTipo(nome, anno, tipo);
@@ -100,11 +100,11 @@ public class ModelloAttrezzaturaServiceDaoImpl implements ModelloAttrezzaturaSer
 			return repository.findByNomeContainingIgnoreCaseAndAnnoProduzioneAndMarca(nome, anno, marca);
 		if (fornitore == null && anno == null)
 			return repository.findByNomeContainingIgnoreCaseAndTipoAndMarca(nome, tipo, marca);
-		if (fornitore == null && StringUtils.isEmpty(nome))
+		if (fornitore == null && !StringUtils.hasLength(nome))
 			return repository.findByAnnoProduzioneAndTipoAndMarca(anno, tipo, marca);
 		
 
-		if (StringUtils.isEmpty(nome))
+		if (!StringUtils.hasLength(nome))
 			return repository.findByFornitoreAndAnnoProduzioneAndTipoAndMarca(fornitore, anno, tipo, marca);
 		if (fornitore == null)
 			return repository.findByNomeContainingIgnoreCaseAndAnnoProduzioneAndTipoAndMarca(nome, anno, tipo, marca);

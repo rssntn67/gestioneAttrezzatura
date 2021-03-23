@@ -43,9 +43,9 @@ public class OperatoreServiceDaoImpl implements OperatoreService {
 
 	@Override
 	public List<Operatore> searchBy(String search, StatoOperatore stato) {
-		if (StringUtils.isEmpty(search) && stato == null) 
+		if (!StringUtils.hasLength(search) && stato == null) 
 			return repository.findAll();
-		if (StringUtils.isEmpty(search))
+		if (!StringUtils.hasLength(search))
 			return repository.findByStato(stato);
 		if (stato == null)
 			return repository.findByIdentificativoContainingIgnoreCase(search);

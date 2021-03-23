@@ -53,15 +53,15 @@ public class AttrezzaturaServiceDaoImpl implements AttrezzaturaService {
     @Override
     public List<Attrezzatura> searchBy(StatoOperabile searchStatoAttrezzatura,
             String searchIdentificativo, ModelloAttrezzatura searchModello) {
-        if (StringUtils.isEmpty(searchIdentificativo)
+        if (!StringUtils.hasLength(searchIdentificativo)
                 && searchStatoAttrezzatura == null && searchModello == null)
             return repository.findAll();
 
-        if (StringUtils.isEmpty(searchIdentificativo)
+        if (!StringUtils.hasLength(searchIdentificativo)
                 && searchStatoAttrezzatura == null)
             return repository.findByModello(searchModello);
 
-        if (StringUtils.isEmpty(searchIdentificativo)
+        if (!StringUtils.hasLength(searchIdentificativo)
                 && searchModello == null)
             return repository.findByStato(searchStatoAttrezzatura);
 
@@ -76,7 +76,7 @@ public class AttrezzaturaServiceDaoImpl implements AttrezzaturaService {
             return repository.findByIdentificativoContainingIgnoreCaseAndModello(searchIdentificativo,
                                                                                  searchModello);
 
-        if (StringUtils.isEmpty(searchIdentificativo))
+        if (!StringUtils.hasLength(searchIdentificativo))
             return repository.findByStatoAndModello(searchStatoAttrezzatura,
                                                     searchModello);
 

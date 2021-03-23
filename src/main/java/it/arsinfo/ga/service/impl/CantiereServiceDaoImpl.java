@@ -60,15 +60,15 @@ public class CantiereServiceDaoImpl implements CantiereService {
 
 	@Override
 	public List<Cantiere> searchBy(String search, StatoCantiere stato, TipoCantiere tipo) {
-		if (StringUtils.isEmpty(search) && stato == null && tipo == null) 
+		if (!StringUtils.hasLength(search) && stato == null && tipo == null) 
 			return repository.findAll();
-		if (StringUtils.isEmpty(search) && tipo == null)
+		if (!StringUtils.hasLength(search) && tipo == null)
 			return repository.findByStato(stato);
-		if (StringUtils.isEmpty(search) && stato == null)
+		if (!StringUtils.hasLength(search) && stato == null)
 			return repository.findByTipo(tipo);
 		if (stato == null && tipo == null)
 			return repository.findByIdentificativoContainingIgnoreCase(search);
-		if (StringUtils.isEmpty(search))
+		if (!StringUtils.hasLength(search))
 			return repository.findByStatoAndTipo(stato, tipo);
 		if (stato == null)
 			return repository.findByIdentificativoContainingIgnoreCaseAndTipo(search, tipo);

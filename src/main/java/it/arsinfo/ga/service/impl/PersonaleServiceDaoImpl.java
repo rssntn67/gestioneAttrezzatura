@@ -53,13 +53,13 @@ public class PersonaleServiceDaoImpl implements PersonaleService {
 	@Override
 	public List<Personale> searchBy(StatoOperabile searchStatoPersonale, String searchIdentificativo,
 			ModelloPersonale searchModello) {
-		if (StringUtils.isEmpty(searchIdentificativo) && searchStatoPersonale == null && searchModello == null)
+		if (!StringUtils.hasLength(searchIdentificativo) && searchStatoPersonale == null && searchModello == null)
 			return repository.findAll();
 
-		if (StringUtils.isEmpty(searchIdentificativo) && searchStatoPersonale == null )
+		if (!StringUtils.hasLength(searchIdentificativo) && searchStatoPersonale == null )
 			return repository.findByModello(searchModello);
 
-		if (StringUtils.isEmpty(searchIdentificativo) && searchModello == null)
+		if (!StringUtils.hasLength(searchIdentificativo) && searchModello == null)
 			return repository.findByStato(searchStatoPersonale);
 
 		if (searchStatoPersonale == null && searchModello == null)
@@ -71,7 +71,7 @@ public class PersonaleServiceDaoImpl implements PersonaleService {
 		if (searchStatoPersonale == null )
 			return repository.findByIdentificativoContainingIgnoreCaseAndModello(searchIdentificativo, searchModello);
 
-		if (StringUtils.isEmpty(searchIdentificativo))
+		if (!StringUtils.hasLength(searchIdentificativo))
 			return repository.findByStatoAndModello(searchStatoPersonale, searchModello);
 
 		return repository.findByIdentificativoContainingIgnoreCaseAndStatoAndModello(searchIdentificativo, searchStatoPersonale, searchModello);

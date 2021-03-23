@@ -11,4 +11,5 @@ public interface EntityBaseService<S extends EntityBase> {
 	void delete(S entity) throws Exception ;
 	S findById(Long id);
 	List<S> findAll();
+	
 }

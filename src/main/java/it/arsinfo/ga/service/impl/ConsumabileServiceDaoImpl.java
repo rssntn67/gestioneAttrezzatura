@@ -53,13 +53,13 @@ public class ConsumabileServiceDaoImpl implements ConsumabileService {
 	@Override
 	public List<Consumabile> searchBy(StatoOperabile searchStatoConsumabile, String searchIdentificativo,
 			ModelloConsumabile searchModello) {
-		if (StringUtils.isEmpty(searchIdentificativo) && searchStatoConsumabile == null && searchModello == null)
+		if (!StringUtils.hasLength(searchIdentificativo) && searchStatoConsumabile == null && searchModello == null)
 			return repository.findAll();
 
-		if (StringUtils.isEmpty(searchIdentificativo) && searchStatoConsumabile == null )
+		if (!StringUtils.hasLength(searchIdentificativo) && searchStatoConsumabile == null )
 			return repository.findByModello(searchModello);
 
-		if (StringUtils.isEmpty(searchIdentificativo) && searchModello == null)
+		if (!StringUtils.hasLength(searchIdentificativo) && searchModello == null)
 			return repository.findByStato(searchStatoConsumabile);
 
 		if (searchStatoConsumabile == null && searchModello == null)
@@ -71,7 +71,7 @@ public class ConsumabileServiceDaoImpl implements ConsumabileService {
 		if (searchStatoConsumabile == null )
 			return repository.findByIdentificativoContainingIgnoreCaseAndModello(searchIdentificativo, searchModello);
 
-		if (StringUtils.isEmpty(searchIdentificativo))
+		if (!StringUtils.hasLength(searchIdentificativo))
 			return repository.findByStatoAndModello(searchStatoConsumabile, searchModello);
 
 		return repository.findByIdentificativoContainingIgnoreCaseAndStatoAndModello(searchIdentificativo, searchStatoConsumabile, searchModello);
